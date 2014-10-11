@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 DrawTalk. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 typealias DWTPathJSON = Dictionary<String, AnyObject>
@@ -48,9 +49,9 @@ public class DWTArtboardViewController : UIViewController {
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
-
+  
   required public init(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented")
   }
   
   public class func artboardController() -> DWTArtboardViewController {
@@ -90,7 +91,7 @@ public class DWTArtboardViewController : UIViewController {
     canvasImageView.image = UIGraphicsGetImageFromCurrentImageContext()
     canvasImageView.alpha = opacity
     UIGraphicsEndImageContext();
-
+    
     lastPoint = currentPoint;
     
     currPath?.coords.append(currentPoint)
@@ -109,7 +110,7 @@ public class DWTArtboardViewController : UIViewController {
     CGContextFlush(UIGraphicsGetCurrentContext());
     canvasImageView.image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext();
-
+    
     
     UIGraphicsBeginImageContext(self.finalImageView.frame.size);
     finalImageView.image?.drawInRect(CGRectMake(0, 0, view.frame.size.width, view.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
@@ -128,5 +129,29 @@ public class DWTArtboardViewController : UIViewController {
       return path.toJSON()
     })
     println(data)
+    
+    // https://github.com/mobile-web-messaging/MQTTKit
+    
+    var clientID = UIDevice.currentDevice().identifierForVendor.UUIDString
+    let client: MQTTClient = MQTTClient(clientId: clientID)
+    
+    client.connectToHost("drawtalk.io") { (code: MQTTConnectionReturnCode) -> Void in
+      switch code.value {
+      case ConnectionAccepted.value:
+        var payload : NSData = NSKeyedArchiver.archivedDataWithRootObject(data)
+        client.publishData(
+          payload,
+          toTopic: "test/topic",
+          withQos: AtMostOnce,
+          retain: false,
+          completionHandler: { (mid: Int32) -> Void in
+            
+        })
+        break
+      default:
+        break
+      }
+    }
+    
   }
 }
