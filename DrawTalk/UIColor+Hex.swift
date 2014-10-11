@@ -8,6 +8,13 @@
 
 import UIKit
 
+public struct RGBA {
+  var red: CGFloat
+  var green: CGFloat
+  var blue: CGFloat
+  var alpha: CGFloat = 1.0
+}
+
 extension UIColor {
   
   convenience init(rgba: String) {
@@ -44,13 +51,18 @@ extension UIColor {
   }
 
   public func hex() -> String? {
+    let rgab = rgbaValues()
+    var hexString = String(format: "#%02X%02X%02X%02X", Int(rgab.red * 255), Int(rgab.green * 255), Int(rgab.blue * 255), Int(rgab.alpha * 255))
+    return hexString;
+  }
+  
+  public func rgbaValues() -> RGBA {
     let components = CGColorGetComponents(self.CGColor);
     let red = components[0]
     let green = components[1]
     let blue = components[2]
-    let alpha = components[3];
-    var hexString = String(format: "#%02X%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255), Int(alpha * 255))
-    return hexString;
+    let alpha = components[3]
+    return RGBA(red: red, green: green, blue: blue, alpha: alpha)
   }
 }
 

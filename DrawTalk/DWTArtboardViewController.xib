@@ -32,6 +32,15 @@
                         <action selector="sendButtonTapped:" destination="-1" eventType="touchUpInside" id="pve-fc-b55"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-sS-REW">
+                    <rect key="frame" x="276" y="540" width="48" height="30"/>
+                    <state key="normal" title="Replay">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="replayButtonTapped:" destination="-1" eventType="touchUpInside" id="dRz-Ax-Jvt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -39,14 +48,16 @@
                 <constraint firstItem="X8t-e2-UEk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Yq-3K-MYP"/>
                 <constraint firstAttribute="trailing" secondItem="WND-kQ-b8j" secondAttribute="trailing" id="FrH-PB-iHA"/>
                 <constraint firstItem="WND-kQ-b8j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ktt-jF-kWs"/>
+                <constraint firstAttribute="centerX" secondItem="xrX-sS-REW" secondAttribute="centerX" id="ZiV-0k-kAb"/>
                 <constraint firstItem="QLH-Nt-zf6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="aHF-9k-zBn"/>
                 <constraint firstItem="X8t-e2-UEk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="d8T-l3-y97"/>
+                <constraint firstAttribute="bottom" secondItem="xrX-sS-REW" secondAttribute="bottom" constant="30" id="gMI-ST-tOm"/>
                 <constraint firstAttribute="bottom" secondItem="WND-kQ-b8j" secondAttribute="bottom" id="ivE-2n-NIH"/>
                 <constraint firstItem="WND-kQ-b8j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pKk-CG-eu3"/>
                 <constraint firstAttribute="trailing" secondItem="X8t-e2-UEk" secondAttribute="trailing" id="pWA-Og-HuN"/>
                 <constraint firstAttribute="bottom" secondItem="X8t-e2-UEk" secondAttribute="bottom" id="rgw-RY-B45"/>
             </constraints>
-            <point key="canvasLocation" x="223" y="-85"/>
+            <point key="canvasLocation" x="65" y="-76"/>
         </view>
     </objects>
 </document>
