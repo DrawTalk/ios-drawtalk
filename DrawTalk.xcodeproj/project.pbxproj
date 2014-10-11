@@ -14,6 +14,7 @@
 		A11E8F2819E882E70055772A /* DrawTalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F2719E882E70055772A /* DrawTalkTests.m */; };
 		A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */; };
 		A11E8F3F19E88CEE0055772A /* DWTArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */; };
+		A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Prefix.pch"; sourceTree = "<group>"; };
 		A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTArtboardViewController.swift; sourceTree = "<group>"; };
 		A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DWTArtboardViewController.xib; sourceTree = "<group>"; };
+		A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
 				A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */,
+				A11E8F4219E8A5940055772A /* Extensions */,
 				A11E8F1819E882E70055772A /* Images.xcassets */,
 				A11E8F1A19E882E70055772A /* LaunchScreen.xib */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
@@ -119,6 +122,14 @@
 				A11E8F2619E882E70055772A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A11E8F4219E8A5940055772A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11E8F1119E882E70055772A /* AppDelegate.m in Sources */,
+				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
 				A11E8F0E19E882E70055772A /* main.m in Sources */,
 				A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */,
 			);

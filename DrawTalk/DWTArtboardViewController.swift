@@ -8,10 +8,32 @@
 
 import UIKit
 
+typealias DWTPathJSON = Dictionary<String, AnyObject>
+
+struct Path {
+  var coords: [CGPoint]
+  var color: UIColor = UIColor.blackColor()
+  var brush: CGFloat = 1.0
+  
+  func toJSON() -> DWTPathJSON {
+    var arr: [[CGFloat]] = coords.map({ (point: CGPoint) -> [CGFloat] in
+      return [point.x, point.y]
+    })
+    var hex = color.hex()
+    var json : DWTPathJSON = [
+      "coods": arr,
+      "color": hex!,
+      "brush": brush
+    ]
+    return json
+  }
+}
+
 public class DWTArtboardViewController : UIViewController {
   
   @IBOutlet weak var canvasImageView: UIImageView!
   @IBOutlet weak var finalImageView: UIImageView!
+  @IBOutlet weak var sendButton: UIButton!
   
   var lastPoint: CGPoint = CGPointZero
   var red : CGFloat = 0.0/255.0
@@ -19,6 +41,9 @@ public class DWTArtboardViewController : UIViewController {
   var blue: CGFloat = 0.0/255.0
   var brush: CGFloat = 5.0
   var opacity: CGFloat = 1.0
+  
+  var currPath: Path?
+  var paths: [Path] = []
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -29,12 +54,23 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   public class func artboardController() -> DWTArtboardViewController {
+    let color = UIColor.blueColor()
+    let hex = color.hex()
+    println("hex: \(hex)")
+    var c = UIColor(rgba: hex!)
+    println("color: \(c)")
     return DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
   }
   
   public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
     let touch : UITouch = touches.anyObject() as UITouch
     lastPoint = touch.locationInView(view)
+    
+    currPath = Path(
+      coords: [lastPoint],
+      color: UIColor(red: red, green: green, blue: blue, alpha: opacity),
+      brush: brush
+    )
   }
   
   public override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
@@ -54,8 +90,10 @@ public class DWTArtboardViewController : UIViewController {
     canvasImageView.image = UIGraphicsGetImageFromCurrentImageContext()
     canvasImageView.alpha = opacity
     UIGraphicsEndImageContext();
-    
+
     lastPoint = currentPoint;
+    
+    currPath?.coords.append(currentPoint)
   }
   
   public override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
@@ -79,6 +117,16 @@ public class DWTArtboardViewController : UIViewController {
     finalImageView.image = UIGraphicsGetImageFromCurrentImageContext();
     canvasImageView.image = nil;
     UIGraphicsEndImageContext();
+    
+    if currPath != nil {
+      paths.append(currPath!)
+    }
   }
   
+  @IBAction func sendButtonTapped(sender : AnyObject) {
+    var data: [DWTPathJSON] = paths.map({ (path: Path) -> DWTPathJSON in
+      return path.toJSON()
+    })
+    println(data)
+  }
 }
