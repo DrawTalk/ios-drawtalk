@@ -46,7 +46,7 @@ public class DWTArtboardViewController : UIViewController {
   var red : CGFloat = 0.0/255.0
   var green: CGFloat = 0.0/255.0
   var blue: CGFloat = 0.0/255.0
-  var brush: CGFloat = 1.0
+  var brush: CGFloat = 5.0
   var opacity: CGFloat = 1.0
   
   var currPath: Path?
@@ -171,14 +171,11 @@ public class DWTArtboardViewController : UIViewController {
       pointB = nil
     }
     */
-    
-    //drawSegment(pointA: CGPointMake(50,50), pointB: CGPointMake(50, 200), completion: nil)
 
     canvasImageView.image = nil
     finalImageView.image = nil
     
-    var pointA : CGPoint?
-    var pointB : CGPoint?
+    var prevPoint : CGPoint?
     
     typealias Pair = [CGPoint]
     
@@ -188,23 +185,22 @@ public class DWTArtboardViewController : UIViewController {
     for path: Path in paths {
       let rgba = path.color.rgbaValues()
       for point: CGPoint in path.coords {
-        if pointA != nil {
-          pairs.append([pointA!, point])
+        if prevPoint != nil {
+          pairs.append([prevPoint!, point])
         }
-        pointA = point
+        prevPoint = point
       }
-      pointA = nil
+      prevPoint = nil
       parts.append(pairs)
     }
 
-    var next : (Int, Int) -> Int = { $1 }
+    var next: (Int, Int) -> Int = { $1 }
     next = { (section: Int, index: Int) -> Int in
       if (section > parts.count - 1) {
         return 0
       }
       if index > parts[section].count - 1 {
-        next(section+1, index+1)
-        return 0
+        return next(section+1, 0)
       }
       let pair = parts[section][index]
       self.drawSegment(
@@ -221,54 +217,11 @@ public class DWTArtboardViewController : UIViewController {
   
   private func drawSegment(#pointA: CGPoint, pointB: CGPoint, completion: (() -> Void)?) {
     println("\(pointA), \(pointB)")
-    
-    /*
-    let rgba =  UIColor.blackColor().rgbaValues()
-    
-    UIGraphicsBeginImageContext(view.frame.size)
-    canvasImageView.image?.drawInRect(CGRectMake(0, 0, view.frame.size.width, view.frame.size.height))
-    
-    // Connect the segment
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pointA.x, pointA.y)
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pointB.x, pointB.y)
-    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound)
-    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 5)
-    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), rgba.red, rgba.green, rgba.blue, rgba.alpha)
-    CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal)
-    CGContextStrokePath(UIGraphicsGetCurrentContext())
-    canvasImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-    canvasImageView.alpha = opacity
-    UIGraphicsEndImageContext()
-    
-    completion!()
-    */
-    
+
     // 1) Create bezier path from first point to second.
     var path: UIBezierPath = UIBezierPath()
     path.moveToPoint(pointA)
     path.addLineToPoint(pointB)
-    
-    /*
-    func midPointForPoints(p1: CGPoint, p2: CGPoint) -> CGPoint {
-      return CGPointMake((p1.x + p2.x) / 2, (p1.y + p2.y) / 2)
-    }
-    
-    func controlPointForPoints(p1: CGPoint, p2: CGPoint) -> CGPoint {
-      var controlPoint: CGPoint = midPointForPoints(p1, p2);
-      var diffY: CGFloat = abs(p2.y - controlPoint.y);
-      
-      if p1.y < p2.y {
-        controlPoint.y += diffY;
-      } else if  p1.y > p2.y {
-        controlPoint.y -= diffY;
-      }
-      return controlPoint;
-    }
-    let midPoint: CGPoint = midPointForPoints(pointA, pointB);
-    path.addQuadCurveToPoint(midPoint, controlPoint:controlPointForPoints(midPoint, pointA))
-    path.addQuadCurveToPoint(pointB, controlPoint:controlPointForPoints(midPoint, pointB))
-    */
-
     path.lineJoinStyle = kCGLineJoinRound
     
     // 2) Create a shape layer for above created path.
@@ -278,6 +231,7 @@ public class DWTArtboardViewController : UIViewController {
     layer.lineWidth = brush
     layer.strokeStart = 0.0
     layer.strokeEnd = 1.0
+    layer.lineCap = kCALineCapRound
     layer.path = path.CGPath
     finalImageView.layer.addSublayer(layer)
     
