@@ -11,7 +11,12 @@ import UIKit
 
 typealias DWTPathJSON = Dictionary<String, AnyObject>
 
-struct Path {
+private struct DWTPair {
+  var pointA: CGPoint
+  var pointB: CGPoint
+}
+
+private struct DWTPath {
   var coords: [CGPoint]
   var color: UIColor = UIColor.blackColor()
   var brush: CGFloat = 1.0
@@ -28,6 +33,18 @@ struct Path {
     ]
     return json
   }
+  
+  func pairs() -> [DWTPair] {
+    var prevPoint: CGPoint?
+    var pairs: [DWTPair] = []
+    for point: CGPoint in coords {
+      if prevPoint != nil {
+        pairs.append(DWTPair(pointA: prevPoint!, pointB: point))
+      }
+      prevPoint = point
+    }
+    return pairs
+  }
 }
 
 /*
@@ -42,15 +59,17 @@ public class DWTArtboardViewController : UIViewController {
   @IBOutlet weak var finalImageView: UIImageView!
   @IBOutlet weak var sendButton: UIButton!
   
-  var lastPoint: CGPoint = CGPointZero
-  var red : CGFloat = 0.0/255.0
-  var green: CGFloat = 0.0/255.0
-  var blue: CGFloat = 0.0/255.0
-  var brush: CGFloat = 5.0
-  var opacity: CGFloat = 1.0
+  private var lastPoint: CGPoint = CGPointZero
   
-  var currPath: Path?
-  var paths: [Path] = []
+  private var red : CGFloat = 0.0/255.0
+  private var green: CGFloat = 0.0/255.0
+  private var blue: CGFloat = 0.0/255.0
+  
+  private var brush: CGFloat = 5.0
+  private var opacity: CGFloat = 1.0
+  
+  private var currPath: DWTPath?
+  private var paths: [DWTPath] = []
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -73,7 +92,7 @@ public class DWTArtboardViewController : UIViewController {
     let touch : UITouch = touches.anyObject() as UITouch
     lastPoint = touch.locationInView(view)
     
-    currPath = Path(
+    currPath = DWTPath(
       coords: [lastPoint],
       color: UIColor(red: red, green: green, blue: blue, alpha: opacity),
       brush: brush
@@ -131,103 +150,69 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   @IBAction func replayButtonTapped(sender : AnyObject) {
-   
-    /*
+    
     canvasImageView.image = nil
     finalImageView.image = nil
-    
-    var pointA : CGPoint?
-    var pointB : CGPoint?
-    
-    for path: Path in paths {
-      
-      let rgba = path.color.rgbaValues()
+    finalImageView.layer.sublayers = nil
 
-      for point: CGPoint in path.coords {
-        pointA = point
-
-        UIGraphicsBeginImageContext(view.frame.size)
-        canvasImageView.image?.drawInRect(CGRectMake(0, 0, view.frame.size.width, view.frame.size.height))
-        
-        // Connect the segment
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pointA!.x, pointA!.y)
-        if pointB != nil {
-          CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pointB!.x, pointB!.y)
-        }
-        pointB = pointA
-        
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound)
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), path.brush)
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), rgba.red, rgba.green, rgba.blue, rgba.alpha)
-        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal)
-        
-        CGContextStrokePath(UIGraphicsGetCurrentContext())
-        canvasImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        canvasImageView.alpha = opacity
-        UIGraphicsEndImageContext()
+    struct PairsInfo {
+      var pairs: [DWTPair] = []
+      var brush: CGFloat = self.brush
+      var color: UIColor = UIColor.blackColor()
+    }
+    
+    var drawings: [PairsInfo] = []
+    
+    var prevPoint: CGPoint?
+    for path: DWTPath in paths {
+      drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color))
+    }
+    
+    var currBrush = brush
+    var currColor = UIColor.blackColor()
+    
+    var next: ((Int, Int) -> Void)!
+    next = { (section: Int, index: Int) -> Void in
+      if (section > drawings.count - 1) {
+        return
       }
       
-      pointA = nil
-      pointB = nil
-    }
-    */
+      let info: PairsInfo = drawings[section]
+      
+      if index > info.pairs.count - 1 {
+        next(section+1, 0)
+        return
+      }
+      
+      let pair = info.pairs[index]
 
-    canvasImageView.image = nil
-    finalImageView.image = nil
-    
-    var prevPoint : CGPoint?
-    
-    typealias Pair = [CGPoint]
-    
-    var pairs : [Pair] = []
-    var parts : [[Pair]] = []
-    
-    for path: Path in paths {
-      let rgba = path.color.rgbaValues()
-      for point: CGPoint in path.coords {
-        if prevPoint != nil {
-          pairs.append([prevPoint!, point])
-        }
-        prevPoint = point
-      }
-      prevPoint = nil
-      parts.append(pairs)
-    }
-
-    var next: (Int, Int) -> Int = { $1 }
-    next = { (section: Int, index: Int) -> Int in
-      if (section > parts.count - 1) {
-        return 0
-      }
-      if index > parts[section].count - 1 {
-        return next(section+1, 0)
-      }
-      let pair = parts[section][index]
-      self.drawSegment(
-        pointA: pair[0] as CGPoint,
-        pointB: pair[1] as CGPoint,
+      self.drawSegmentFromPoint(
+        pair.pointA,
+        toPoint: pair.pointB,
+        brush: info.brush,
+        color: info.color,
+        duration: 0.01,
         completion: { () -> Void in
-          var a = next(section, index+1)
+          next(section, index+1)
       })
-      return 1
     }
     
     next(0, 0)
   }
   
-  private func drawSegment(#pointA: CGPoint, pointB: CGPoint, completion: (() -> Void)?) {
-    println("\(pointA), \(pointB)")
+  private func drawSegmentFromPoint(point: CGPoint, toPoint: CGPoint, brush: CGFloat, color: UIColor, duration: CFTimeInterval, completion: (() -> Void)?) {
+    println("\(point), \(toPoint)")
 
     // 1) Create bezier path from first point to second.
     var path: UIBezierPath = UIBezierPath()
-    path.moveToPoint(pointA)
-    path.addLineToPoint(pointB)
+    path.moveToPoint(point)
+    path.addLineToPoint(toPoint)
     path.lineJoinStyle = kCGLineJoinRound
     
     // 2) Create a shape layer for above created path.
     var layer: CAShapeLayer = CAShapeLayer()
-    layer.strokeColor = UIColor.blackColor().CGColor
-    layer.fillColor = UIColor.blackColor().CGColor
+    layer.strokeColor = color.CGColor
+    layer.fillColor = color.CGColor
     layer.lineWidth = brush
     layer.strokeStart = 0.0
     layer.strokeEnd = 1.0
@@ -243,7 +228,7 @@ public class DWTArtboardViewController : UIViewController {
       }
     }
     var drawAnimation: CABasicAnimation = CABasicAnimation(keyPath:"strokeEnd")
-    drawAnimation.duration = 0.01
+    drawAnimation.duration = duration
     drawAnimation.fromValue = 0.0
     drawAnimation.toValue = 1.0
     drawAnimation.timingFunction = CAMediaTimingFunction(name: "linear")
@@ -253,7 +238,7 @@ public class DWTArtboardViewController : UIViewController {
   }
 
   @IBAction func sendButtonTapped(sender : AnyObject) {
-    var data: [DWTPathJSON] = paths.map({ (path: Path) -> DWTPathJSON in
+    var data: [DWTPathJSON] = paths.map({ (path: DWTPath) -> DWTPathJSON in
       return path.toJSON()
     })
     println(data)
