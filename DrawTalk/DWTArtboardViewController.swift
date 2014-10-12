@@ -73,6 +73,10 @@ public class DWTArtboardViewController : UIViewController {
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    println("init! CALLED")
+    DWTMqttWrapper.create()
+
   }
   
   required public init(coder aDecoder: NSCoder) {
@@ -241,51 +245,17 @@ public class DWTArtboardViewController : UIViewController {
     var data: [DWTPathJSON] = paths.map({ (path: DWTPath) -> DWTPathJSON in
       return path.toJSON()
     })
+    
     println(data)
     
+    var jsonError: NSError?
+    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(data, options: nil, error: &jsonError)
+    let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)
+    
+    println(encodedJsonString)
+    
+    DWTMqttWrapper.sendMessage(encodedJsonString)
+    
     // https://github.com/mobile-web-messaging/MQTTKit
-    
-    let host = "tcp://m10.cloudmqtt.com"
-    let port : UInt16 = 16056
-    let username = "vkgogxez"
-    let password = "oX02eF7V0I9Y"
-    let topic = "hello/world"
-    let qos2 = 2
-    
-    let clientId = UIDevice.currentDevice().identifierForVendor.UUIDString
-    let client: MQTTClient = MQTTClient(clientId: clientId)
-    
-    client.username = username
-    client.password = password
-    client.host = host
-    client.port = port
-    
-    client.connectWithCompletionHandler { (code: MQTTConnectionReturnCode) -> Void in
-      switch code.value {
-      case ConnectionAccepted.value:
-        client.publishString(
-          "Message from iOS app",
-          toTopic: topic,
-          withQos: ExactlyOnce,
-          retain: false,
-          completionHandler: { (mid: Int32) -> Void in
-            
-        })
-        /*
-        var payload : NSData = NSKeyedArchiver.archivedDataWithRootObject(data)
-        client.publishData(
-          payload,
-          toTopic: topic,
-          withQos: ExactlyOnce,
-          retain: false,
-          completionHandler: { (mid: Int32) -> Void in
-            
-        })
-        */
-        break
-      default:
-        break
-      }
-    }
   }
 }

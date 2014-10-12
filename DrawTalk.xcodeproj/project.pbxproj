@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5FF085BE19EA30AD00E54490 /* DWTMqttWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A11E8F0E19E882E70055772A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F0D19E882E70055772A /* main.m */; };
 		A11E8F1119E882E70055772A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F1019E882E70055772A /* AppDelegate.m */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMqttWrapper.swift; sourceTree = "<group>"; };
 		73856A6D01F8473F8290FCB1 /* Pods-DrawTalk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.xcconfig"; path = "Pods/Pods-DrawTalk.xcconfig"; sourceTree = "<group>"; };
 		8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E8F0819E882E70055772A /* DrawTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 				A11E8F1819E882E70055772A /* Images.xcassets */,
 				A11E8F1A19E882E70055772A /* LaunchScreen.xib */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
+				5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */,
 			);
 			path = DrawTalk;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11E8F1119E882E70055772A /* AppDelegate.m in Sources */,
+				5FF085BE19EA30AD00E54490 /* DWTMqttWrapper.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
 				A11E8F0E19E882E70055772A /* main.m in Sources */,
 				A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */,

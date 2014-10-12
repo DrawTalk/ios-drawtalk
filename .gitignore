@@ -21,3 +21,6 @@ DerivedData
 #
 Pods/
 Podfile.lock
+
+#Mac
+.DS_Store
