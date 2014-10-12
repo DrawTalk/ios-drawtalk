@@ -9,20 +9,24 @@
 import Foundation
 import UIKit
 
-var sharedMqttWrapper: DWTMqttWrapper? = nil
-
 public class DWTMqttWrapper {
   
   // tcp:// or mqtt://
-  let host = "m10.cloudmqtt.com"
-  let port : UInt16 = 16056
-  let username = "vkgogxez"
-  let password = "oX02eF7V0I9Y"
-  let topic = "hello/world"
-  let qos2 = 2
+  private let host = "m10.cloudmqtt.com"
+  private let port : UInt16 = 16056
+  private let username = "vkgogxez"
+  private let password = "oX02eF7V0I9Y"
+  private let topic = "hello/world"
   
-  let client: MQTTClient
-  let clientId: String
+  private let client: MQTTClient
+  private let clientId: String
+  
+  class var defaultMQTT: DWTMqttWrapper {
+    struct Static {
+      static let instance = DWTMqttWrapper()
+    }
+    return Static.instance
+  }
   
   init() {
     clientId = UIDevice.currentDevice().identifierForVendor.UUIDString
@@ -32,7 +36,7 @@ public class DWTMqttWrapper {
     client.password = password
     client.host = host
     client.port = port
-
+    
     client.connectWithCompletionHandler { (code: MQTTConnectionReturnCode) -> Void in
       switch code.value {
       case ConnectionAccepted.value:
@@ -51,37 +55,30 @@ public class DWTMqttWrapper {
       println(message.payload)
     }
   }
-  
-  class func create() {
-    println("CREATING CLIENT")
-    sharedMqttWrapper = DWTMqttWrapper()
-  }
-  
+
   // message would be json serialized drawing
   class func sendMessage(message: String) {
-    sharedMqttWrapper?.sendMessage(message)
+    DWTMqttWrapper.defaultMQTT.sendMessage(message)
   }
   
-  func sendMessage(message: String) {
-    
+  private func sendMessage(message: String) {
     let messageId = NSUUID.UUID().UUIDString
     let payload = ["message": message, "clientId": clientId, "id": messageId]
-
+    
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(payload, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)
-
-    
     
     println("sending")
     println(encodedJsonString);
-
-            client.publishString(
-              encodedJsonString,
-              toTopic: topic,
-              withQos: ExactlyOnce,
-              retain: false,
-              completionHandler: { (mid: Int32) -> Void in
-              })
+    
+    client.publishString(
+      encodedJsonString,
+      toTopic: topic,
+      withQos: ExactlyOnce,
+      retain: false,
+      completionHandler: { (mid: Int32) -> Void in
+        println("message has been delivered");
+    })
   }
 }

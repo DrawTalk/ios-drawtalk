@@ -73,10 +73,6 @@ public class DWTArtboardViewController : UIViewController {
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    
-    println("init! CALLED")
-    DWTMqttWrapper.create()
-
   }
   
   required public init(coder aDecoder: NSCoder) {

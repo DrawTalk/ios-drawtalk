@@ -106,11 +106,11 @@
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
 				A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */,
+				5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */,
 				A11E8F4219E8A5940055772A /* Extensions */,
 				A11E8F1819E882E70055772A /* Images.xcassets */,
 				A11E8F1A19E882E70055772A /* LaunchScreen.xib */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
-				5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */,
 			);
 			path = DrawTalk;
 			sourceTree = "<group>";
