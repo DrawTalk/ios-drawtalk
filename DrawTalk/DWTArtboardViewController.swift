@@ -244,8 +244,12 @@ public class DWTArtboardViewController : UIViewController {
     
     println(data)
     
+    var jsonData = [
+       "paths" : data
+    ]
+    
     var jsonError: NSError?
-    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(data, options: nil, error: &jsonError)
+    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(jsonData, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)
     
     println(encodedJsonString)
