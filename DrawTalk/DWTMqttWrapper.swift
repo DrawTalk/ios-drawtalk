@@ -54,6 +54,11 @@ public class DWTMqttWrapper {
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       println(message.payload)
       // TODO: deserialize and replay it here
+      // please note, that since we are subscribed to the same topic we are sending to.
+      // we will also receive our send here.
+      // which is good for testing purposes, but then we can just ignore it using "clientId" from the payload
+      // see the serialization defailt on line 72 here.
+      //
     }
   }
 
