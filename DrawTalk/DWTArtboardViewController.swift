@@ -88,11 +88,6 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   public class func artboardController() -> DWTArtboardViewController {
-    let color = UIColor.blueColor()
-    let hex = color.hex()
-    println("hex: \(hex)")
-    var c = UIColor(rgba: hex!)
-    println("color: \(c)")
     return DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
   }
   
