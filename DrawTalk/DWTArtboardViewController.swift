@@ -27,7 +27,7 @@ private struct DWTPath {
     })
     var hex = color.hex()
     var json : DWTPathJSON = [
-      "coods": arr,
+      "coords": arr,
       "color": hex!,
       "brush": brush
     ]
