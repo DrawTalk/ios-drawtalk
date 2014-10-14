@@ -20,6 +20,7 @@ private struct DWTPath {
   var coords: [CGPoint]
   var color: UIColor = UIColor.blackColor()
   var brush: CGFloat = 1.0
+  var duration: NSTimeInterval = 0.01
   
   func toJSON() -> DWTPathJSON {
     var arr: [[CGFloat]] = coords.map({ (point: CGPoint) -> [CGFloat] in
@@ -29,12 +30,19 @@ private struct DWTPath {
     var json : DWTPathJSON = [
       "coords": arr,
       "color": hex!,
-      "brush": brush
+      "brush": brush,
+      "duration": duration
     ]
     return json
   }
   
   func pairs() -> [DWTPair] {
+    // If there's only one coord, then the pair is just the same point
+    if coords.count == 1 {
+      let point: CGPoint = coords[0]
+      return [DWTPair(pointA: point, pointB: point)]
+    }
+    // Otherwise, assemble the pairs
     var prevPoint: CGPoint?
     var pairs: [DWTPair] = []
     for point: CGPoint in coords {
@@ -95,7 +103,8 @@ public class DWTArtboardViewController : UIViewController {
     currPath = DWTPath(
       coords: [lastPoint],
       color: UIColor(red: red, green: green, blue: blue, alpha: opacity),
-      brush: brush
+      brush: brush,
+      duration: NSDate.timeIntervalSinceReferenceDate()
     )
   }
   
@@ -144,8 +153,9 @@ public class DWTArtboardViewController : UIViewController {
     canvasImageView.image = nil
     UIGraphicsEndImageContext()
     
-    if currPath != nil {
-      paths.append(currPath!)
+    if var p: DWTPath = currPath {
+      p.duration = (NSDate.timeIntervalSinceReferenceDate() - p.duration) / Double(p.coords.count)
+      paths.append(p)
     }
   }
   
@@ -159,14 +169,17 @@ public class DWTArtboardViewController : UIViewController {
       var pairs: [DWTPair] = []
       var brush: CGFloat = self.brush
       var color: UIColor = UIColor.blackColor()
+      var duration: CFTimeInterval = 0.01
     }
     
     var drawings: [PairsInfo] = []
     
     var prevPoint: CGPoint?
     for path: DWTPath in paths {
-      drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color))
+      drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color, duration: path.duration))
     }
+
+    println(drawings)
     
     var currBrush = brush
     var currColor = UIColor.blackColor()
@@ -191,7 +204,7 @@ public class DWTArtboardViewController : UIViewController {
         toPoint: pair.pointB,
         brush: info.brush,
         color: info.color,
-        duration: 0.01,
+        duration: info.duration,
         completion: { () -> Void in
           next(section, index+1)
       })
@@ -201,7 +214,7 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   private func drawSegmentFromPoint(point: CGPoint, toPoint: CGPoint, brush: CGFloat, color: UIColor, duration: CFTimeInterval, completion: (() -> Void)?) {
-    println("\(point), \(toPoint)")
+    println("\(point), \(toPoint), \(duration)")
 
     // 1) Create bezier path from first point to second.
     var path: UIBezierPath = UIBezierPath()
