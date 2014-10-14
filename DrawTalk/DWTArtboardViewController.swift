@@ -57,7 +57,7 @@ private struct DWTPath {
 
 /*
 private class DWTBezierPath: UIBezierPath {
-  var timelapse: NSTimeInterval = 0
+var timelapse: NSTimeInterval = 0
 }
 */
 
@@ -164,7 +164,7 @@ public class DWTArtboardViewController : UIViewController {
     canvasImageView.image = nil
     finalImageView.image = nil
     finalImageView.layer.sublayers = nil
-
+    
     struct PairsInfo {
       var pairs: [DWTPair] = []
       var brush: CGFloat = self.brush
@@ -178,7 +178,7 @@ public class DWTArtboardViewController : UIViewController {
     for path: DWTPath in paths {
       drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color, duration: path.duration))
     }
-
+    
     println(drawings)
     
     var currBrush = brush
@@ -198,7 +198,7 @@ public class DWTArtboardViewController : UIViewController {
       }
       
       let pair = info.pairs[index]
-
+      
       self.drawSegmentFromPoint(
         pair.pointA,
         toPoint: pair.pointB,
@@ -215,7 +215,7 @@ public class DWTArtboardViewController : UIViewController {
   
   private func drawSegmentFromPoint(point: CGPoint, toPoint: CGPoint, brush: CGFloat, color: UIColor, duration: CFTimeInterval, completion: (() -> Void)?) {
     println("\(point), \(toPoint), \(duration)")
-
+    
     // 1) Create bezier path from first point to second.
     var path: UIBezierPath = UIBezierPath()
     path.moveToPoint(point)
@@ -249,7 +249,7 @@ public class DWTArtboardViewController : UIViewController {
     
     CATransaction.commit()
   }
-
+  
   @IBAction func sendButtonTapped(sender : AnyObject) {
     var data: [DWTPathJSON] = paths.map({ (path: DWTPath) -> DWTPathJSON in
       return path.toJSON()
@@ -258,7 +258,7 @@ public class DWTArtboardViewController : UIViewController {
     println(data)
     
     var jsonData = [
-       "paths" : data
+      "paths" : data
     ]
     
     var jsonError: NSError?
