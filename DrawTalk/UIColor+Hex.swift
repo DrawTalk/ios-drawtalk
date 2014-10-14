@@ -50,9 +50,10 @@ extension UIColor {
     self.init(red:red, green:green, blue:blue, alpha:alpha)
   }
 
+  // returns ARGB format for color string
   public func hex() -> String? {
     let rgab = rgbaValues()
-    var hexString = String(format: "#%02X%02X%02X%02X", Int(rgab.red * 255), Int(rgab.green * 255), Int(rgab.blue * 255), Int(rgab.alpha * 255))
+    var hexString = String(format: "#%02X%02X%02X%02X", Int(rgab.alpha * 255), Int(rgab.red * 255), Int(rgab.green * 255), Int(rgab.blue * 255))
     return hexString;
   }
   

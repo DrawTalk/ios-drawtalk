@@ -53,6 +53,7 @@ public class DWTMqttWrapper {
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       println(message.payload)
+      // TODO: deserialize and replay it here
     }
   }
 
