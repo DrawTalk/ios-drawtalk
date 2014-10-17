@@ -52,7 +52,24 @@ public class DWTMqttWrapper {
     })
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
-      println(message.payload)
+      println("PAYLOAD")
+      
+      /*
+      var data: NSData = jsonStringAsArray.dataUsingEncoding(NSUTF8StringEncoding)!
+      var error: NSError?
+      
+      var jsonError: NSError?
+      let json: AnyObject? = NSJSONSerialization.JSONObjectWithData(message.payload, options: nil, error: &jsonError)
+      
+      let dict = json as Dictionary<String, AnyObject>
+      let result: AnyObject? = NSJSONSerialization.JSONObjectWithData(dict["message"], options: nil, error: &jsonError)
+
+      //DrawTalk.Path.fromJSON()
+      
+      println(jsonData)
+      println(result)
+      
+      */
       // TODO: deserialize and replay it here
       // please note, that since we are subscribed to the same topic we are sending to.
       // we will also receive our send here.

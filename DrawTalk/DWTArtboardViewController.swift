@@ -9,33 +9,41 @@
 import Foundation
 import UIKit
 
-typealias DWTPathJSON = Dictionary<String, AnyObject>
+typealias PathJSON = Dictionary<String, AnyObject>
 
-private struct DWTPair {
+public struct Pair {
   var pointA: CGPoint
   var pointB: CGPoint
 }
 
-private struct DWTPath {
+public struct Path {
   var coords: [CGPoint]
   var color: UIColor = UIColor.blackColor()
   var brush: CGFloat = 1.0
   var duration: NSTimeInterval = 0.01
-  
-  func normalize(grid: CGSize) -> [[CGFloat]] {
-    let scale: CGFloat = 100.0
-    let maxDimension: CGFloat = max(grid.width, grid.height)
-    let normFactor: CGFloat = maxDimension / scale
-    var arr: [[CGFloat]] = coords.map({ (point: CGPoint) -> [CGFloat] in
-      return [point.x/normFactor, point.y/normFactor]
-    })
-    return arr
-  }
 
-  func toJSON(#grid: CGSize) -> DWTPathJSON {
+  static func fromJSON(dict: Dictionary<String, AnyObject>) -> Path {
+    let rawCoords = dict["coords"]! as [[CGFloat]]
+    let coords: [CGPoint] = rawCoords.map({ (point: [CGFloat]) -> CGPoint in
+      return CGPointMake(point[0], point[1])
+    })
+    
+    let hexString = dict["color"]! as String
+    let color = UIColor(rgba: hexString)
+    
+    let brush = dict["brush"]! as CGFloat
+    let duration = dict["duration"]! as NSTimeInterval
+    
+    return Path(coords: coords, color: color, brush: brush, duration: duration)
+  }
+  
+  func toJSON() -> DrawTalk.PathJSON {
+    var arr: [[CGFloat]] = coords.map({ (point: CGPoint) -> [CGFloat] in
+      return [point.x, point.y]
+    })
     var hex = color.hex()
-    var json : DWTPathJSON = [
-      "coords": normalize(grid),
+    var json : DrawTalk.PathJSON = [
+      "coords": arr,
       "color": hex!,
       "brush": brush,
       "duration": duration,
@@ -43,18 +51,18 @@ private struct DWTPath {
     return json
   }
   
-  func pairs() -> [DWTPair] {
+  func pairs() -> [DrawTalk.Pair] {
     // If there's only one coord, then the pair is just the same point
     if coords.count == 1 {
       let point: CGPoint = coords[0]
-      return [DWTPair(pointA: point, pointB: point)]
+      return [DrawTalk.Pair(pointA: point, pointB: point)]
     }
     // Otherwise, assemble the pairs
     var prevPoint: CGPoint?
-    var pairs: [DWTPair] = []
+    var pairs: [DrawTalk.Pair] = []
     for point: CGPoint in coords {
       if prevPoint != nil {
-        pairs.append(DWTPair(pointA: prevPoint!, pointB: point))
+        pairs.append(DrawTalk.Pair(pointA: prevPoint!, pointB: point))
       }
       prevPoint = point
     }
@@ -83,8 +91,8 @@ public class DWTArtboardViewController : UIViewController {
   private var brush: CGFloat = 5.0
   private var opacity: CGFloat = 1.0
   
-  private var currPath: DWTPath?
-  private var paths: [DWTPath] = []
+  private var currPath: DrawTalk.Path?
+  private var paths: [DrawTalk.Path] = []
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -102,7 +110,7 @@ public class DWTArtboardViewController : UIViewController {
     let touch : UITouch = touches.anyObject() as UITouch
     lastPoint = touch.locationInView(view)
     
-    currPath = DWTPath(
+    currPath = DrawTalk.Path(
       coords: [lastPoint],
       color: UIColor(red: red, green: green, blue: blue, alpha: opacity),
       brush: brush,
@@ -155,7 +163,7 @@ public class DWTArtboardViewController : UIViewController {
     canvasImageView.image = nil
     UIGraphicsEndImageContext()
     
-    if var p: DWTPath = currPath {
+    if var p: DrawTalk.Path = currPath {
       p.duration = (NSDate.timeIntervalSinceReferenceDate() - p.duration) / Double(p.coords.count)
       paths.append(p)
     }
@@ -168,7 +176,7 @@ public class DWTArtboardViewController : UIViewController {
     finalImageView.layer.sublayers = nil
     
     struct PairsInfo {
-      var pairs: [DWTPair] = []
+      var pairs: [DrawTalk.Pair] = []
       var brush: CGFloat = self.brush
       var color: UIColor = UIColor.blackColor()
       var duration: CFTimeInterval = 0.01
@@ -177,7 +185,7 @@ public class DWTArtboardViewController : UIViewController {
     var drawings: [PairsInfo] = []
     
     var prevPoint: CGPoint?
-    for path: DWTPath in paths {
+    for path: DrawTalk.Path in paths {
       drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color, duration: path.duration))
     }
     
@@ -253,16 +261,15 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
-    let grid = finalImageView.frame.size
-    var data: [DWTPathJSON] = paths.map({ (path: DWTPath) -> DWTPathJSON in
-      return path.toJSON(grid: grid)
+    let size = finalImageView.frame.size
+    var data: [DrawTalk.PathJSON] = paths.map({ (path: DrawTalk.Path) -> DrawTalk.PathJSON in
+      return path.toJSON()
     })
     
     println(data)
-    
     var jsonData = [
       "paths" : data,
-      "grid": [grid.width, grid.height]
+      "grid": [size.width, size.height]
     ]
     
     var jsonError: NSError?
