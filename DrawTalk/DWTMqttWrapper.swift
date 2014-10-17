@@ -84,7 +84,7 @@ public class DWTMqttWrapper {
       withQos: ExactlyOnce,
       retain: false,
       completionHandler: { (mid: Int32) -> Void in
-        println("message has been delivered");
+        println("message has been delivered: \(mid)");
     })
   }
 }

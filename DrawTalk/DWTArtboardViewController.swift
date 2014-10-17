@@ -22,16 +22,23 @@ private struct DWTPath {
   var brush: CGFloat = 1.0
   var duration: NSTimeInterval = 0.01
   
-  func toJSON() -> DWTPathJSON {
+  func normalize(grid: CGSize) -> [[CGFloat]] {
+    let scale: CGFloat = 100.0
+    let maxDimension: CGFloat = max(grid.width, grid.height)
+    let normFactor: CGFloat = maxDimension / scale
     var arr: [[CGFloat]] = coords.map({ (point: CGPoint) -> [CGFloat] in
-      return [point.x, point.y]
+      return [point.x/normFactor, point.y/normFactor]
     })
+    return arr
+  }
+
+  func toJSON(#grid: CGSize) -> DWTPathJSON {
     var hex = color.hex()
     var json : DWTPathJSON = [
-      "coords": arr,
+      "coords": normalize(grid),
       "color": hex!,
       "brush": brush,
-      "duration": duration
+      "duration": duration,
     ]
     return json
   }
@@ -246,14 +253,16 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
+    let grid = finalImageView.frame.size
     var data: [DWTPathJSON] = paths.map({ (path: DWTPath) -> DWTPathJSON in
-      return path.toJSON()
+      return path.toJSON(grid: grid)
     })
     
     println(data)
     
     var jsonData = [
-      "paths" : data
+      "paths" : data,
+      "grid": [grid.width, grid.height]
     ]
     
     var jsonError: NSError?
