@@ -26,11 +26,14 @@ public class Drawing {
 extension Drawing {
   
   func normalizedToSize(size: CGSize) -> Drawing {
-    var newDrawing = Drawing()
+    if CGSizeEqualToSize(size, self.grid) {
+      return self
+    }
     
+    var newDrawing = Drawing()
     var newGrid = CGSizeZero
     var offset = CGPointZero
-    
+
     var factor: CGFloat = 1
     let currentRatio = size.width / size.height;
     let otherRatio = self.grid.width / self.grid.height;
