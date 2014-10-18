@@ -35,8 +35,15 @@ public class DWTArtboardViewController : UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public class func artboardController() -> DWTArtboardViewController {
-    return DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
+  public class func artboardController() -> DWTArtboardViewController {    
+    let c = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
+    DWTMqttWrapper.onMessageReceived { (message: AnyObject) -> Void in
+      dispatch_async(dispatch_get_main_queue(), {
+        c.reset()
+        c.replay(message as PathCollection)
+      })
+    }
+    return c
   }
   
   public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -102,11 +109,32 @@ public class DWTArtboardViewController : UIViewController {
     }
   }
   
+  @IBAction func resetButtonTapped(sender : AnyObject) {
+    reset()
+  }
+  
   @IBAction func replayButtonTapped(sender : AnyObject) {
-    
+    replay(paths)
+  }
+  
+  public func reset() {
+    paths.removeAll(keepCapacity: false)
+    clear()
+  }
+  
+  public func clear() {
     canvasImageView.image = nil
     finalImageView.image = nil
     finalImageView.layer.sublayers = nil
+  }
+  
+  public func replay(pathCollection: PathCollection) {
+    replay(pathCollection.paths!)
+  }
+  
+  func replay(paths: [DrawTalk.Path]) {
+    
+    clear()
     
     struct PairsInfo {
       var pairs: [DrawTalk.Pair] = []
@@ -119,10 +147,12 @@ public class DWTArtboardViewController : UIViewController {
     
     var prevPoint: CGPoint?
     for path: DrawTalk.Path in paths {
+      /*
       var p: [DrawTalk.Pair] = path.pairs()
       for x: DrawTalk.Pair in p {
-        println(x.pointA, x.pointB)
+        println("here", x.pointA, x.pointB)
       }
+      */
       drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color, duration: path.duration))
     }
   
@@ -136,8 +166,7 @@ public class DWTArtboardViewController : UIViewController {
       }
       
       let info: PairsInfo = drawings[section]
-      println(info.pairs)
-      
+
       if index > info.pairs.count - 1 {
         next(section+1, 0)
         return
@@ -160,7 +189,8 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   private func drawSegmentFromPoint(point: CGPoint, toPoint: CGPoint, brush: CGFloat, color: UIColor, duration: CFTimeInterval, completion: (() -> Void)?) {
-    println("\(point), \(toPoint), \(duration)")
+    
+    //println("drawing: \(point), \(toPoint), \(duration)")
     
     // 1) Create bezier path from first point to second.
     var path: UIBezierPath = UIBezierPath()
@@ -199,9 +229,8 @@ public class DWTArtboardViewController : UIViewController {
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let size = finalImageView.frame.size
     
-    var pathCollection = DrawTalk.PathCollection()
+    var pathCollection = DrawTalk.PathCollection(paths: paths, grid: size)
     pathCollection.paths = paths
-    pathCollection.grid = size
     
     var json = DrawTalk.PathCollection.toJSON(pathCollection)
     

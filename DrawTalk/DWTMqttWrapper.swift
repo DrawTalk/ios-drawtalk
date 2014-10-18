@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+typealias DWTMessageReceivedHandler = (AnyObject) -> Void
+
 public class DWTMqttWrapper {
   
   // tcp:// or mqtt://
@@ -50,27 +52,32 @@ public class DWTMqttWrapper {
     client.subscribe(topic, withCompletionHandler: { ([AnyObject]!) -> Void in
       println("subscribed to the topic")
     })
-    
-    client.messageHandler = { (message: MQTTMessage!) -> Void in
+  }
+
+  
+  class func onMessageReceived(completion: DWTMessageReceivedHandler) {
+    DWTMqttWrapper.defaultMQTT.client.messageHandler = { (message: MQTTMessage!) -> Void in
       println("PAYLOAD")
       
       var jsonError: NSError?
       let json: AnyObject? = NSJSONSerialization.JSONObjectWithData(message.payload, options: nil, error: &jsonError)
       
       let dict = json as Dictionary<String, AnyObject>
+      
       let message = dict["message"]! as String
-      let result: AnyObject? = NSJSONSerialization.JSONObjectWithData(message.dataUsingEncoding(NSUTF8StringEncoding)!, options: nil, error: &jsonError)
-      
-      let data = result as Dictionary<String, AnyObject>
 
-      let pathsArr = data["paths"]! as [DrawTalk.PathJSON]
-      let paths: [DrawTalk.Path] = pathsArr.map({ (dict: DrawTalk.PathJSON) -> DrawTalk.Path in
-        return DrawTalk.Path.fromJSON(dict)
-      })
+      var x = DrawTalk.PathCollection.fromJSON(message)
       
-      println(json);
-      println(result);
-      println(paths);
+      let clientId = dict["clientId"]! as String
+      let id = dict["id"]! as String
+      if clientId != DWTMqttWrapper.defaultMQTT.clientId {
+        completion(x)
+      }
+      
+      //println(x);
+      //println(json);
+      //println(result);
+      //println(paths);
     }
   }
 

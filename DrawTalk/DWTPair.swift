@@ -25,7 +25,7 @@ protocol MessageProtocol {
 }
 
 public class PathCollection: MessageProtocol, SerializableProtocol {
-  var paths: [Path]?
+  var paths: [DrawTalk.Path]?
   var grid: CGSize = CGSizeZero
   
   required public init() {
@@ -35,7 +35,8 @@ public class PathCollection: MessageProtocol, SerializableProtocol {
   }
   
   public init (paths: [Path], grid: CGSize) {
-    
+    self.paths = paths
+    self.grid = grid
   }
   
   class func fromJSON(json: AnyObject) -> Self {
@@ -80,10 +81,13 @@ public class Path: SerializableProtocol {
   
   required public init() {
   }
-  
+
   convenience public init (coords: [CGPoint], color: UIColor, brush: CGFloat, duration: NSTimeInterval) {
     self.init()
     self.coords = coords
+    self.color = color
+    self.brush = brush
+    self.duration = duration
   }
   
   class func fromJSON(json: AnyObject) -> Self {
@@ -93,12 +97,19 @@ public class Path: SerializableProtocol {
     })
     
     let hexString = json["color"]! as String
-    let color = UIColor(rgba: hexString)
+    let color = UIColor(hex: hexString)
     
     let brush = json["brush"]! as CGFloat
     let duration = json["duration"]! as NSTimeInterval
     
-    return self()
+    // This is so stupid
+    var p = self()
+    p.coords = coords
+    p.brush = brush
+    p.duration = duration
+    p.color = color
+
+    return p
   }
   
   class func toJSON(item: Path) -> Dictionary<String, AnyObject> {

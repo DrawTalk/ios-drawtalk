@@ -17,6 +17,30 @@ public struct RGBA {
 
 extension UIColor {
   
+  convenience init(hex: String) {
+    var red:CGFloat   = 0.0
+    var green:CGFloat = 0.0
+    var blue:CGFloat  = 0.0
+    var alpha:CGFloat = 1.0
+    
+    let scanner = NSScanner.scannerWithString(hex)
+    var hexValue: UInt32 = 0
+    if scanner.scanHexInt(&hexValue) {
+      if countElements(hex) == 8 {
+        red   = CGFloat((hexValue & 0xFF000000) >> 24) / 255.0
+        green = CGFloat((hexValue & 0x00FF0000) >> 16) / 255.0
+        blue  = CGFloat((hexValue & 0x0000FF00) >> 8) / 255.0
+        alpha = CGFloat((hexValue & 0x000000FF)) / 255.0
+      } else if countElements(hex) == 6 {
+        red   = CGFloat((hexValue & 0xFF0000) >> 16) / 255.0
+        green = CGFloat((hexValue & 0x00FF00) >> 8) / 255.0
+        blue  = CGFloat((hexValue & 0x0000FF)) / 255.0
+      }
+    }
+    
+    self.init(red:red, green:green, blue:blue, alpha:alpha)
+  }
+  
   convenience init(rgba: String) {
     var red:   CGFloat = 0.0
     var green: CGFloat = 0.0
@@ -50,10 +74,18 @@ extension UIColor {
     self.init(red:red, green:green, blue:blue, alpha:alpha)
   }
 
-  // returns ARGB format for color string
+  // returns RGBA format for color string
   public func hex() -> String? {
-    let rgab = rgbaValues()
-    var hexString = String(format: "#%02X%02X%02X%02X", Int(rgab.alpha * 255), Int(rgab.red * 255), Int(rgab.green * 255), Int(rgab.blue * 255))
+    let rgba = rgbaValues()
+    
+    println(rgba.red, rgba.green, rgba.blue, rgba.alpha)
+    
+    var hexString = String(format: "#%02X%02X%02X%02X",
+      Int(rgba.red * 255),
+      Int(rgba.green * 255),
+      Int(rgba.blue * 255),
+      Int(rgba.alpha * 255))
+    
     return hexString;
   }
   
@@ -62,7 +94,8 @@ extension UIColor {
     let red = components[0]
     let green = components[1]
     let blue = components[2]
-    let alpha = components[3]
+    let alpha = CGColorGetAlpha(self.CGColor)
+    
     return RGBA(red: red, green: green, blue: blue, alpha: alpha)
   }
 }
