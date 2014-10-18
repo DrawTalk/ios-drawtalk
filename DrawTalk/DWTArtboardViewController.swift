@@ -35,7 +35,7 @@ public class DWTArtboardViewController : UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public class func artboardController() -> DWTArtboardViewController {    
+  public class func artboardController() -> DWTArtboardViewController {
     let vc = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
     
     MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
@@ -47,7 +47,7 @@ public class DWTArtboardViewController : UIViewController {
         vc.replay(drawingJson.toDrawing())
       })
     })
-
+    
     return vc
   }
   
@@ -134,44 +134,8 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   public func replay(drawing: Drawing) {
-    let newDrawing = normalize(drawing)
+    let newDrawing = drawing.normalizedToSize(finalImageView.frame.size)
     replay(newDrawing.paths)
-  }
-  
-  private func normalize(drawing: Drawing) -> Drawing {
-    var newDrawing = Drawing()
-    
-    let size = finalImageView.frame.size
-    
-    var newGrid = CGSizeZero
-    var offset = CGPointZero
-    
-    var factor: CGFloat = 1
-    let currentRatio = size.width / size.height;
-    let otherRatio = drawing.grid.width / drawing.grid.height;
-    
-    if otherRatio > currentRatio {
-      factor = size.width / drawing.grid.width
-      newGrid = CGSizeMake(size.width, size.width / otherRatio)
-      offset = CGPointMake(0, (size.height - newGrid.height) / 2)
-    } else {
-      factor = size.height / drawing.grid.height
-      newGrid = CGSizeMake(size.height * otherRatio, size.height)
-      offset = CGPointMake((size.width - newGrid.width) / 2, 0)
-    }
-    
-    newDrawing.paths = drawing.paths.map { (path: DrawTalk.Path) -> DrawTalk.Path in
-      var newPath = Path()
-      newPath.color = path.color
-      newPath.brush = path.brush
-      newPath.duration = path.duration
-      newPath.coords = path.coords.map({ (point: CGPoint) -> CGPoint in
-        return CGPointMake(point.x * factor + offset.x, point.y * factor + offset.y)
-      })
-      return newPath
-    }
-    
-    return newDrawing
   }
   
   func replay(paths: [DrawTalk.Path]) {
@@ -192,12 +156,12 @@ public class DWTArtboardViewController : UIViewController {
       /*
       var p: [DrawTalk.Pair] = path.pairs()
       for x: DrawTalk.Pair in p {
-        println("here", x.pointA, x.pointB)
+      println("here", x.pointA, x.pointB)
       }
       */
       drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color, duration: path.duration))
     }
-  
+    
     var currBrush = brush
     var currColor = UIColor.blackColor()
     
@@ -208,7 +172,7 @@ public class DWTArtboardViewController : UIViewController {
       }
       
       let info: PairsInfo = drawings[section]
-
+      
       if index > info.pairs.count - 1 {
         next(section+1, 0)
         return
