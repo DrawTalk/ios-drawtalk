@@ -82,7 +82,7 @@ extension UIColor {
     
     println(rgba.red, rgba.green, rgba.blue, rgba.alpha)
     
-    var hexString = String(format: "#%02X%02X%02X%02X",
+    var hexString = String(format: "#%0.2X%0.2X%0.2X%0.2X",
       Int(rgba.red * 255),
       Int(rgba.green * 255),
       Int(rgba.blue * 255),
