@@ -54,28 +54,22 @@ public class DWTMqttWrapper {
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       println("PAYLOAD")
       
-      /*
-      var data: NSData = jsonStringAsArray.dataUsingEncoding(NSUTF8StringEncoding)!
-      var error: NSError?
-      
       var jsonError: NSError?
       let json: AnyObject? = NSJSONSerialization.JSONObjectWithData(message.payload, options: nil, error: &jsonError)
       
       let dict = json as Dictionary<String, AnyObject>
-      let result: AnyObject? = NSJSONSerialization.JSONObjectWithData(dict["message"], options: nil, error: &jsonError)
+      let message = dict["message"]! as String
+      let result: AnyObject? = NSJSONSerialization.JSONObjectWithData(message.dataUsingEncoding(NSUTF8StringEncoding)!, options: nil, error: &jsonError)
+      
+      let data = result as Dictionary<String, AnyObject>
 
-      //DrawTalk.Path.fromJSON()
+      let pathsArr = data["paths"]! as [Dictionary<String, AnyObject>]
+      let paths: [DrawTalk.Path] = pathsArr.map({ (dict: Dictionary<String, AnyObject>) -> DrawTalk.Path in
+        return DrawTalk.Path.fromJSON(dict)
+      })
       
-      println(jsonData)
-      println(result)
-      
-      */
-      // TODO: deserialize and replay it here
-      // please note, that since we are subscribed to the same topic we are sending to.
-      // we will also receive our send here.
-      // which is good for testing purposes, but then we can just ignore it using "clientId" from the payload
-      // see the serialization defailt on line 72 here.
-      //
+      println(result);
+      println(paths);
     }
   }
 

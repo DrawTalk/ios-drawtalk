@@ -17,6 +17,7 @@
 		A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */; };
 		A11E8F3F19E88CEE0055772A /* DWTArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */; };
 		A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */; };
+		A1F7329519F20EC5007436F7 /* DWTPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7329419F20EC5007436F7 /* DWTPair.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTArtboardViewController.swift; sourceTree = "<group>"; };
 		A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DWTArtboardViewController.xib; sourceTree = "<group>"; };
 		A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		A1F7329419F20EC5007436F7 /* DWTPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPair.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */,
 				5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */,
+				A1F7329419F20EC5007436F7 /* DWTPair.swift */,
 				A11E8F4219E8A5940055772A /* Extensions */,
 				A11E8F1819E882E70055772A /* Images.xcassets */,
 				A11E8F1A19E882E70055772A /* LaunchScreen.xib */,
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11E8F1119E882E70055772A /* AppDelegate.m in Sources */,
+				A1F7329519F20EC5007436F7 /* DWTPair.swift in Sources */,
 				5FF085BE19EA30AD00E54490 /* DWTMqttWrapper.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
 				A11E8F0E19E882E70055772A /* main.m in Sources */,
