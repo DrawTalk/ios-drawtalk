@@ -40,7 +40,7 @@ public class DWTArtboardViewController : UIViewController {
     DWTMqttWrapper.onMessageReceived { (message: AnyObject) -> Void in
       dispatch_async(dispatch_get_main_queue(), {
         c.reset()
-        c.replay(message as PathCollection)
+        c.replay(message as Drawing)
       })
     }
     return c
@@ -128,8 +128,8 @@ public class DWTArtboardViewController : UIViewController {
     finalImageView.layer.sublayers = nil
   }
   
-  public func replay(pathCollection: PathCollection) {
-    replay(pathCollection.paths!)
+  public func replay(drawing: Drawing) {
+    replay(drawing.paths)
   }
   
   func replay(paths: [DrawTalk.Path]) {
@@ -229,11 +229,12 @@ public class DWTArtboardViewController : UIViewController {
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let size = finalImageView.frame.size
     
-    var pathCollection = DrawTalk.PathCollection(paths: paths, grid: size)
-    pathCollection.paths = paths
-    
-    var json = DrawTalk.PathCollection.toJSON(pathCollection)
-    
+    var drawing = Drawing()
+    drawing.paths = paths
+    drawing.grid = size
+    var drawingJson = DrawingJson(drawing: drawing)
+    //println("here we are", drawingJson.toJson())
+    var json: AnyObject = drawingJson.toJson()
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(json, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)

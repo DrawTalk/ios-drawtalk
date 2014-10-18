@@ -59,25 +59,18 @@ public class DWTMqttWrapper {
     DWTMqttWrapper.defaultMQTT.client.messageHandler = { (message: MQTTMessage!) -> Void in
       println("PAYLOAD")
       
-      var jsonError: NSError?
-      let json: AnyObject? = NSJSONSerialization.JSONObjectWithData(message.payload, options: nil, error: &jsonError)
+      let json = JSON(data: message.payload)
+      let message = json["message"].stringValue
+      var d = JSON(data: message.dataUsingEncoding(NSUTF8StringEncoding)!)
+      var x =  DrawingJson(json: d)
       
-      let dict = json as Dictionary<String, AnyObject>
+      println("message", x.toJson())
       
-      let message = dict["message"]! as String
-
-      var x = DrawTalk.PathCollection.fromJSON(message)
-      
-      let clientId = dict["clientId"]! as String
-      let id = dict["id"]! as String
+      let clientId = json["clientId"].stringValue
+      let id = json["id"].stringValue
       if clientId != DWTMqttWrapper.defaultMQTT.clientId {
-        completion(x)
+        completion(x.toDrawing())
       }
-      
-      //println(x);
-      //println(json);
-      //println(result);
-      //println(paths);
     }
   }
 

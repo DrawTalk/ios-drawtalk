@@ -41,6 +41,7 @@ extension UIColor {
     self.init(red:red, green:green, blue:blue, alpha:alpha)
   }
   
+  /*
   convenience init(rgba: String) {
     var red:   CGFloat = 0.0
     var green: CGFloat = 0.0
@@ -73,6 +74,7 @@ extension UIColor {
     }
     self.init(red:red, green:green, blue:blue, alpha:alpha)
   }
+  */
 
   // returns RGBA format for color string
   public func hex() -> String? {

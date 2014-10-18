@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */; };
 		5FF085BE19EA30AD00E54490 /* DWTMqttWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A11E8F0E19E882E70055772A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F0D19E882E70055772A /* main.m */; };
 		A11E8F1119E882E70055772A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F1019E882E70055772A /* AppDelegate.m */; };
 		A11E8F1919E882E70055772A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1819E882E70055772A /* Images.xcassets */; };
 		A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1A19E882E70055772A /* LaunchScreen.xib */; };
-		A11E8F2819E882E70055772A /* DrawTalkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F2719E882E70055772A /* DrawTalkTests.m */; };
 		A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */; };
 		A11E8F3F19E88CEE0055772A /* DWTArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */; };
 		A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */; };
-		A1F7329519F20EC5007436F7 /* DWTPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F7329419F20EC5007436F7 /* DWTPair.swift */; };
+		A14549D519F2C8B4000513A6 /* DWTColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14549D419F2C8B4000513A6 /* DWTColorTests.swift */; };
+		A1EF259F19F2CC2D00F52A85 /* DWTPathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */; };
+		A1EF25A119F2CC3500F52A85 /* DWTPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A019F2CC3500F52A85 /* DWTPath.swift */; };
+		A1EF25A319F2CF3400F52A85 /* DWTDrawingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A219F2CF3400F52A85 /* DWTDrawingJson.swift */; };
+		A1EF25A519F2CF3C00F52A85 /* DWTDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A419F2CF3C00F52A85 /* DWTDrawing.swift */; };
+		A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D961AF35B16402E93D17D13 /* Pods-DrawTalkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalkTests.xcconfig"; path = "Pods/Pods-DrawTalkTests.xcconfig"; sourceTree = "<group>"; };
 		5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMqttWrapper.swift; sourceTree = "<group>"; };
 		73856A6D01F8473F8290FCB1 /* Pods-DrawTalk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.xcconfig"; path = "Pods/Pods-DrawTalk.xcconfig"; sourceTree = "<group>"; };
 		8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,13 +49,19 @@
 		A11E8F1B19E882E70055772A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A11E8F2119E882E70055772A /* DrawTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E8F2619E882E70055772A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A11E8F2719E882E70055772A /* DrawTalkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawTalkTests.m; sourceTree = "<group>"; };
 		A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Prefix.pch"; sourceTree = "<group>"; };
 		A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTArtboardViewController.swift; sourceTree = "<group>"; };
 		A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DWTArtboardViewController.xib; sourceTree = "<group>"; };
 		A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
-		A1F7329419F20EC5007436F7 /* DWTPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPair.swift; sourceTree = "<group>"; };
+		A14549D419F2C8B4000513A6 /* DWTColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTColorTests.swift; sourceTree = "<group>"; };
+		A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawTalkTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPathJson.swift; sourceTree = "<group>"; };
+		A1EF25A019F2CC3500F52A85 /* DWTPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPath.swift; sourceTree = "<group>"; };
+		A1EF25A219F2CF3400F52A85 /* DWTDrawingJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTDrawingJson.swift; sourceTree = "<group>"; };
+		A1EF25A419F2CF3C00F52A85 /* DWTDrawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTDrawing.swift; sourceTree = "<group>"; };
+		A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */,
+				ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -87,6 +101,7 @@
 				A11E8F0919E882E70055772A /* Products */,
 				73856A6D01F8473F8290FCB1 /* Pods-DrawTalk.xcconfig */,
 				706A4F7972AC4C41BE43FE30 /* Frameworks */,
+				3D961AF35B16402E93D17D13 /* Pods-DrawTalkTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,11 +124,12 @@
 				A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */,
 				5FF085BD19EA30AD00E54490 /* DWTMqttWrapper.swift */,
-				A1F7329419F20EC5007436F7 /* DWTPair.swift */,
 				A11E8F4219E8A5940055772A /* Extensions */,
 				A11E8F1819E882E70055772A /* Images.xcassets */,
 				A11E8F1A19E882E70055772A /* LaunchScreen.xib */,
+				A185DD4C19F2419E0030415E /* Models */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
+				A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */,
 			);
 			path = DrawTalk;
 			sourceTree = "<group>";
@@ -130,7 +146,8 @@
 		A11E8F2419E882E70055772A /* DrawTalkTests */ = {
 			isa = PBXGroup;
 			children = (
-				A11E8F2719E882E70055772A /* DrawTalkTests.m */,
+				A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */,
+				A14549D419F2C8B4000513A6 /* DWTColorTests.swift */,
 				A11E8F2519E882E70055772A /* Supporting Files */,
 			);
 			path = DrawTalkTests;
@@ -150,6 +167,17 @@
 				A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		A185DD4C19F2419E0030415E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1EF25A419F2CF3C00F52A85 /* DWTDrawing.swift */,
+				A1EF25A219F2CF3400F52A85 /* DWTDrawingJson.swift */,
+				A1EF25A019F2CC3500F52A85 /* DWTPath.swift */,
+				A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,9 +206,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A11E8F2E19E882E70055772A /* Build configuration list for PBXNativeTarget "DrawTalkTests" */;
 			buildPhases = (
+				1C61571BCC1E460B856DF956 /* Check Pods Manifest.lock */,
 				A11E8F1D19E882E70055772A /* Sources */,
 				A11E8F1E19E882E70055772A /* Frameworks */,
 				A11E8F1F19E882E70055772A /* Resources */,
+				32B0087C450740E0AA0F65C4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,6 +282,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1C61571BCC1E460B856DF956 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		32B0087C450740E0AA0F65C4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-DrawTalkTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		343A4F2B7321468DA908147F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -290,9 +350,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11E8F1119E882E70055772A /* AppDelegate.m in Sources */,
-				A1F7329519F20EC5007436F7 /* DWTPair.swift in Sources */,
 				5FF085BE19EA30AD00E54490 /* DWTMqttWrapper.swift in Sources */,
+				A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
+				A1EF25A519F2CF3C00F52A85 /* DWTDrawing.swift in Sources */,
+				A1EF25A119F2CC3500F52A85 /* DWTPath.swift in Sources */,
+				A1EF259F19F2CC2D00F52A85 /* DWTPathJson.swift in Sources */,
+				A1EF25A319F2CF3400F52A85 /* DWTDrawingJson.swift in Sources */,
 				A11E8F0E19E882E70055772A /* main.m in Sources */,
 				A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */,
 			);
@@ -302,7 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A11E8F2819E882E70055772A /* DrawTalkTests.m in Sources */,
+				A14549D519F2C8B4000513A6 /* DWTColorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,8 +503,10 @@
 		};
 		A11E8F2F19E882E70055772A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D961AF35B16402E93D17D13 /* Pods-DrawTalkTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -452,14 +518,18 @@
 				INFOPLIST_FILE = DrawTalkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DrawTalkTests/DrawTalkTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrawTalk.app/DrawTalk";
 			};
 			name = Debug;
 		};
 		A11E8F3019E882E70055772A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D961AF35B16402E93D17D13 /* Pods-DrawTalkTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -467,6 +537,7 @@
 				INFOPLIST_FILE = DrawTalkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DrawTalkTests/DrawTalkTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrawTalk.app/DrawTalk";
 			};
 			name = Release;
