@@ -19,6 +19,8 @@ public typealias Observer = NSObjectProtocol
 public let kMessageEventOutgoing = "kMessageEventOutgoing"
 public let kMessageEventIncoming = "kMessageEventIncoming"
 
+private let kEvent = "event"
+
 public class MessageEventBus {
   
   private var observers: [Observer] = []
@@ -31,7 +33,7 @@ public class MessageEventBus {
   }
 
   public func post(name: String, event: MessageEvent!) {
-    NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil, userInfo: ["event" : event])
+    NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil, userInfo: [kEvent : event])
   }
   
   public func subscribe(name: String, handler: EventBusHandler!) -> Observer {
@@ -41,7 +43,7 @@ public class MessageEventBus {
       queue: nil,
       usingBlock: { (note: NSNotification!) -> Void in
         if let userInfo = note.userInfo {
-          if let event: AnyObject = userInfo["event"] {
+          if let event: AnyObject = userInfo[kEvent] {
             if event is MessageEvent {
               handler(event as MessageEvent)
             }

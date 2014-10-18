@@ -47,6 +47,13 @@ public class DrawingJson {
     return json
   }
   
+  public func jsonString() -> NSString {
+    var jsonError: NSError?
+    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(toJson(), options: nil, error: &jsonError)
+    let encodedJsonString: NSString = NSString(data: encodedJsonData!, encoding: NSUTF8StringEncoding)
+    return encodedJsonString
+  }
+  
   public func toDrawing() -> Drawing {
     var drawing = Drawing()
     drawing.paths = self.paths.map({ (pathJson: DrawTalk.PathJson) -> DrawTalk.Path in

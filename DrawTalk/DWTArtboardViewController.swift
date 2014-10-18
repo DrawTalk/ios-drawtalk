@@ -134,7 +134,44 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   public func replay(drawing: Drawing) {
-    replay(drawing.paths)
+    let newDrawing = normalize(drawing)
+    replay(newDrawing.paths)
+  }
+  
+  private func normalize(drawing: Drawing) -> Drawing {
+    var newDrawing = Drawing()
+    
+    let size = finalImageView.frame.size
+    
+    var newGrid = CGSizeZero
+    var offset = CGPointZero
+    
+    var factor: CGFloat = 1
+    let currentRatio = size.width / size.height;
+    let otherRatio = drawing.grid.width / drawing.grid.height;
+    
+    if otherRatio > currentRatio {
+      factor = size.width / drawing.grid.width
+      newGrid = CGSizeMake(size.width, size.width / otherRatio)
+      offset = CGPointMake(0, (size.height - newGrid.height) / 2)
+    } else {
+      factor = size.height / drawing.grid.height
+      newGrid = CGSizeMake(size.height * otherRatio, size.height)
+      offset = CGPointMake((size.width - newGrid.width) / 2, 0)
+    }
+    
+    newDrawing.paths = drawing.paths.map { (path: DrawTalk.Path) -> DrawTalk.Path in
+      var newPath = Path()
+      newPath.color = path.color
+      newPath.brush = path.brush
+      newPath.duration = path.duration
+      newPath.coords = path.coords.map({ (point: CGPoint) -> CGPoint in
+        return CGPointMake(point.x * factor + offset.x, point.y * factor + offset.y)
+      })
+      return newPath
+    }
+    
+    return newDrawing
   }
   
   func replay(paths: [DrawTalk.Path]) {
@@ -236,12 +273,8 @@ public class DWTArtboardViewController : UIViewController {
     
     let drawing = Drawing(paths: paths, grid: size)
     let drawingJson = DrawingJson(drawing: drawing)
-    var json: AnyObject = drawingJson.toJson()
-    var jsonError: NSError?
-    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(json, options: nil, error: &jsonError)
-    let encodedJsonString: NSString = NSString(data: encodedJsonData!, encoding: NSUTF8StringEncoding)
-  
-    var message = ChatMessage.outgoing(encodedJsonString)
+    var message = ChatMessage.outgoing(drawingJson.jsonString())
+    
     MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
     
     //println("here we are", drawingJson.toJson())
