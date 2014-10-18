@@ -1,8 +1,8 @@
 //
-//  DWTMqttWrapper.swift
+//  DWTMqqtClientWrapper.swift
 //  DrawTalk
 //
-//  Created by Roman Inozemtsev on 10/11/14.
+//  Created by Kirollos Risk on 10/18/14.
 //  Copyright (c) 2014 DrawTalk. All rights reserved.
 //
 
@@ -11,21 +11,16 @@ import UIKit
 
 typealias DWTMessageReceivedHandler = (AnyObject) -> Void
 
-public class DWTMqttWrapper {
+@objc
+public class DWTMqttClientWrapper {
   
-  // tcp:// or mqtt://
-  private let host = "m10.cloudmqtt.com"
-  private let port : UInt16 = 16056
-  private let username = "vkgogxez"
-  private let password = "oX02eF7V0I9Y"
   private let topic = "hello/world"
-  
   private let client: MQTTClient
   private let clientId: String
   
-  class var defaultMQTT: DWTMqttWrapper {
-    struct Static {
-      static let instance = DWTMqttWrapper()
+  class var defaultMQTT: DWTMqttClientWrapper {
+  struct Static {
+    static let instance = DWTMqttClientWrapper()
     }
     return Static.instance
   }
@@ -33,7 +28,9 @@ public class DWTMqttWrapper {
   init() {
     clientId = UIDevice.currentDevice().identifierForVendor.UUIDString
     client = MQTTClient(clientId: clientId)
-    
+  }
+  
+  public func setup(#username: String, password: String, host: String, port: UInt16) {
     client.username = username
     client.password = password
     client.host = host
@@ -52,37 +49,22 @@ public class DWTMqttWrapper {
     client.subscribe(topic, withCompletionHandler: { ([AnyObject]!) -> Void in
       println("subscribed to the topic")
     })
-  }
-
-  
-  class func onMessageReceived(completion: DWTMessageReceivedHandler) {
-    DWTMqttWrapper.defaultMQTT.client.messageHandler = { (message: MQTTMessage!) -> Void in
-      println("PAYLOAD")
-      
-      let json = JSON(data: message.payload)
-      let message = json["message"].stringValue
-      var d = JSON(data: message.dataUsingEncoding(NSUTF8StringEncoding)!)
-      var x =  DrawingJson(json: d)
-      
-      println("message", x.toJson())
-      
-      let clientId = json["clientId"].stringValue
-      let id = json["id"].stringValue
-      if clientId != DWTMqttWrapper.defaultMQTT.clientId {
-        completion(x.toDrawing())
+    
+    MessageEventBus.defaultBus.subscribe(kMessageEventOutgoing, handler: { (event: MessageEvent) -> Void in
+      var message: AnyObject = event.toPayload()
+      self.sendMessage(message)
+    })
+    
+    client.messageHandler = { (message: MQTTMessage!) -> Void in
+      let m = ChatMessage.incoming(message.payload)
+      if m.clientId != self.clientId {
+        MessageEventBus.defaultBus.post(kMessageEventIncoming, event: m)
       }
     }
   }
-
-  // message would be json serialized drawing
-  class func sendMessage(message: String) {
-    DWTMqttWrapper.defaultMQTT.sendMessage(message)
-  }
   
-  private func sendMessage(message: String) {
-    let messageId = NSUUID.UUID().UUIDString
-    let payload = ["message": message, "clientId": clientId, "id": messageId]
-    
+  // message would be json serialized drawing
+  private func sendMessage(payload: AnyObject) {
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(payload, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)

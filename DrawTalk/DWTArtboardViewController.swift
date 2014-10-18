@@ -36,14 +36,19 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   public class func artboardController() -> DWTArtboardViewController {    
-    let c = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
-    DWTMqttWrapper.onMessageReceived { (message: AnyObject) -> Void in
+    let vc = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
+    
+    MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
+      let chatMessage = event as ChatMessage
+      var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
+      var drawingJson =  DrawingJson(json: d)
       dispatch_async(dispatch_get_main_queue(), {
-        c.reset()
-        c.replay(message as Drawing)
+        vc.reset()
+        vc.replay(drawingJson.toDrawing())
       })
-    }
-    return c
+    })
+
+    return vc
   }
   
   public override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -229,20 +234,18 @@ public class DWTArtboardViewController : UIViewController {
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let size = finalImageView.frame.size
     
-    var drawing = Drawing()
-    drawing.paths = paths
-    drawing.grid = size
-    var drawingJson = DrawingJson(drawing: drawing)
-    //println("here we are", drawingJson.toJson())
+    let drawing = Drawing(paths: paths, grid: size)
+    let drawingJson = DrawingJson(drawing: drawing)
     var json: AnyObject = drawingJson.toJson()
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(json, options: nil, error: &jsonError)
-    let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)
+    let encodedJsonString: NSString = NSString(data: encodedJsonData!, encoding: NSUTF8StringEncoding)
+  
+    var message = ChatMessage.outgoing(encodedJsonString)
+    MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
     
+    //println("here we are", drawingJson.toJson())
     //println(encodedJsonString)
-    
-    DWTMqttWrapper.sendMessage(encodedJsonString)
-    
     // https://github.com/mobile-web-messaging/MQTTKit
   }
 }

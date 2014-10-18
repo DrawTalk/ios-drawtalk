@@ -20,7 +20,15 @@
   
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   //self.window.backgroundColor = [UIColor colorWithPatternImage:[UIScreen lcn_launchImage]];
+
+  static NSString *kUsername = @"vkgogxez";
+  static NSString *kPassword = @"oX02eF7V0I9Y";
   
+  [[DWTMqttClientWrapper defaultMQTT] setupWithUsername:kUsername
+                                               password:kPassword
+                                                   host:[Constants host]
+                                                   port:[Constants port]];
+
   DWTArtboardViewController *vc = [DWTArtboardViewController artboardController];
   self.window.rootViewController = vc;
   [self.window makeKeyAndVisible];
