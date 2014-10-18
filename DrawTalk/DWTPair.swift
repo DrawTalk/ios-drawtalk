@@ -16,37 +16,101 @@ public struct Pair {
   var pointB: CGPoint
 }
 
-public struct Path {
-  var coords: [CGPoint]
+protocol SerializableProtocol {
+  class func fromJSON(json: AnyObject) -> Self
+  class func toJSON(item: Self) -> Dictionary<String, AnyObject>
+}
+
+protocol MessageProtocol {
+}
+
+public class PathCollection: MessageProtocol, SerializableProtocol {
+  var paths: [Path]?
+  var grid: CGSize = CGSizeZero
+  
+  required public init() {
+    // Does nothing, but we need it for the class methods below, since they construct an object of class type 'Self'
+    // with a metatype value, which can only work if there's a 'required initializer'
+    // What a majectic pain. Some lovely initialization inference would be much appreciated.
+  }
+  
+  public init (paths: [Path], grid: CGSize) {
+    
+  }
+  
+  class func fromJSON(json: AnyObject) -> Self {
+    var permission = self()
+
+    var error: NSError?
+    let message = (json as String).dataUsingEncoding(NSUTF8StringEncoding)!
+    let result: AnyObject? = NSJSONSerialization.JSONObjectWithData(message, options: nil, error: &error)
+    
+    if let data = result as? Dictionary<String, AnyObject> {
+      if let pathsArr = data["paths"]! as? [DrawTalk.PathJSON] {
+        permission.paths = pathsArr.map({ (dict: DrawTalk.PathJSON) -> DrawTalk.Path in
+          return DrawTalk.Path.fromJSON(dict)
+        })
+      }
+      if let grid = data["grid"]! as? [CGFloat] {
+        permission.grid = CGSizeMake(grid[0], grid[1])
+      }
+    }
+    
+    return permission
+  }
+  
+  class func toJSON(item: PathCollection) -> Dictionary<String, AnyObject> {
+    let data: [DrawTalk.PathJSON] = item.paths!.map({ (path: DrawTalk.Path) -> DrawTalk.PathJSON in
+      return DrawTalk.Path.toJSON(path)
+    })
+    
+    let json: Dictionary<String, AnyObject> = [
+      "paths" : data,
+      "grid": [item.grid.width, item.grid.height]
+    ]
+    return json
+  }
+}
+
+public class Path: SerializableProtocol {
+  var coords: [CGPoint] = []
   var color: UIColor = UIColor.blackColor()
   var brush: CGFloat = 1.0
   var duration: NSTimeInterval = 0.01
   
-  static func fromJSON(dict: Dictionary<String, AnyObject>) -> Path {
-    let rawCoords = dict["coords"]! as [[CGFloat]]
+  required public init() {
+  }
+  
+  convenience public init (coords: [CGPoint], color: UIColor, brush: CGFloat, duration: NSTimeInterval) {
+    self.init()
+    self.coords = coords
+  }
+  
+  class func fromJSON(json: AnyObject) -> Self {
+    let rawCoords = json["coords"]! as [[CGFloat]]
     let coords: [CGPoint] = rawCoords.map({ (point: [CGFloat]) -> CGPoint in
       return CGPointMake(point[0], point[1])
     })
     
-    let hexString = dict["color"]! as String
+    let hexString = json["color"]! as String
     let color = UIColor(rgba: hexString)
     
-    let brush = dict["brush"]! as CGFloat
-    let duration = dict["duration"]! as NSTimeInterval
+    let brush = json["brush"]! as CGFloat
+    let duration = json["duration"]! as NSTimeInterval
     
-    return Path(coords: coords, color: color, brush: brush, duration: duration)
+    return self()
   }
   
-  func toJSON() -> DrawTalk.PathJSON {
-    var arr: [[CGFloat]] = coords.map({ (point: CGPoint) -> [CGFloat] in
+  class func toJSON(item: Path) -> Dictionary<String, AnyObject> {
+    var arr: [[CGFloat]] = item.coords.map({ (point: CGPoint) -> [CGFloat] in
       return [point.x, point.y]
     })
-    var hex = color.hex()
-    var json : DrawTalk.PathJSON = [
+    var hex = item.color.hex()
+    var json: DrawTalk.PathJSON = [
       "coords": arr,
       "color": hex!,
-      "brush": brush,
-      "duration": duration,
+      "brush": item.brush,
+      "duration": item.duration,
     ]
     return json
   }
@@ -66,6 +130,7 @@ public struct Path {
       }
       prevPoint = point
     }
+
     return pairs
   }
 }

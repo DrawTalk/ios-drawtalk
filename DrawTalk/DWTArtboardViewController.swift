@@ -119,11 +119,13 @@ public class DWTArtboardViewController : UIViewController {
     
     var prevPoint: CGPoint?
     for path: DrawTalk.Path in paths {
+      var p: [DrawTalk.Pair] = path.pairs()
+      for x: DrawTalk.Pair in p {
+        println(x.pointA, x.pointB)
+      }
       drawings.append(PairsInfo(pairs: path.pairs(), brush: path.brush, color: path.color, duration: path.duration))
     }
-    
-    //println(drawings)
-    
+  
     var currBrush = brush
     var currColor = UIColor.blackColor()
     
@@ -134,6 +136,7 @@ public class DWTArtboardViewController : UIViewController {
       }
       
       let info: PairsInfo = drawings[section]
+      println(info.pairs)
       
       if index > info.pairs.count - 1 {
         next(section+1, 0)
@@ -157,7 +160,7 @@ public class DWTArtboardViewController : UIViewController {
   }
   
   private func drawSegmentFromPoint(point: CGPoint, toPoint: CGPoint, brush: CGFloat, color: UIColor, duration: CFTimeInterval, completion: (() -> Void)?) {
-    //println("\(point), \(toPoint), \(duration)")
+    println("\(point), \(toPoint), \(duration)")
     
     // 1) Create bezier path from first point to second.
     var path: UIBezierPath = UIBezierPath()
@@ -195,18 +198,15 @@ public class DWTArtboardViewController : UIViewController {
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let size = finalImageView.frame.size
-    var data: [DrawTalk.PathJSON] = paths.map({ (path: DrawTalk.Path) -> DrawTalk.PathJSON in
-      return path.toJSON()
-    })
     
-    //println(data)
-    var jsonData = [
-      "paths" : data,
-      "grid": [size.width, size.height]
-    ]
+    var pathCollection = DrawTalk.PathCollection()
+    pathCollection.paths = paths
+    pathCollection.grid = size
+    
+    var json = DrawTalk.PathCollection.toJSON(pathCollection)
     
     var jsonError: NSError?
-    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(jsonData, options: nil, error: &jsonError)
+    let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(json, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)
     
     //println(encodedJsonString)

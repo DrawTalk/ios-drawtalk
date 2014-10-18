@@ -63,11 +63,12 @@ public class DWTMqttWrapper {
       
       let data = result as Dictionary<String, AnyObject>
 
-      let pathsArr = data["paths"]! as [Dictionary<String, AnyObject>]
-      let paths: [DrawTalk.Path] = pathsArr.map({ (dict: Dictionary<String, AnyObject>) -> DrawTalk.Path in
+      let pathsArr = data["paths"]! as [DrawTalk.PathJSON]
+      let paths: [DrawTalk.Path] = pathsArr.map({ (dict: DrawTalk.PathJSON) -> DrawTalk.Path in
         return DrawTalk.Path.fromJSON(dict)
       })
       
+      println(json);
       println(result);
       println(paths);
     }
