@@ -58,7 +58,7 @@ public class DWTMqttClientWrapper {
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       let m = ChatMessage.incoming(message.payload)
       if m.clientId != self.clientId {
-        MessageEventBus.defaultBus.post(kMessageEventIncoming, event: m)
+        //MessageEventBus.defaultBus.post(kMessageEventIncoming, event: m)
       }
     }
   }

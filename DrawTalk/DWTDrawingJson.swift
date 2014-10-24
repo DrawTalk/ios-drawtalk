@@ -51,6 +51,7 @@ public class DrawingJson {
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(toJson(), options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data: encodedJsonData!, encoding: NSUTF8StringEncoding)
+    println(encodedJsonString)
     return encodedJsonString
   }
   

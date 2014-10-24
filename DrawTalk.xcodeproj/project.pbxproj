@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
+		A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10935F119F4BF2000D618EA /* DWTCanvasView.swift */; };
 		A11E8F0E19E882E70055772A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F0D19E882E70055772A /* main.m */; };
 		A11E8F1119E882E70055772A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F1019E882E70055772A /* AppDelegate.m */; };
 		A11E8F1919E882E70055772A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1819E882E70055772A /* Images.xcassets */; };
@@ -42,6 +43,7 @@
 		3D961AF35B16402E93D17D13 /* Pods-DrawTalkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalkTests.xcconfig"; path = "Pods/Pods-DrawTalkTests.xcconfig"; sourceTree = "<group>"; };
 		73856A6D01F8473F8290FCB1 /* Pods-DrawTalk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.xcconfig"; path = "Pods/Pods-DrawTalk.xcconfig"; sourceTree = "<group>"; };
 		8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10935F119F4BF2000D618EA /* DWTCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTCanvasView.swift; sourceTree = "<group>"; };
 		A11E8F0819E882E70055772A /* DrawTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E8F0C19E882E70055772A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11E8F0D19E882E70055772A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -99,6 +101,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A10935F019F4BF0C00D618EA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A10935F119F4BF2000D618EA /* DWTCanvasView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		A11E8EFF19E882E70055772A = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +149,7 @@
 				A185DD4C19F2419E0030415E /* Models */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
 				A1D269CE19F31B27004C82C6 /* ThirdParty */,
+				A10935F019F4BF0C00D618EA /* Views */,
 			);
 			path = DrawTalk;
 			sourceTree = "<group>";
@@ -374,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* DWTChatMessage.swift in Sources */,
 				A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */,
 				A11E8F1119E882E70055772A /* AppDelegate.m in Sources */,

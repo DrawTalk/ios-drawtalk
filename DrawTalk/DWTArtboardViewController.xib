@@ -6,8 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DWTArtboardViewController" customModule="DrawTalk" customModuleProvider="target">
             <connections>
-                <outlet property="canvasImageView" destination="X8t-e2-UEk" id="2vh-ad-hKJ"/>
-                <outlet property="finalImageView" destination="WND-kQ-b8j" id="hkc-4K-b5c"/>
+                <outlet property="canvasView" destination="z9q-aF-xZ6" id="y1x-oC-ESW"/>
                 <outlet property="sendButton" destination="QLH-Nt-zf6" id="bqs-ke-gdE"/>
                 <outlet property="view" destination="iN0-l3-epB" id="UNn-lV-Hst"/>
             </connections>
@@ -17,12 +16,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WND-kQ-b8j" userLabel="Final ImageView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X8t-e2-UEk" userLabel="Canvas ImageView">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLH-Nt-zf6">
                     <rect key="frame" x="217" y="540" width="36" height="30"/>
                     <state key="normal" title="Send">
@@ -50,22 +43,22 @@
                         <action selector="replayButtonTapped:" destination="-1" eventType="touchUpInside" id="dRz-Ax-Jvt"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9q-aF-xZ6" customClass="DWTCanvasView" customModule="DrawTalk" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="520"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="QLH-Nt-zf6" secondAttribute="bottom" constant="30" id="5Sp-7y-DtO"/>
-                <constraint firstItem="X8t-e2-UEk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Yq-3K-MYP"/>
+                <constraint firstItem="z9q-aF-xZ6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9RM-SB-cu7"/>
                 <constraint firstItem="dzn-zw-CVv" firstAttribute="leading" secondItem="xrX-sS-REW" secondAttribute="trailing" constant="27" id="EwG-Ue-nHD"/>
-                <constraint firstAttribute="trailing" secondItem="WND-kQ-b8j" secondAttribute="trailing" id="FrH-PB-iHA"/>
                 <constraint firstItem="xrX-sS-REW" firstAttribute="leading" secondItem="QLH-Nt-zf6" secondAttribute="trailing" constant="28" id="GAO-Cc-9AO"/>
                 <constraint firstAttribute="bottom" secondItem="xrX-sS-REW" secondAttribute="bottom" constant="30" id="K3Q-et-JNF"/>
-                <constraint firstItem="WND-kQ-b8j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ktt-jF-kWs"/>
+                <constraint firstAttribute="bottom" secondItem="z9q-aF-xZ6" secondAttribute="bottom" constant="80" id="MYD-79-LHZ"/>
                 <constraint firstAttribute="bottom" secondItem="dzn-zw-CVv" secondAttribute="bottom" constant="30" id="WNe-gE-voS"/>
-                <constraint firstItem="X8t-e2-UEk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="d8T-l3-y97"/>
-                <constraint firstAttribute="bottom" secondItem="WND-kQ-b8j" secondAttribute="bottom" id="ivE-2n-NIH"/>
-                <constraint firstItem="WND-kQ-b8j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pKk-CG-eu3"/>
-                <constraint firstAttribute="trailing" secondItem="X8t-e2-UEk" secondAttribute="trailing" id="pWA-Og-HuN"/>
-                <constraint firstAttribute="bottom" secondItem="X8t-e2-UEk" secondAttribute="bottom" id="rgw-RY-B45"/>
+                <constraint firstAttribute="trailing" secondItem="z9q-aF-xZ6" secondAttribute="trailing" id="btV-ag-xem"/>
+                <constraint firstItem="z9q-aF-xZ6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="h1Q-Ao-oCn"/>
                 <constraint firstAttribute="centerX" secondItem="xrX-sS-REW" secondAttribute="centerX" constant="-5" id="sBo-dM-ef3"/>
             </constraints>
             <point key="canvasLocation" x="65" y="-76"/>

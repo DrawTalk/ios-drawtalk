@@ -52,7 +52,7 @@ public class PathJson {
       "coords": self.coords,
       "color": self.color!,
       "brush": self.brush,
-      "duration": self.duration
+      "duration": self.duration 
     ]
     return json
   }

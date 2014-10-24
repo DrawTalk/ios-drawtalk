@@ -12,10 +12,10 @@ import UIKit
 public class Drawing {
   var paths: [DrawTalk.Path] = []
   var grid: CGSize = CGSizeZero
-  
+
   required public init() {
   }
-  
+
   convenience public init (paths: [DrawTalk.Path], grid: CGSize) {
     self.init()
     self.paths = paths
@@ -24,12 +24,12 @@ public class Drawing {
 }
 
 extension Drawing {
-  
+
   func normalizedToSize(size: CGSize) -> Drawing {
     if CGSizeEqualToSize(size, self.grid) {
       return self
     }
-    
+
     var newDrawing = Drawing()
     var newGrid = CGSizeZero
     var offset = CGPointZero
@@ -37,7 +37,7 @@ extension Drawing {
     var factor: CGFloat = 1
     let currentRatio = size.width / size.height;
     let otherRatio = self.grid.width / self.grid.height;
-    
+
     if otherRatio > currentRatio {
       factor = size.width / self.grid.width
       newGrid = CGSizeMake(size.width, size.width / otherRatio)
@@ -47,7 +47,7 @@ extension Drawing {
       newGrid = CGSizeMake(size.height * otherRatio, size.height)
       offset = CGPointMake((size.width - newGrid.width) / 2, 0)
     }
-    
+
     newDrawing.paths = self.paths.map { (path: DrawTalk.Path) -> DrawTalk.Path in
       var newPath = Path()
       newPath.color = path.color
@@ -58,7 +58,7 @@ extension Drawing {
       })
       return newPath
     }
-    
+
     return newDrawing
   }
 }
