@@ -9,18 +9,18 @@
 import Foundation
 import UIKit
 
-public class PathJson {
+class PathJson {
   var coords: [[CGFloat]] = []
   var color: String?
   var brush: CGFloat = 1.0
   var duration: NSTimeInterval = 0.01
 
   
-  required public init() {
+  required init() {
     color = UIColor.blackColor().hex()
   }
   
-  convenience public init (json: JSON) {
+  convenience init (json: JSON) {
     self.init()
     let coords = json["coords"].arrayValue
 
@@ -32,7 +32,7 @@ public class PathJson {
     self.duration = json["duration"].doubleValue
   }
   
-  convenience public init (path: Path) {
+  convenience init (path: Path) {
     self.init()
     
     self.coords = path.coords.map({ (point: CGPoint) -> [CGFloat] in
@@ -47,7 +47,7 @@ public class PathJson {
     self.duration = path.duration
   }
   
-  public func toJson() -> AnyObject {
+  func toJson() -> AnyObject {
     var json = [
       "coords": self.coords,
       "color": self.color!,
@@ -56,8 +56,12 @@ public class PathJson {
     ]
     return json
   }
+
+}
+
+extension PathJson {
   
-  public func toPath() -> Path {
+  func toPath() -> Path {
     let path = Path()
     path.coords = self.coords.map({ (point: [CGFloat]) -> CGPoint in
       return CGPointMake(point[0], point[1])
@@ -68,5 +72,5 @@ public class PathJson {
     
     return path
   }
-
+  
 }

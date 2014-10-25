@@ -145,27 +145,27 @@ public class DWTCanvasView: UIView {
     }
   }
   
-  public func reset() {
+  func reset() {
     paths.removeAll(keepCapacity: false)
     clear()
   }
   
-  public func clear() {
+  func clear() {
     drawingImageView.image = nil
     copyImageView.image = nil
     copyImageView.layer.sublayers = nil
   }
   
-  public func replay() {
+  func replay() {
     replay(paths)
   }
   
-  public func replay(drawing: Drawing) {
+  func replay(drawing: Drawing) {
     let newDrawing = drawing.normalizedToSize(copyImageView.frame.size)
     replay(newDrawing.paths)
   }
   
-  public func replay(paths: [DrawTalk.Path]) {
+  func replay(paths: [DrawTalk.Path]) {
     clear()
     
     var path: UIBezierPath = UIBezierPath()
@@ -257,7 +257,7 @@ public class DWTCanvasView: UIView {
       }
     }
     var drawAnimation: CABasicAnimation = CABasicAnimation(keyPath:"strokeEnd")
-    drawAnimation.duration = 0.1
+    drawAnimation.duration = duration
     drawAnimation.fromValue = 0
     drawAnimation.toValue = 1.0
     drawAnimation.timingFunction = CAMediaTimingFunction(name: "linear")
@@ -266,7 +266,7 @@ public class DWTCanvasView: UIView {
     CATransaction.commit()
   }
   
-  public func drawing() -> Drawing {
+  func drawing() -> Drawing {
     let size = self.frame.size
     let drawing = Drawing(paths: paths, grid: size)
     return drawing

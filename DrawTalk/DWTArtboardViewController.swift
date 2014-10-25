@@ -24,13 +24,11 @@ public class DWTArtboardViewController : UIViewController {
   
   public class func artboardController() -> DWTArtboardViewController {
     let vc = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
-    
-    
+
     DWTAddressBookImport.defaultAddressBookImport.contacts {
       (contacts: [AnyObject]?, error: NSError?) in
     }
-    
-    
+
     MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
       var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)

@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-public class Drawing {
+ class Drawing {
   var paths: [DrawTalk.Path] = []
   var grid: CGSize = CGSizeZero
 
-  required public init() {
+  required init() {
   }
 
-  convenience public init (paths: [DrawTalk.Path], grid: CGSize) {
+  convenience init (paths: [DrawTalk.Path], grid: CGSize) {
     self.init()
     self.paths = paths
     self.grid = grid

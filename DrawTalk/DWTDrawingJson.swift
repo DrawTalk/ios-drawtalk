@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-public class DrawingJson {
+class DrawingJson {
   var paths: [DrawTalk.PathJson] = []
   var grid: [CGFloat] = []
   
-  required public init() {
+  required init() {
   }
   
-  convenience public init (json: JSON) {
+  convenience init (json: JSON) {
     self.init()
     let paths = json["paths"].arrayValue
     let grid = json["grid"]
@@ -27,7 +27,7 @@ public class DrawingJson {
     self.grid = [CGFloat(grid[0].floatValue), CGFloat(grid[1].floatValue)]
   }
   
-  convenience public init (drawing: DrawTalk.Drawing) {
+  convenience init (drawing: DrawTalk.Drawing) {
     self.init()
     self.paths = drawing.paths.map({ (path: DrawTalk.Path) -> DrawTalk.PathJson in
       return DrawTalk.PathJson(path: path)
@@ -35,7 +35,7 @@ public class DrawingJson {
     self.grid = [drawing.grid.width, drawing.grid.height]
   }
   
-  public func toJson() -> AnyObject {
+  func toJson() -> AnyObject {
     var p: [AnyObject] = self.paths.map({ (pathJson: DrawTalk.PathJson) -> AnyObject in
       return pathJson.toJson()
     })
@@ -47,15 +47,18 @@ public class DrawingJson {
     return json
   }
   
-  public func jsonString() -> NSString {
+  func jsonString() -> NSString {
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(toJson(), options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data: encodedJsonData!, encoding: NSUTF8StringEncoding)
     println(encodedJsonString)
     return encodedJsonString
   }
+}
+
+extension DrawingJson {
   
-  public func toDrawing() -> Drawing {
+  func toDrawing() -> Drawing {
     var drawing = Drawing()
     drawing.paths = self.paths.map({ (pathJson: DrawTalk.PathJson) -> DrawTalk.Path in
       return pathJson.toPath()
@@ -64,4 +67,5 @@ public class DrawingJson {
     
     return drawing
   }
+  
 }

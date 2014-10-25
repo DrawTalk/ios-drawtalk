@@ -9,21 +9,21 @@
 import Foundation
 import UIKit
 
-public struct Pair {
+struct Pair {
   var pointA: CGPoint
   var pointB: CGPoint
 }
 
-public class Path {
+class Path {
   var coords: [CGPoint] = []
   var color: UIColor = UIColor.blackColor()
   var brush: CGFloat = 1.0
   var duration: NSTimeInterval = 0.01
   
-  required public init() {
+  required init() {
   }
   
-  convenience public init (coords: [CGPoint], color: UIColor, brush: CGFloat, duration: NSTimeInterval) {
+  convenience init (coords: [CGPoint], color: UIColor, brush: CGFloat, duration: NSTimeInterval) {
     self.init()
     self.coords = coords
     self.color = color
