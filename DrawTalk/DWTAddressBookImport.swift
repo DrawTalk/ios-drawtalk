@@ -9,7 +9,7 @@
 import Foundation
 import AddressBook
 
-typealias DWTAddressBookImportCompletionHandler = ([AnyObject]?, NSError?) -> Void
+typealias DWTAddressBookImportCompletionHandler = ([Contact]?, NSError?) -> Void
 
 class DWTAddressBookImport {
   
@@ -54,12 +54,14 @@ class DWTAddressBookImport {
         ABAddressBookRequestAccessWithCompletion(ref) {
           (granted:Bool, err:CFError!) in
           if granted {
+            var contacts: [Contact] = []
             // retrieve contacts
             let people = ABAddressBookCopyArrayOfAllPeople(ref).takeRetainedValue() as NSArray as [ABRecord]
             for person in people {
               let contact = ContactABRecord(abRecord: person)
-              contact.toContact()
+              contacts.append(contact.toContact())
             }
+            completion(contacts, nil)
           } else {
             println(err)
           }

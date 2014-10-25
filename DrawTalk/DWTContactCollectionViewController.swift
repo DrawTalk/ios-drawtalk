@@ -15,8 +15,8 @@ class DWTContactCollectionViewController : UIViewController, UICollectionViewDel
   
   private var mainCollectionDataSource: DWTContactCollectionDataSource!
   
-  class func controller() -> DWTArtboardViewController {
-    let vc = DWTArtboardViewController(nibName:"DWTContactCollectionViewController", bundle: nil)
+  class func controller() -> DWTContactCollectionViewController {
+    let vc = DWTContactCollectionViewController(nibName:"DWTContactCollectionViewController", bundle: nil)
     return vc
   }
   
@@ -24,10 +24,21 @@ class DWTContactCollectionViewController : UIViewController, UICollectionViewDel
     super.viewDidLoad()
     
     setupMainCollectionView()
+    retrieveContactsFromAddressBook()
   }
   
   private func setupMainCollectionView() {
     mainCollectionDataSource = DWTContactCollectionDataSource(collectionView: mainCollectionView)
     mainCollectionView.dataSource = mainCollectionDataSource;
+  }
+  
+  private func retrieveContactsFromAddressBook() {
+    DWTAddressBookImport.defaultAddressBookImport.contacts {
+      (contacts: [Contact]?, error: NSError?) in
+      dispatch_async(dispatch_get_main_queue(), {
+        self.mainCollectionDataSource.loadWithContacts(contacts)
+        println(contacts?)
+      })
+    }
   }
 }

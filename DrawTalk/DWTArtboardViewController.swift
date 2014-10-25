@@ -22,12 +22,8 @@ public class DWTArtboardViewController : UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public class func artboardController() -> DWTArtboardViewController {
+  public class func controller() -> DWTArtboardViewController {
     let vc = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
-
-    DWTAddressBookImport.defaultAddressBookImport.contacts {
-      (contacts: [AnyObject]?, error: NSError?) in
-    }
 
     MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage

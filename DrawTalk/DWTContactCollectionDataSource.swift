@@ -12,10 +12,24 @@ import UIKit
 class DWTContactCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
   private var contactCollectionView: UICollectionView!
-  private var contacts: [AnyObject]!
+  private var contacts: [Contact]!
   
   init(collectionView: UICollectionView) {
+    super.init()
+    contacts = []
     contactCollectionView = collectionView
+    contactCollectionView.delegate = self
+    contactCollectionView.backgroundColor = UIColor.whiteColor()
+    registerCells()
+  }
+  
+  func loadWithContacts(contacts: [Contact]?) {
+    self.contacts = contacts;
+    contactCollectionView.reloadData()
+  }
+  
+  func registerCells() {
+    contactCollectionView.registerNib(ContactCollectionViewCell.cellNib, forCellWithReuseIdentifier:ContactCollectionViewCell.reuseIdentifier)
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -29,29 +43,35 @@ class DWTContactCollectionDataSource : NSObject, UICollectionViewDataSource, UIC
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-    return CGSizeMake(contactCollectionView.frame.size.width, 100)
+      return CGSizeMake(contactCollectionView.frame.size.width, 100)
   }
   
   func collectionView(collectionView: UICollectionView,
     cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    return UICollectionViewCell()
+      
+      var cell = contactCollectionView.dequeueReusableCellWithReuseIdentifier(ContactCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as ContactCollectionViewCell
+      
+      var contact = contacts[indexPath.row] as Contact
+      cell.bindObject(contact)
+      
+      return cell
   }
   
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-    return UIEdgeInsetsMake(0, 0, 1, 0)
+      return UIEdgeInsetsMake(0, 0, 1, 0)
   }
   
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-    return 0
+      return 0
   }
   
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-    return 0
+      return 0
   }
 }

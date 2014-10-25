@@ -12,25 +12,36 @@ import UIKit
 private struct Line {
   let p1: CGPoint
   let p2: CGPoint
+  
+  // Slope
   var m: CGFloat {
     get {
-      return (p2.y - p1.y) / (p2.x - p1.x)
+      return _m
     }
   }
+  
+  // y-intercept
   var b: CGFloat {
     get {
-      return p1.y - m * p1.x
+      return _b
     }
   }
+  
+  private init(p1: CGPoint, p2: CGPoint) {
+    self.p1 = p1
+    self.p2 = p2
+    
+    _m = (p2.y - p1.y) / (p2.x - p1.x)
+    _b = p1.y - _m * p1.x
+  }
+  
+  private var _m: CGFloat = 0
+  private var _b: CGFloat = 0
 }
 
 
 public class DWTCanvasView: UIView {
 
-  //@IBOutlet weak var containerView: UIView!
-  //@IBOutlet weak var drawingImageView: UIImageView!
-  //@IBOutlet weak var copyImageView: UIImageView!
-  
   private var contentView: UIView!
   private var drawingImageView: UIImageView!
   private var copyImageView: UIImageView!
@@ -51,13 +62,7 @@ public class DWTCanvasView: UIView {
     super.init(coder: aDecoder)
     setupUI()
   }
-  
-  /*
-  override public func awakeFromNib() {
-    super.awakeFromNib()
-  }
-  */
-  
+
   private func setupUI() {
     contentView = UIView()
     drawingImageView = UIImageView()

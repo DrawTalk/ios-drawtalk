@@ -12,8 +12,6 @@
 		A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10935F119F4BF2000D618EA /* DWTCanvasView.swift */; };
 		A10E60CC19F9E62400A69F18 /* DWTAddressBookImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E60CB19F9E62400A69F18 /* DWTAddressBookImport.swift */; };
 		A10E60CE19F9E6B100A69F18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10E60CD19F9E6B100A69F18 /* AddressBook.framework */; };
-		A11E8F0E19E882E70055772A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F0D19E882E70055772A /* main.m */; };
-		A11E8F1119E882E70055772A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F1019E882E70055772A /* AppDelegate.m */; };
 		A11E8F1919E882E70055772A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1819E882E70055772A /* Images.xcassets */; };
 		A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1A19E882E70055772A /* LaunchScreen.xib */; };
 		A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */; };
@@ -27,6 +25,7 @@
 		A19C69F019F9E19C00848370 /* DWTContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69EF19F9E19C00848370 /* DWTContactCollectionViewCell.swift */; };
 		A1D269CA19F313A1004C82C6 /* DWTMqqtClientWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */; };
 		A1D269CC19F31774004C82C6 /* DWTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269CB19F31774004C82C6 /* DWTConstants.swift */; };
+		A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */; };
 		A1E6539819FC268F00DBABE7 /* DWTContactABRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */; };
 		A1E6539A19FC27F900DBABE7 /* DWTContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539919FC27F900DBABE7 /* DWTContact.swift */; };
 		A1EF259F19F2CC2D00F52A85 /* DWTPathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */; };
@@ -57,9 +56,6 @@
 		A10E60CD19F9E6B100A69F18 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A11E8F0819E882E70055772A /* DrawTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E8F0C19E882E70055772A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A11E8F0D19E882E70055772A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A11E8F0F19E882E70055772A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		A11E8F1019E882E70055772A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A11E8F1819E882E70055772A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A11E8F1B19E882E70055772A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A11E8F2119E882E70055772A /* DrawTalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawTalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +74,7 @@
 		A19C69EF19F9E19C00848370 /* DWTContactCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMqqtClientWrapper.swift; sourceTree = "<group>"; };
 		A1D269CB19F31774004C82C6 /* DWTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTConstants.swift; sourceTree = "<group>"; };
+		A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactABRecord.swift; sourceTree = "<group>"; };
 		A1E6539919FC27F900DBABE7 /* DWTContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContact.swift; sourceTree = "<group>"; };
 		A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPathJson.swift; sourceTree = "<group>"; };
@@ -153,8 +150,7 @@
 		A11E8F0A19E882E70055772A /* DrawTalk */ = {
 			isa = PBXGroup;
 			children = (
-				A11E8F0F19E882E70055772A /* AppDelegate.h */,
-				A11E8F1019E882E70055772A /* AppDelegate.m */,
+				A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */,
 				A19C69E819F9DB4B00848370 /* Assets */,
 				A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */,
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
@@ -176,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				A11E8F0C19E882E70055772A /* Info.plist */,
-				A11E8F0D19E882E70055772A /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -466,7 +461,7 @@
 				A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* DWTChatMessage.swift in Sources */,
 				A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */,
-				A11E8F1119E882E70055772A /* AppDelegate.m in Sources */,
+				A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */,
 				A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
 				A1E6539A19FC27F900DBABE7 /* DWTContact.swift in Sources */,
@@ -479,7 +474,6 @@
 				A1E6539819FC268F00DBABE7 /* DWTContactABRecord.swift in Sources */,
 				A10E60CC19F9E62400A69F18 /* DWTAddressBookImport.swift in Sources */,
 				A1EF25A319F2CF3400F52A85 /* DWTDrawingJson.swift in Sources */,
-				A11E8F0E19E882E70055772A /* main.m in Sources */,
 				A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* DWTConstants.swift in Sources */,
 				A19C69EA19F9DBFD00848370 /* DWTContactCollectionDataSource.swift in Sources */,

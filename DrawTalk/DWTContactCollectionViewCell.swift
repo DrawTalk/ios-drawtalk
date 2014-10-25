@@ -7,3 +7,35 @@
 //
 
 import Foundation
+import UIKit
+
+class ContactCollectionViewCell: UICollectionViewCell {
+  
+  @IBOutlet weak var nameLabel: UILabel!
+  
+  class var reuseIdentifier: String {
+    return "DWTContactCollectionViewCell"
+  }
+  
+  class var cellNib: UINib {
+    return UINib(nibName: "DWTContactCollectionViewCell", bundle: nil)
+  }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    self.setupUI()
+  }
+  
+  override func prepareForReuse() {
+    nameLabel.text = ""
+  }
+  
+  func setupUI() {
+    self.layoutMargins = UIEdgeInsetsZero
+  }
+  
+  func bindObject(object: Contact) {
+    self.nameLabel.text = object.firstName
+  }
+  
+}
