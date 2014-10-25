@@ -26,6 +26,7 @@
 		A1D269CA19F313A1004C82C6 /* DWTMqqtClientWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */; };
 		A1D269CC19F31774004C82C6 /* DWTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269CB19F31774004C82C6 /* DWTConstants.swift */; };
 		A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */; };
+		A1DACD3F19FC3F9700D02B5D /* DWTMainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3E19FC3F9700D02B5D /* DWTMainTabBarController.swift */; };
 		A1E6539819FC268F00DBABE7 /* DWTContactABRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */; };
 		A1E6539A19FC27F900DBABE7 /* DWTContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539919FC27F900DBABE7 /* DWTContact.swift */; };
 		A1EF259F19F2CC2D00F52A85 /* DWTPathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */; };
@@ -75,6 +76,7 @@
 		A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMqqtClientWrapper.swift; sourceTree = "<group>"; };
 		A1D269CB19F31774004C82C6 /* DWTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTConstants.swift; sourceTree = "<group>"; };
 		A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A1DACD3E19FC3F9700D02B5D /* DWTMainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMainTabBarController.swift; sourceTree = "<group>"; };
 		A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactABRecord.swift; sourceTree = "<group>"; };
 		A1E6539919FC27F900DBABE7 /* DWTContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContact.swift; sourceTree = "<group>"; };
 		A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPathJson.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		A19C69E719F9DB1F00848370 /* Functional */ = {
 			isa = PBXGroup;
 			children = (
+				A1DACD3E19FC3F9700D02B5D /* DWTMainTabBarController.swift */,
 				A19C69F319F9E1D000848370 /* Conversations */,
 				A19C69F219F9E1AE00848370 /* Contacts */,
 				A19C69F119F9E1A600848370 /* Artboard */,
@@ -458,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1DACD3F19FC3F9700D02B5D /* DWTMainTabBarController.swift in Sources */,
 				A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* DWTChatMessage.swift in Sources */,
 				A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */,

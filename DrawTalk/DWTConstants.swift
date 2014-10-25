@@ -11,10 +11,10 @@ import Foundation
 @objc
 class Constants {
   // tcp:// or mqtt://
-  class func host() -> String {
+  class var host: String {
     return "m10.cloudmqtt.com"
   }
-  class func port() -> UInt16 {
+  class var port: UInt16 {
     return 16056
   }
 }

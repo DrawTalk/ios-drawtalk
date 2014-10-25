@@ -14,19 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
   
-  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions:     NSDictionary?) -> Bool {
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
     
-    let kUsername = "vkgogxez"
-    let kPassword = "oX02eF7V0I9Y"
-    
-    DWTMqttClientWrapper.defaultMQTT.setup(username: kUsername, password: kPassword, host: Constants.host(), port: Constants.port())
-    
-    var artboard = DWTArtboardViewController.controller()
-    var contacts = DWTContactCollectionViewController.controller()
-    
-    self.window!.rootViewController = artboard
+
+    self.window!.rootViewController = MainTabBarController()
     self.window!.makeKeyAndVisible()
     
     return true
