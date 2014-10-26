@@ -78,7 +78,6 @@ extension UIColor {
 
   // returns RGBA format for color string
   public func hex() -> String? {
-    return ""
     let rgba = rgbaValues()
     
     println(rgba.red, rgba.green, rgba.blue, rgba.alpha)

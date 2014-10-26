@@ -18,3 +18,11 @@ class Constants {
     return 16056
   }
 }
+
+func DWTLocalizedStringWithDefaultValue(key: String, #tableName: String, #bundle: NSBundle, #value: String, #comment: String) -> String {
+  return NSLocalizedString(key,
+    tableName: tableName,
+    bundle: bundle,
+    value: value,
+    comment: comment)
+}

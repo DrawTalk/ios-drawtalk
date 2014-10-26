@@ -66,7 +66,23 @@ protocol TabContent {
 
 private class ContactsTabContent: TabContent {
   var tabName: NSString {
-    return "Contacts"
+    /*
+    let x = DWTLocalizedStringWithDefaultValue(
+      "records.found",
+      tableName: "Localizable",
+      bundle: NSBundle.mainBundle(),
+      value: "%d file(s) remaining",
+      comment: "Records found")
+      
+    let str = NSString.localizedStringWithFormat(x, 10)
+    println(str)
+    */
+    return DWTLocalizedStringWithDefaultValue(
+      "tab.contacts.title",
+      tableName: "Localizable",
+      bundle: NSBundle.mainBundle(),
+      value: "Contacts",
+      comment: "Name for contacts' tab")
   }
   func controller() -> UINavigationController {
     let cv = DWTContactCollectionViewController.controller()
@@ -77,7 +93,12 @@ private class ContactsTabContent: TabContent {
 
 private class ChatTabContent: TabContent {
   var tabName: NSString {
-    return "Chats"
+    return DWTLocalizedStringWithDefaultValue(
+      "tab.chat.title",
+      tableName: "Localizable",
+      bundle: NSBundle.mainBundle(),
+      value: "Chats",
+      comment: "Name for chats' tab")
   }
   func controller() -> UINavigationController {
     let kUsername = "vkgogxez"
