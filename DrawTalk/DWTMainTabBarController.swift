@@ -101,16 +101,6 @@ private class ChatTabContent: TabContent {
       comment: "Name for chats' tab")
   }
   func controller() -> UINavigationController {
-    let kUsername = "vkgogxez"
-    let kPassword = "oX02eF7V0I9Y"
-    
-    DWTMqttClientWrapper.defaultMQTT.setup(
-      username: kUsername,
-      password: kPassword,
-      host: Constants.host,
-      port: Constants.port
-    )
-    
     let artboard = DWTArtboardViewController.controller()
     let nav = UINavigationController(rootViewController: artboard)
     return nav

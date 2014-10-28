@@ -15,10 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+    let kUsername = "vkgogxez"
+    let kPassword = "oX02eF7V0I9Y"
+    
+    DWTMqttClientWrapper.defaultMQTT.setup(
+      username: kUsername,
+      password: kPassword,
+      host: Constants.host,
+      port: Constants.port
+    )
+    
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    
-
     self.window!.rootViewController = MainTabBarController()
     self.window!.makeKeyAndVisible()
     
