@@ -14,8 +14,6 @@ class ConcurrentOperation: NSOperation {
   
   // MARK: - Types
   
-  // private var completion: ((OperationResult, NSError?) -> Void)?
-  
   enum State {
     case Ready, Executing, Finished
     func keyPath() -> String {
@@ -49,13 +47,6 @@ class ConcurrentOperation: NSOperation {
     state = State.Ready
     super.init()
   }
-  
-  /*
-  convenience init(completion: (OperationResult, NSError?) -> Void) {
-    self.init()
-    self.completion = completion
-  }
-  */
 
   // MARK: - NSOperation
   
@@ -74,14 +65,4 @@ class ConcurrentOperation: NSOperation {
   override var asynchronous: Bool {
     return true
   }
-  
-  // MARK: - Finisher
-  
-  /*
-  func finish(result: OperationResult, error: NSError?) {
-    completion?(result, error)
-    state = .Finished
-  }
-  */
-  
 }
