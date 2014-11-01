@@ -85,7 +85,7 @@ private class ContactsTabContent: TabContent {
       comment: "Name for contacts' tab")
   }
   func controller() -> UINavigationController {
-    let cv = DWTContactCollectionViewController.controller()
+    let cv = ContactCollectionViewController.controller()
     let nav = UINavigationController(rootViewController: cv)
     return nav
   }
@@ -101,7 +101,7 @@ private class ChatTabContent: TabContent {
       comment: "Name for chats' tab")
   }
   func controller() -> UINavigationController {
-    let artboard = DWTArtboardViewController.controller()
+    let artboard = ArtboardViewController.controller()
     let nav = UINavigationController(rootViewController: artboard)
     return nav
   }

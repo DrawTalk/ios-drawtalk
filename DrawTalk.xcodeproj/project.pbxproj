@@ -11,32 +11,38 @@
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A10658B519FD7E5800618C15 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A10658B719FD7E5800618C15 /* Localizable.strings */; };
 		A10658C219FD87B700618C15 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = A10658C419FD87B700618C15 /* Localizable.stringsdict */; };
-		A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10935F119F4BF2000D618EA /* DWTCanvasView.swift */; };
-		A10E60CC19F9E62400A69F18 /* DWTAddressBookImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E60CB19F9E62400A69F18 /* DWTAddressBookImport.swift */; };
+		A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10935F119F4BF2000D618EA /* CanvasView.swift */; };
+		A10E60CC19F9E62400A69F18 /* AddressBookImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E60CB19F9E62400A69F18 /* AddressBookImport.swift */; };
 		A10E60CE19F9E6B100A69F18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10E60CD19F9E6B100A69F18 /* AddressBook.framework */; };
 		A11E8F1919E882E70055772A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1819E882E70055772A /* Images.xcassets */; };
 		A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1A19E882E70055772A /* LaunchScreen.xib */; };
-		A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */; };
-		A11E8F3F19E88CEE0055772A /* DWTArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */; };
+		A11E8F3C19E8895B0055772A /* ArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */; };
+		A11E8F3F19E88CEE0055772A /* ArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */; };
 		A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */; };
 		A14549D519F2C8B4000513A6 /* DWTColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14549D419F2C8B4000513A6 /* DWTColorTests.swift */; };
-		A19C69E619F9DB1700848370 /* DWTContactCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E519F9DB1700848370 /* DWTContactCollectionViewController.swift */; };
-		A19C69EA19F9DBFD00848370 /* DWTContactCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E919F9DBFD00848370 /* DWTContactCollectionDataSource.swift */; };
-		A19C69EC19F9DF4600848370 /* DWTContactCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69EB19F9DF4600848370 /* DWTContactCollectionViewController.xib */; };
-		A19C69EE19F9E19500848370 /* DWTContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69ED19F9E19500848370 /* DWTContactCollectionViewCell.xib */; };
-		A19C69F019F9E19C00848370 /* DWTContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69EF19F9E19C00848370 /* DWTContactCollectionViewCell.swift */; };
-		A1D269CA19F313A1004C82C6 /* DWTMqqtClientWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */; };
-		A1D269CC19F31774004C82C6 /* DWTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269CB19F31774004C82C6 /* DWTConstants.swift */; };
+		A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */; };
+		A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */; };
+		A19C69EC19F9DF4600848370 /* ContactCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */; };
+		A19C69EE19F9E19500848370 /* ContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69ED19F9E19500848370 /* ContactCollectionViewCell.xib */; };
+		A19C69F019F9E19C00848370 /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69EF19F9E19C00848370 /* ContactCollectionViewCell.swift */; };
+		A1CF82711A03283A00E93F65 /* MessageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */; };
+		A1CF82731A03285C00E93F65 /* MessageCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */; };
+		A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */; };
+		A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */; };
+		A1CF82791A0329EF00E93F65 /* MessageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */; };
+		A1D269CA19F313A1004C82C6 /* MqqtClientWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */; };
+		A1D269CC19F31774004C82C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269CB19F31774004C82C6 /* Constants.swift */; };
 		A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */; };
-		A1DACD3F19FC3F9700D02B5D /* DWTMainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3E19FC3F9700D02B5D /* DWTMainTabBarController.swift */; };
-		A1E6539819FC268F00DBABE7 /* DWTContactABRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */; };
-		A1E6539A19FC27F900DBABE7 /* DWTContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539919FC27F900DBABE7 /* DWTContact.swift */; };
-		A1EF259F19F2CC2D00F52A85 /* DWTPathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */; };
-		A1EF25A119F2CC3500F52A85 /* DWTPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A019F2CC3500F52A85 /* DWTPath.swift */; };
-		A1EF25A319F2CF3400F52A85 /* DWTDrawingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A219F2CF3400F52A85 /* DWTDrawingJson.swift */; };
-		A1EF25A519F2CF3C00F52A85 /* DWTDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A419F2CF3C00F52A85 /* DWTDrawing.swift */; };
+		A1DACD3F19FC3F9700D02B5D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */; };
+		A1E33D141A0470060039339E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E33D131A0470060039339E /* MainViewController.swift */; };
+		A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */; };
+		A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539919FC27F900DBABE7 /* Contact.swift */; };
+		A1EF259F19F2CC2D00F52A85 /* PathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* PathJson.swift */; };
+		A1EF25A119F2CC3500F52A85 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A019F2CC3500F52A85 /* Path.swift */; };
+		A1EF25A319F2CF3400F52A85 /* DrawingJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A219F2CF3400F52A85 /* DrawingJson.swift */; };
+		A1EF25A519F2CF3C00F52A85 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A419F2CF3C00F52A85 /* Drawing.swift */; };
 		A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */; };
-		A1EF25AA19F2EC5000F52A85 /* DWTChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A919F2EC5000F52A85 /* DWTChatMessage.swift */; };
+		A1EF25AA19F2EC5000F52A85 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25A919F2EC5000F52A85 /* ChatMessage.swift */; };
 		A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF25AB19F2F35A00F52A85 /* MessageEventBus.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,8 +62,8 @@
 		8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10658B619FD7E5800618C15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A10658C319FD87B700618C15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		A10935F119F4BF2000D618EA /* DWTCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTCanvasView.swift; sourceTree = "<group>"; };
-		A10E60CB19F9E62400A69F18 /* DWTAddressBookImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTAddressBookImport.swift; sourceTree = "<group>"; };
+		A10935F119F4BF2000D618EA /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		A10E60CB19F9E62400A69F18 /* AddressBookImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressBookImport.swift; sourceTree = "<group>"; };
 		A10E60CD19F9E6B100A69F18 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A11E8F0819E882E70055772A /* DrawTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11E8F0C19E882E70055772A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,28 +73,34 @@
 		A11E8F2619E882E70055772A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Prefix.pch"; sourceTree = "<group>"; };
-		A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTArtboardViewController.swift; sourceTree = "<group>"; };
-		A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DWTArtboardViewController.xib; sourceTree = "<group>"; };
+		A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtboardViewController.swift; sourceTree = "<group>"; };
+		A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtboardViewController.xib; sourceTree = "<group>"; };
 		A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		A14549D419F2C8B4000513A6 /* DWTColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTColorTests.swift; sourceTree = "<group>"; };
 		A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawTalkTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		A19C69E519F9DB1700848370 /* DWTContactCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactCollectionViewController.swift; sourceTree = "<group>"; };
-		A19C69E919F9DBFD00848370 /* DWTContactCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactCollectionDataSource.swift; sourceTree = "<group>"; };
-		A19C69EB19F9DF4600848370 /* DWTContactCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DWTContactCollectionViewController.xib; sourceTree = "<group>"; };
-		A19C69ED19F9E19500848370 /* DWTContactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DWTContactCollectionViewCell.xib; sourceTree = "<group>"; };
-		A19C69EF19F9E19C00848370 /* DWTContactCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactCollectionViewCell.swift; sourceTree = "<group>"; };
-		A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMqqtClientWrapper.swift; sourceTree = "<group>"; };
-		A1D269CB19F31774004C82C6 /* DWTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTConstants.swift; sourceTree = "<group>"; };
+		A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewController.swift; sourceTree = "<group>"; };
+		A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionDataSource.swift; sourceTree = "<group>"; };
+		A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewController.xib; sourceTree = "<group>"; };
+		A19C69ED19F9E19500848370 /* ContactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewCell.xib; sourceTree = "<group>"; };
+		A19C69EF19F9E19C00848370 /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewController.swift; sourceTree = "<group>"; };
+		A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCollectionViewController.xib; sourceTree = "<group>"; };
+		A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionDataSource.swift; sourceTree = "<group>"; };
+		A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCollectionViewCell.xib; sourceTree = "<group>"; };
+		A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MqqtClientWrapper.swift; sourceTree = "<group>"; };
+		A1D269CB19F31774004C82C6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A1DACD3E19FC3F9700D02B5D /* DWTMainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTMainTabBarController.swift; sourceTree = "<group>"; };
-		A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContactABRecord.swift; sourceTree = "<group>"; };
-		A1E6539919FC27F900DBABE7 /* DWTContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTContact.swift; sourceTree = "<group>"; };
-		A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPathJson.swift; sourceTree = "<group>"; };
-		A1EF25A019F2CC3500F52A85 /* DWTPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTPath.swift; sourceTree = "<group>"; };
-		A1EF25A219F2CF3400F52A85 /* DWTDrawingJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTDrawingJson.swift; sourceTree = "<group>"; };
-		A1EF25A419F2CF3C00F52A85 /* DWTDrawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTDrawing.swift; sourceTree = "<group>"; };
+		A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		A1E33D131A0470060039339E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactABRecord.swift; sourceTree = "<group>"; };
+		A1E6539919FC27F900DBABE7 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		A1EF259E19F2CC2D00F52A85 /* PathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathJson.swift; sourceTree = "<group>"; };
+		A1EF25A019F2CC3500F52A85 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		A1EF25A219F2CF3400F52A85 /* DrawingJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingJson.swift; sourceTree = "<group>"; };
+		A1EF25A419F2CF3C00F52A85 /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		A1EF25A919F2EC5000F52A85 /* DWTChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTChatMessage.swift; sourceTree = "<group>"; };
+		A1EF25A919F2EC5000F52A85 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		A1EF25AB19F2F35A00F52A85 /* MessageEventBus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageEventBus.swift; sourceTree = "<group>"; };
 		ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -127,7 +139,7 @@
 		A10935F019F4BF0C00D618EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A10935F119F4BF2000D618EA /* DWTCanvasView.swift */,
+				A10935F119F4BF2000D618EA /* CanvasView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -160,8 +172,8 @@
 				A19C69E819F9DB4B00848370 /* Assets */,
 				A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */,
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
-				A1D269CB19F31774004C82C6 /* DWTConstants.swift */,
-				A1D269C919F313A1004C82C6 /* DWTMqqtClientWrapper.swift */,
+				A1D269CB19F31774004C82C6 /* Constants.swift */,
+				A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */,
 				A11E8F4219E8A5940055772A /* Extensions */,
 				A19C69E719F9DB1F00848370 /* Functional */,
 				A1D269CD19F319FD004C82C6 /* Messaging */,
@@ -213,12 +225,12 @@
 		A185DD4C19F2419E0030415E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A1E6539919FC27F900DBABE7 /* DWTContact.swift */,
-				A1E6539719FC268F00DBABE7 /* DWTContactABRecord.swift */,
-				A1EF25A419F2CF3C00F52A85 /* DWTDrawing.swift */,
-				A1EF25A219F2CF3400F52A85 /* DWTDrawingJson.swift */,
-				A1EF25A019F2CC3500F52A85 /* DWTPath.swift */,
-				A1EF259E19F2CC2D00F52A85 /* DWTPathJson.swift */,
+				A1E6539919FC27F900DBABE7 /* Contact.swift */,
+				A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */,
+				A1EF25A419F2CF3C00F52A85 /* Drawing.swift */,
+				A1EF25A219F2CF3400F52A85 /* DrawingJson.swift */,
+				A1EF25A019F2CC3500F52A85 /* Path.swift */,
+				A1EF259E19F2CC2D00F52A85 /* PathJson.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -226,10 +238,11 @@
 		A19C69E719F9DB1F00848370 /* Functional */ = {
 			isa = PBXGroup;
 			children = (
-				A1DACD3E19FC3F9700D02B5D /* DWTMainTabBarController.swift */,
-				A19C69F319F9E1D000848370 /* Conversations */,
-				A19C69F219F9E1AE00848370 /* Contacts */,
 				A19C69F119F9E1A600848370 /* Artboard */,
+				A19C69F219F9E1AE00848370 /* Contacts */,
+				A19C69F319F9E1D000848370 /* Conversations */,
+				A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */,
+				A1E33D131A0470060039339E /* MainViewController.swift */,
 			);
 			name = Functional;
 			sourceTree = "<group>";
@@ -246,8 +259,8 @@
 		A19C69F119F9E1A600848370 /* Artboard */ = {
 			isa = PBXGroup;
 			children = (
-				A11E8F3A19E8895B0055772A /* DWTArtboardViewController.swift */,
-				A11E8F3E19E88CEE0055772A /* DWTArtboardViewController.xib */,
+				A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */,
+				A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */,
 			);
 			name = Artboard;
 			sourceTree = "<group>";
@@ -255,11 +268,11 @@
 		A19C69F219F9E1AE00848370 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				A19C69E919F9DBFD00848370 /* DWTContactCollectionDataSource.swift */,
-				A19C69EF19F9E19C00848370 /* DWTContactCollectionViewCell.swift */,
-				A19C69ED19F9E19500848370 /* DWTContactCollectionViewCell.xib */,
-				A19C69E519F9DB1700848370 /* DWTContactCollectionViewController.swift */,
-				A19C69EB19F9DF4600848370 /* DWTContactCollectionViewController.xib */,
+				A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */,
+				A19C69EF19F9E19C00848370 /* ContactCollectionViewCell.swift */,
+				A19C69ED19F9E19500848370 /* ContactCollectionViewCell.xib */,
+				A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */,
+				A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -267,6 +280,11 @@
 		A19C69F319F9E1D000848370 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */,
+				A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */,
+				A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */,
+				A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */,
+				A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */,
 			);
 			name = Conversations;
 			sourceTree = "<group>";
@@ -275,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				A1EF25AB19F2F35A00F52A85 /* MessageEventBus.swift */,
-				A1EF25A919F2EC5000F52A85 /* DWTChatMessage.swift */,
+				A1EF25A919F2EC5000F52A85 /* ChatMessage.swift */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -291,7 +309,7 @@
 		A1E6539B19FC2BB500DBABE7 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				A10E60CB19F9E62400A69F18 /* DWTAddressBookImport.swift */,
+				A10E60CB19F9E62400A69F18 /* AddressBookImport.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -384,11 +402,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */,
-				A19C69EE19F9E19500848370 /* DWTContactCollectionViewCell.xib in Resources */,
-				A19C69EC19F9DF4600848370 /* DWTContactCollectionViewController.xib in Resources */,
+				A19C69EE19F9E19500848370 /* ContactCollectionViewCell.xib in Resources */,
+				A1CF82791A0329EF00E93F65 /* MessageCollectionViewCell.xib in Resources */,
+				A19C69EC19F9DF4600848370 /* ContactCollectionViewController.xib in Resources */,
 				A10658B519FD7E5800618C15 /* Localizable.strings in Resources */,
+				A1CF82731A03285C00E93F65 /* MessageCollectionViewController.xib in Resources */,
 				A11E8F1919E882E70055772A /* Images.xcassets in Resources */,
-				A11E8F3F19E88CEE0055772A /* DWTArtboardViewController.xib in Resources */,
+				A11E8F3F19E88CEE0055772A /* ArtboardViewController.xib in Resources */,
 				A10658C219FD87B700618C15 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,26 +504,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1DACD3F19FC3F9700D02B5D /* DWTMainTabBarController.swift in Sources */,
-				A10935F219F4BF2000D618EA /* DWTCanvasView.swift in Sources */,
-				A1EF25AA19F2EC5000F52A85 /* DWTChatMessage.swift in Sources */,
+				A1DACD3F19FC3F9700D02B5D /* MainTabBarController.swift in Sources */,
+				A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */,
+				A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */,
+				A1EF25AA19F2EC5000F52A85 /* ChatMessage.swift in Sources */,
 				A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */,
+				A1CF82711A03283A00E93F65 /* MessageCollectionViewController.swift in Sources */,
 				A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */,
 				A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
-				A1E6539A19FC27F900DBABE7 /* DWTContact.swift in Sources */,
-				A19C69E619F9DB1700848370 /* DWTContactCollectionViewController.swift in Sources */,
-				A1EF25A519F2CF3C00F52A85 /* DWTDrawing.swift in Sources */,
-				A1EF25A119F2CC3500F52A85 /* DWTPath.swift in Sources */,
-				A1D269CA19F313A1004C82C6 /* DWTMqqtClientWrapper.swift in Sources */,
-				A19C69F019F9E19C00848370 /* DWTContactCollectionViewCell.swift in Sources */,
-				A1EF259F19F2CC2D00F52A85 /* DWTPathJson.swift in Sources */,
-				A1E6539819FC268F00DBABE7 /* DWTContactABRecord.swift in Sources */,
-				A10E60CC19F9E62400A69F18 /* DWTAddressBookImport.swift in Sources */,
-				A1EF25A319F2CF3400F52A85 /* DWTDrawingJson.swift in Sources */,
-				A11E8F3C19E8895B0055772A /* DWTArtboardViewController.swift in Sources */,
-				A1D269CC19F31774004C82C6 /* DWTConstants.swift in Sources */,
-				A19C69EA19F9DBFD00848370 /* DWTContactCollectionDataSource.swift in Sources */,
+				A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */,
+				A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */,
+				A1EF25A519F2CF3C00F52A85 /* Drawing.swift in Sources */,
+				A1EF25A119F2CC3500F52A85 /* Path.swift in Sources */,
+				A1D269CA19F313A1004C82C6 /* MqqtClientWrapper.swift in Sources */,
+				A19C69F019F9E19C00848370 /* ContactCollectionViewCell.swift in Sources */,
+				A1E33D141A0470060039339E /* MainViewController.swift in Sources */,
+				A1EF259F19F2CC2D00F52A85 /* PathJson.swift in Sources */,
+				A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */,
+				A10E60CC19F9E62400A69F18 /* AddressBookImport.swift in Sources */,
+				A1EF25A319F2CF3400F52A85 /* DrawingJson.swift in Sources */,
+				A11E8F3C19E8895B0055772A /* ArtboardViewController.swift in Sources */,
+				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
+				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
+				A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

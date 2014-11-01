@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DWTContactCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class ContactCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
   private var contactCollectionView: UICollectionView!
   private var contacts: [Contact]!

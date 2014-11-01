@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-public class DWTArtboardViewController : UIViewController {
-  
-  @IBOutlet weak var canvasView: DWTCanvasView!
+public class ArtboardViewController : UIViewController {
+
+  @IBOutlet weak var messageContainerView: UIView!
+  @IBOutlet weak var canvasView: CanvasView!
   @IBOutlet weak var sendButton: UIButton!
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
@@ -22,8 +23,8 @@ public class DWTArtboardViewController : UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public class func controller() -> DWTArtboardViewController {
-    let vc = DWTArtboardViewController(nibName:"DWTArtboardViewController", bundle: nil)
+  public class func controller() -> ArtboardViewController {
+    let vc = ArtboardViewController(nibName:"ArtboardViewController", bundle: nil)
 
     MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
@@ -36,6 +37,16 @@ public class DWTArtboardViewController : UIViewController {
     })
     
     return vc
+  }
+  
+  override public func viewDidLoad() {
+    super.viewDidLoad()
+
+    let messageController = MessageCollectionViewController.controller()
+    addChildViewController(messageController)
+    messageContainerView.addSubview(messageController.view)
+    messageController.didMoveToParentViewController(self)
+    messageContainerView.backgroundColor = UIColor.redColor()
   }
   
   @IBAction func resetButtonTapped(sender : AnyObject) {

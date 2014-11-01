@@ -40,7 +40,7 @@ private struct Line {
 }
 
 
-public class DWTCanvasView: UIView {
+public class CanvasView: UIView {
 
   private var contentView: UIView!
   private var drawingImageView: UIImageView!

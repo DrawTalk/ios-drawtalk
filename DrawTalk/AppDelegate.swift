@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let kUsername = "vkgogxez"
     let kPassword = "oX02eF7V0I9Y"
     
+    
     DWTMqttClientWrapper.defaultMQTT.setup(
       username: kUsername,
       password: kPassword,
@@ -27,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    self.window!.rootViewController = MainTabBarController()
+    self.window!.rootViewController = MainViewController()
     self.window!.makeKeyAndVisible()
     
     return true

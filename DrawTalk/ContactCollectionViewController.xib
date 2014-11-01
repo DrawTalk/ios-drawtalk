@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DWTContactCollectionViewController" customModule="DrawTalk" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactCollectionViewController" customModule="DrawTalk" customModuleProvider="target">
             <connections>
                 <outlet property="mainCollectionView" destination="i3d-MR-wAc" id="29a-Ea-3Rz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="0eO-iB-oMH"/>

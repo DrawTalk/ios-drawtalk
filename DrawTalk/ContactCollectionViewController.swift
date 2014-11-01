@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-class DWTContactCollectionViewController : UIViewController, UICollectionViewDelegate {
+class ContactCollectionViewController : UIViewController, UICollectionViewDelegate {
   
   @IBOutlet weak var mainCollectionView: UICollectionView!
   
-  private var mainCollectionDataSource: DWTContactCollectionDataSource!
+  private var mainCollectionDataSource: ContactCollectionDataSource!
   
-  class func controller() -> DWTContactCollectionViewController {
-    let vc = DWTContactCollectionViewController(nibName:"DWTContactCollectionViewController", bundle: nil)
+  class func controller() -> ContactCollectionViewController {
+    let vc = ContactCollectionViewController(nibName:"ContactCollectionViewController", bundle: nil)
     return vc
   }
   
@@ -28,12 +28,12 @@ class DWTContactCollectionViewController : UIViewController, UICollectionViewDel
   }
   
   private func setupMainCollectionView() {
-    mainCollectionDataSource = DWTContactCollectionDataSource(collectionView: mainCollectionView)
+    mainCollectionDataSource = ContactCollectionDataSource(collectionView: mainCollectionView)
     mainCollectionView.dataSource = mainCollectionDataSource;
   }
   
   private func retrieveContactsFromAddressBook() {
-    DWTAddressBookImport.defaultAddressBookImport.contacts {
+    AddressBookImport.defaultAddressBookImport.contacts {
       (contacts: [Contact]?, error: NSError?) in
       dispatch_async(dispatch_get_main_queue(), {
         self.mainCollectionDataSource.loadWithContacts(contacts)

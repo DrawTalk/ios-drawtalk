@@ -9,15 +9,15 @@
 import Foundation
 import AddressBook
 
-typealias DWTAddressBookImportCompletionHandler = ([Contact]?, NSError?) -> Void
+typealias AddressBookImportCompletionHandler = ([Contact]?, NSError?) -> Void
 
-class DWTAddressBookImport {
+class AddressBookImport {
   
   private var importQueue: dispatch_queue_t
   
-  class var defaultAddressBookImport: DWTAddressBookImport {
+  class var defaultAddressBookImport: AddressBookImport {
   struct Static {
-    static let instance = DWTAddressBookImport()
+    static let instance = AddressBookImport()
     }
     return Static.instance
   }
@@ -26,14 +26,14 @@ class DWTAddressBookImport {
     importQueue = dispatch_queue_create("com.drawtalk.import.queue", DISPATCH_QUEUE_SERIAL);
   }
   
-  func contacts(completion: DWTAddressBookImportCompletionHandler!) {
+  func contacts(completion: AddressBookImportCompletionHandler!) {
     let status = ABAddressBookGetAuthorizationStatus()
     
     // Creates an address book reference in the dedicated `importQueue`.
     // From Apple's doc: "You must ensures that an instance of ABAddressBookRef is used by only one thread."
     let AddressBookRefCreateWithCompletion = {
       (handler: ((ABAddressBookRef) -> Void)!) -> Void in
-      let instance = DWTAddressBookImport.defaultAddressBookImport
+      let instance = AddressBookImport.defaultAddressBookImport
       dispatch_async(instance.importQueue, { () -> Void in
         var error : Unmanaged<CFError>? = nil
         let adbk : ABAddressBook? = ABAddressBookCreateWithOptions(nil, &error).takeRetainedValue()

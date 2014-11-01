@@ -23,14 +23,14 @@ class ContactCollectionViewCell: UICollectionViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    self.setupUI()
+    setupUI()
   }
   
   override func prepareForReuse() {
     nameLabel.text = ""
   }
   
-  func setupUI() {
+  private func setupUI() {
     self.layoutMargins = UIEdgeInsetsZero
   }
   
