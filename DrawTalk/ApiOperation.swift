@@ -11,15 +11,15 @@ import Foundation
 //struct ServerRequests {}
 //struct ServerResponses {}
 
-// MARK: - Requests
+// MARK: - Request
 
 typealias RequestJson = [String: AnyObject]?
 
-public protocol ServerRequest {
-  func toJson() -> [String: AnyObject]?
+protocol ServerRequest {
+  func toJson() -> RequestJson
 }
 
-// MARK: - Responses
+// MARK: - Response
 
 struct ServerResponse<T> {
   let result: T?

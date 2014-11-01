@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let kPassword = "oX02eF7V0I9Y"
     
     
-    DWTMqttClientWrapper.defaultMQTT.setup(
+    MqttClientWrapper.defaultMQTT.setup(
       username: kUsername,
       password: kPassword,
       host: Constants.host,

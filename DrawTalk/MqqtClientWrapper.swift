@@ -9,18 +9,15 @@
 import Foundation
 import UIKit
 
-typealias DWTMessageReceivedHandler = (AnyObject) -> Void
-
-@objc
-public class DWTMqttClientWrapper {
+public class MqttClientWrapper {
   
   private let topic = "hello/world"
   private let client: MQTTClient
   private let clientId: String
   
-  class var defaultMQTT: DWTMqttClientWrapper {
+  class var defaultMQTT: MqttClientWrapper {
   struct Static {
-    static let instance = DWTMqttClientWrapper()
+    static let instance = MqttClientWrapper()
     }
     return Static.instance
   }
