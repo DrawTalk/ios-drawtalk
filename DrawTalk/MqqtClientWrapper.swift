@@ -67,7 +67,7 @@ public class DWTMqttClientWrapper {
   private func sendMessage(payload: AnyObject) {
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(payload, options: nil, error: &jsonError)
-    let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)
+    let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)!
     
     println("sending")
     println(encodedJsonString);

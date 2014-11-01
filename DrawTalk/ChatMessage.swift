@@ -34,7 +34,7 @@ public class ChatMessage: MessageEvent {
     var message = ChatMessage(
       text: payload,
       clientId: UIDevice.currentDevice().identifierForVendor.UUIDString,
-      id: NSUUID.UUID().UUIDString,
+      id: NSUUID().UUIDString,
       channel: "hello/world",
       state: MessageState.OUTGOING)
     

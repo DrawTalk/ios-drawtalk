@@ -13,7 +13,7 @@ import UIKit
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
   
   private lazy var tabBarItemFont:UIFont = {
-    return UIFont(name: "HelveticaNeue-Medium", size: 14)
+    return UIFont(name: "HelveticaNeue-Medium", size: 14)!
     }()
   private let tabBarItemTitleOffset = UIOffsetMake(0, -10.0)
   private let tabBarItemTitleColor = UIColor.whiteColor()

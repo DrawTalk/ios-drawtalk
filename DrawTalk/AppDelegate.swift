@@ -31,6 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window!.rootViewController = MainViewController()
     self.window!.makeKeyAndVisible()
     
+    
+    
+    var q = NSOperationQueue()
+    
+    var op1 = SendVerificationOperation(serverRequest: PhoneNumberRequest(number: "6504047096"))
+    op1.completionBlock = {
+      if let response = op1.serverReponse {
+      }
+    }
+    q.addOperation(op1)
+    
+    var op2 = PhoneNumberVerificationOperation(serverRequest: PhoneNumberVerificationRequest(number: "6504047096", code: "death"))
+    op2.completionBlock = {
+      if let response = op2.serverReponse {
+      }
+    }
+    op2.addDependency(op1)
+    q.addOperation(op2)
+    
+    
     return true
   }
 }

@@ -22,1200 +22,1314 @@
 
 import Foundation
 
-@availability(*, unavailable, renamed="JSON")
-public typealias JSONValue = JSON
+// MARK: - Error
 
-//MARK: - Return Error
-//The SwiftyJSON's error domain
-public let ErrorDomain = "SwiftyJSONErrorDomain"
-//The error code
-public let ErrorUnsupportedType = 999
-public let ErrorIndexOutOfBounds = 900
-public let ErrorWrongType = 901
-public let ErrorNotExist = 500
+///Error domain
+public let ErrorDomain: String! = "SwiftyJSONErrorDomain"
 
+///Error code
+public let ErrorUnsupportedType: Int! = 999
+public let ErrorIndexOutOfBounds: Int! = 900
+public let ErrorWrongType: Int! = 901
+public let ErrorNotExist: Int! = 500
+
+// MARK: - JSON Type
+
+/**
+JSON's type definitions.
+
+See http://tools.ietf.org/html/rfc7231#section-4.3
+*/
 public enum Type :Int{
-    
-    case Number
-    case String
-    case Bool
-    case Array
-    case Dictionary
-    case Null
-    case Unknow
+  
+  case Number
+  case String
+  case Bool
+  case Array
+  case Dictionary
+  case Null
+  case Unknow
 }
 
-//MARK:- Base
-//http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf
+// MARK: - JSON Base
+
 public struct JSON {
-    
-    public var type: Type {
-        get {
-            return _type
-        }
-        set {
-            _type = newValue
-        }
+  
+  /**
+  Creates a JSON using the data.
+  
+  :param: data  The NSData used to convert to json.Top level object in data is an NSArray or NSDictionary
+  :param: opt   The JSON serialization reading options. `.AllowFragments` by default.
+  :param: error error The NSErrorPointer used to return the error. `nil` by default.
+  
+  :returns: The created JSON
+  */
+  public init(data:NSData, options opt: NSJSONReadingOptions = .AllowFragments, error: NSErrorPointer = nil) {
+    if let object: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: opt, error: error) {
+      self.init(object)
+    } else {
+      self.init(NSNull())
     }
-    public var object: AnyObject {
-        get {
-            return _object
-        }
-        set {
-            _object = newValue
-            switch newValue {
-            case let number as NSNumber:
-                if number.isBool {
-                    _type = .Bool
-                } else {
-                    _type = .Number
-                }
-            case let string as NSString:
-                _type = .String
-            case let null as NSNull:
-                _type = .Null
-            case let array as Array<AnyObject>:
-                _type = .Array
-            case let dictionary as Dictionary<String, AnyObject>:
-                _type = .Dictionary
-            default:
-                _type = .Unknow
-                _object = NSNull()
-                _error = NSError(domain: ErrorDomain, code: ErrorUnsupportedType, userInfo: [NSLocalizedDescriptionKey: "It is a unsupported type"])
-            }
-        }
+  }
+  
+  /**
+  Creates a JSON using the object.
+  
+  :param: object  The object must have the following properties: All objects are NSString/String, NSNumber/Int/Float/Double/Bool, NSArray/Array, NSDictionary/Dictionary, or NSNull; All dictionary keys are NSStrings/String; NSNumbers are not NaN or infinity.
+  
+  :returns: The created JSON
+  */
+  public init(_ object: AnyObject) {
+    self.object = object
+  }
+  
+  /// Private object
+  private var _object: AnyObject = NSNull()
+  /// Private type
+  private var _type: Type = .Null
+  /// prviate error
+  private var _error: NSError?
+  
+  /// Object in JSON
+  public var object: AnyObject {
+    get {
+      return _object
     }
-    
-    public var error: NSError? { get { return self._error } }
-    public static var nullJSON: JSON { get { return JSON(NSNull()) } }
-
-    /**
-        :param: data The NSData used to convert to json.Top level object in data is an NSArray or NSDictionary
-        :param: options The JSON serialization reading options. `.AllowFragments` by default.
-        :param: error The NSErrorPointer used to return the error. `nil` by default.
-     */
-    public init(data:NSData, options opt: NSJSONReadingOptions = .AllowFragments, error: NSErrorPointer = nil) {
-        if let object: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: opt, error: error) {
-            self.init(object)
+    set {
+      _object = newValue
+      switch newValue {
+      case let number as NSNumber:
+        if number.isBool {
+          _type = .Bool
         } else {
-            self.init(NSNull())
+          _type = .Number
         }
+      case let string as NSString:
+        _type = .String
+      case let null as NSNull:
+        _type = .Null
+      case let array as [AnyObject]:
+        _type = .Array
+      case let dictionary as [String : AnyObject]:
+        _type = .Dictionary
+      default:
+        _type = .Unknow
+        _object = NSNull()
+        _error = NSError(domain: ErrorDomain, code: ErrorUnsupportedType, userInfo: [NSLocalizedDescriptionKey: "It is a unsupported type"])
+      }
     }
-    
-    /**
-        :param: object The object must have the following properties:
-        - All objects are NSString, NSNumber, NSArray, NSDictionary, or NSNull
-        - All dictionary keys are NSStrings
-        - NSNumbers are not NaN or infinity
-        In swift
-        - String as NSString
-        - Bool, Int, Float, Double... as NSNumber
-        - Array<AnyObject> as NSArray
-        - Dictionary<String, AnyObject> as NSDictionary with NSString keys
-    */
-    public init(_ object: AnyObject) {
-        self.object = object
-    }
-    
-    private var _object: AnyObject = NSNull()
-    private var _type: Type = .Null
-    private var _error: NSError?
-
+  }
+  
+  /// json type
+  public var type: Type { get { return _type } }
+  
+  /// Error in JSON
+  public var error: NSError? { get { return self._error } }
+  
+  /// The static null json
+  public static var nullJSON: JSON { get { return JSON(NSNull()) } }
+  
 }
 
 // MARK: - SequenceType
 extension JSON: SequenceType{
-    
-    /// `true` if and only if self's type is `.Array` or `.Dictionary` and it is empty
-    var isEmpty: Bool {
-        get {
-            switch self.type {
-            case .Array:
-                return (self.object as Array<AnyObject>).isEmpty
-            case .Dictionary:
-                return (self.object as Dictionary<String, AnyObject>).isEmpty
-            default:
-                return false
-            }
-        }
+  
+  /// If `type` is `.Array` or `.Dictionary`, return `array.empty` or `dictonary.empty` otherwise return `false`.
+  var isEmpty: Bool {
+    get {
+      switch self.type {
+      case .Array:
+        return (self.object as [AnyObject]).isEmpty
+      case .Dictionary:
+        return (self.object as [String : AnyObject]).isEmpty
+      default:
+        return false
+      }
     }
-    
-    /// `count` value if self's type is `.Array` or `.Dictionary` otherwise is `0`
-    public var count: Int {
-        get {
-            switch self.type {
-            case .Array:
-                return self.arrayValue.count
-            case .Dictionary:
-                return self.dictionaryValue.count
-            default:
-                return 0
-            }
-        }
+  }
+  
+  /// If `type` is `.Array` or `.Dictionary`, return `array.count` or `dictonary.count` otherwise return `0`.
+  public var count: Int {
+    get {
+      switch self.type {
+      case .Array:
+        return self.arrayValue.count
+      case .Dictionary:
+        return self.dictionaryValue.count
+      default:
+        return 0
+      }
     }
-
-    /// - If self's type is .Array return GeneratorOf<(index, JSON(element))> otherwise return `nil`
-    /// - If self's type is .Dictionary return GeneratorOf<(index, JSON(element))> otherwise return `nil`
-    public func generate() -> GeneratorOf <(String, JSON)> {
-        switch self.type {
-        case .Array:
-            let array_ = object as Array<AnyObject>
-            var generate_ = array_.generate()
-            var index_: Int = 0
-            return GeneratorOf<(String, JSON)> {
-                if let element_: AnyObject = generate_.next() {
-                    return ("\(index_++)", JSON(element_))
-                } else {
-                    return nil
-                }
-            }
-        case .Dictionary:
-            let dictionary_ = object as Dictionary<String, AnyObject>
-            var generate_ = dictionary_.generate()
-            return GeneratorOf<(String, JSON)> {
-                if let (key_: String, value_: AnyObject) = generate_.next() {
-                    return (key_, JSON(value_))
-                } else {
-                    return nil
-                }
-            }
-        default:
-            return GeneratorOf<(String, JSON)> {
-                return nil
-            }
+  }
+  
+  /**
+  If `type` is `.Array` or `.Dictionary`, return a generator over the elements like `Array` or `Dictionary, otherwise return a generator over empty.
+  
+  :returns: Return a *generator* over the elements of this *sequence*.
+  */
+  public func generate() -> GeneratorOf <(String, JSON)> {
+    switch self.type {
+    case .Array:
+      let array_ = object as [AnyObject]
+      var generate_ = array_.generate()
+      var index_: Int = 0
+      return GeneratorOf<(String, JSON)> {
+        if let element_: AnyObject = generate_.next() {
+          return ("\(index_++)", JSON(element_))
+        } else {
+          return nil
         }
+      }
+    case .Dictionary:
+      let dictionary_ = object as [String : AnyObject]
+      var generate_ = dictionary_.generate()
+      return GeneratorOf<(String, JSON)> {
+        if let (key_: String, value_: AnyObject) = generate_.next() {
+          return (key_, JSON(value_))
+        } else {
+          return nil
+        }
+      }
+    default:
+      return GeneratorOf<(String, JSON)> {
+        return nil
+      }
     }
+  }
 }
 
 // MARK: - Subscript
-extension JSON {
-    
-    /**
-       If self is .Sequence return the array[index]'s json else return .Null with error
-     */
-    public subscript(idx: Int) -> JSON {
-        get {
-            var returnJSON = JSON.nullJSON
-            if self.type == .Array {
-                let array_ = self.object as Array<AnyObject>
-                if array_.count > idx {
-                    returnJSON = JSON(array_[idx])
-                } else {
-                    returnJSON._error = NSError(domain: ErrorDomain, code:ErrorIndexOutOfBounds , userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] is out of bounds"])
-                }
-            } else {
-                returnJSON._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] failure, It is not an array"])
-            }
-            return returnJSON
-        }
-        set {
-            if self.type == .Array {
-                var array_ = self.object as Array<AnyObject>
-                if array_.count > idx {
-                    array_[idx] = newValue.object
-                    self.object = array_
-                }
-            }
-        }
-    }
 
-    /**
-       If self is .Sequence return the dictionary[key]'s JSON else return .Null with error
-     */
-    public subscript(key: String) -> JSON {
-        get {
-            var returnJSON = JSON.nullJSON
-            if self.type == .Dictionary {
-                if let object_: AnyObject = self.object[key] {
-                    returnJSON = JSON(object_)
-                } else {
-                    returnJSON._error = NSError(domain: ErrorDomain, code: ErrorNotExist, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] does not exist"])
-                }
-            } else {
-                returnJSON._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] failure, It is not an dictionary"])
-            }
-            return returnJSON
-        }
-        set {
-            if self.type == .Dictionary {
-                var dictionary_ = self.object as Dictionary<String, AnyObject>
-                dictionary_[key] = newValue.object
-                self.object = dictionary_
-            }
-        }
+/**
+*  To mark both String and Int can be used in subscript.
+*/
+public protocol SubscriptType {}
+
+extension Int: SubscriptType {}
+
+extension String: SubscriptType {}
+
+extension JSON {
+  
+  /// If `type` is `.Array`, return json which's object is `array[index]`, otherwise return null json with error.
+  private subscript(#index: Int) -> JSON {
+    get {
+      
+      if self.type != .Array {
+        var errorResult_ = JSON.nullJSON
+        errorResult_._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] failure, It is not an array"])
+        return errorResult_
+      }
+      
+      let array_ = self.object as [AnyObject]
+      
+      if index >= 0 && index < array_.count {
+        return JSON(array_[index])
+      }
+      
+      var errorResult_ = JSON.nullJSON
+      errorResult_._error = NSError(domain: ErrorDomain, code:ErrorIndexOutOfBounds , userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] is out of bounds"])
+      return errorResult_
     }
+    set {
+      if self.type == .Array {
+        var array_ = self.object as [AnyObject]
+        if array_.count > index {
+          array_[index] = newValue.object
+          self.object = array_
+        }
+      }
+    }
+  }
+  
+  /// If `type` is `.Dictionary`, return json which's object is `dictionary[key]` , otherwise return null json with error.
+  private subscript(#key: String) -> JSON {
+    get {
+      var returnJSON = JSON.nullJSON
+      if self.type == .Dictionary {
+        if let object_: AnyObject = self.object[key] {
+          returnJSON = JSON(object_)
+        } else {
+          returnJSON._error = NSError(domain: ErrorDomain, code: ErrorNotExist, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] does not exist"])
+        }
+      } else {
+        returnJSON._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] failure, It is not an dictionary"])
+      }
+      return returnJSON
+    }
+    set {
+      if self.type == .Dictionary {
+        var dictionary_ = self.object as [String : AnyObject]
+        dictionary_[key] = newValue.object
+        self.object = dictionary_
+      }
+    }
+  }
+  
+  /// If `sub` is `Int`, return `subscript(index:)`; If `sub` is `String`,  return `subscript(key:)`.
+  private subscript(#sub: SubscriptType) -> JSON {
+    get {
+      if sub is String {
+        return self[key:sub as String]
+      } else {
+        return self[index:sub as Int]
+      }
+    }
+    set {
+      if sub is String {
+        self[key:sub as String] = newValue
+      } else {
+        self[index:sub as Int] = newValue
+      }
+    }
+  }
+  
+  /**
+  Find a json in the complex data structuresby using the Int/String's array.
+  
+  :param: path The target json's path. Example:
+  
+  let json = JSON[data]
+  let path = [9,"list","person","name"]
+  let name = json[path]
+  
+  The same as: let name = json[9]["list"]["person"]["name"]
+  
+  :returns: Return a json found by the path or a null json with error
+  */
+  public subscript(path: [SubscriptType]) -> JSON {
+    get {
+      if path.count == 0 {
+        return JSON.nullJSON
+      }
+      
+      var next = self
+      for sub in path {
+        next = next[sub:sub]
+      }
+      return next
+    }
+    set {
+      
+      switch path.count {
+      case 0: return
+      case 1: self[sub:path[0]] = newValue
+      default:
+        var last = newValue
+        var newPath = path
+        newPath.removeLast()
+        for sub in path.reverse() {
+          var previousLast = self[newPath]
+          previousLast[sub:sub] = last
+          last = previousLast
+          if newPath.count <= 1 {
+            break
+          }
+          newPath.removeLast()
+        }
+        self[sub:newPath[0]] = last
+      }
+    }
+  }
+  
+  /**
+  Find a json in the complex data structuresby using the Int/String's array.
+  
+  :param: path The target json's path. Example:
+  
+  let name = json[9,"list","person","name"]
+  
+  The same as: let name = json[9]["list"]["person"]["name"]
+  
+  :returns: Return a json found by the path or a null json with error
+  */
+  public subscript(path: SubscriptType...) -> JSON {
+    get {
+      return self[path]
+    }
+    set {
+      self[path] = newValue
+    }
+  }
 }
 
-//MARK:- LiteralConvertible
+// MARK: - LiteralConvertible
+
 extension JSON: StringLiteralConvertible {
-    
-    public static func convertFromStringLiteral(value: StringLiteralType) -> JSON {
-        return JSON(value)
-    }
-    
-    public static func convertFromExtendedGraphemeClusterLiteral(value: StringLiteralType) -> JSON {
-        return JSON(value)
-    }
+  
+  public init(stringLiteral value: StringLiteralType) {
+    self.init(value)
+  }
+  
+  public init(extendedGraphemeClusterLiteral value: StringLiteralType) {
+    self.init(value)
+  }
+  
+  public init(unicodeScalarLiteral value: StringLiteralType) {
+    self.init(value)
+  }
 }
 
 extension JSON: IntegerLiteralConvertible {
-    public static func convertFromIntegerLiteral(value: IntegerLiteralType) -> JSON {
-        return JSON(value)
-    }
+  
+  public init(integerLiteral value: IntegerLiteralType) {
+    self.init(value)
+  }
 }
 
 extension JSON: BooleanLiteralConvertible {
-    public static func convertFromBooleanLiteral(value: BooleanLiteralType) -> JSON {
-        return JSON(value)
-    }
+  
+  public init(booleanLiteral value: BooleanLiteralType) {
+    self.init(value)
+  }
 }
 
 extension JSON: FloatLiteralConvertible {
-    public static func convertFromFloatLiteral(value: FloatLiteralType) -> JSON {
-        return JSON(value)
-    }
+  
+  public init(floatLiteral value: FloatLiteralType) {
+    self.init(value)
+  }
 }
 
 extension JSON: DictionaryLiteralConvertible {
-    public static func convertFromDictionaryLiteral(elements: (String, AnyObject)...) -> JSON {
-        var dictionary_ = [String : AnyObject]()
-        for (key_, value) in elements {
-            dictionary_[key_] = value
-        }
-        return JSON(dictionary_)
+  
+  public init(dictionaryLiteral elements: (String, AnyObject)...) {
+    var dictionary_ = [String : AnyObject]()
+    for (key_, value) in elements {
+      dictionary_[key_] = value
     }
+    self.init(dictionary_)
+  }
 }
 
 extension JSON: ArrayLiteralConvertible {
-    public static func convertFromArrayLiteral(elements: AnyObject...) -> JSON {
-        return JSON(elements)
-    }
+  
+  public init(arrayLiteral elements: AnyObject...) {
+    self.init(elements)
+  }
 }
 
 extension JSON: NilLiteralConvertible {
-    public static func convertFromNilLiteral() -> JSON {
-        return JSON(NSNull())
-    }
+  
+  public init(nilLiteral: ()) {
+    self.init(NSNull())
+  }
 }
 
-//MARK:- RawRepresentable
+// MARK: - Raw
+
 extension JSON: RawRepresentable {
-    
-    public static func fromRaw(raw: AnyObject) -> JSON? {
-        let json = JSON(raw)
-        if json.type == .Unknow {
-            return nil
-        } else {
-            return json
-        }
+  
+  public init?(rawValue: AnyObject) {
+    if JSON(rawValue).type == .Unknow {
+      return nil
+    } else {
+      self.init(rawValue)
     }
-    
-    public func toRaw() -> AnyObject {
-        return self.object
+  }
+  
+  public var rawValue: AnyObject {
+    return self.object
+  }
+  
+  public func rawData(options opt: NSJSONWritingOptions = NSJSONWritingOptions(0), error: NSErrorPointer = nil) -> NSData? {
+    return NSJSONSerialization.dataWithJSONObject(self.object, options: opt, error:error)
+  }
+  
+  public func rawString(encoding: UInt = NSUTF8StringEncoding, options opt: NSJSONWritingOptions = .PrettyPrinted) -> String? {
+    switch self.type {
+    case .Array, .Dictionary:
+      if let data = self.rawData(options: opt) {
+        return NSString(data: data, encoding: encoding)
+      } else {
+        return nil
+      }
+    case .String:
+      return (self.object as String)
+    case .Number:
+      return (self.object as NSNumber).stringValue
+    case .Bool:
+      return (self.object as Bool).description
+    case .Null:
+      return "null"
+    default:
+      return nil
     }
+  }
 }
 
-//MARK: - Printable, DebugPrintable
+// MARK: - Printable, DebugPrintable
+
 extension JSON: Printable, DebugPrintable {
-    
-    public var description: String {
-        get {
-            switch type {
-            case .Number:
-                return self.object.description
-            case .String:
-                return self.object as String
-            case .Array:
-                return (self.object as Array<AnyObject>).description
-            case .Dictionary:
-                return (self.object as Dictionary<String, AnyObject>).description
-            case .Bool:
-                return (self.object as Bool).description
-            case .Null:
-                return self.error?.description ?? "null"
-            default:
-                return self.error?.description ?? "unknown"
-            }
-        }
+  
+  public var description: String {
+    if let string = self.rawString(options:.PrettyPrinted) {
+      return string
+    } else {
+      return "unknown"
     }
-    
-    public var debugDescription: String {
-        get {
-            switch type {
-            case .Number:
-                return (self.object as NSNumber).debugDescription
-            case .String:
-                return self.object as String
-            case .Array:
-                return (self.object as Array<AnyObject>).debugDescription
-            case .Dictionary:
-                return (self.object as Dictionary<String, AnyObject>).debugDescription
-            case .Bool:
-                return (self.object as Bool).description
-            case .Null:
-                return self.error?.debugDescription ?? "null"
-            default:
-                return self.error?.debugDescription ?? "unknown"
-            }
-        }
-    }
+  }
+  
+  public var debugDescription: String {
+    return description
+  }
 }
 
 // MARK: - Array
+
 extension JSON {
-    
-    //Optional Array<JSON>
-    public var array: Array<JSON>? {
-        get {
-            if self.type == .Array {
-                let array_ = self.object as Array<AnyObject>
-                var returnArray_ = Array<JSON>()
-                for subObject_ in array_ {
-                    returnArray_.append(JSON(subObject_))
-                }
-                return returnArray_
-            }
-            return nil
-        }
+  
+  //Optional [JSON]
+  public var array: [JSON]? {
+    get {
+      if self.type == .Array {
+        return map(self.object as [AnyObject]){ JSON($0) }
+      } else {
+        return nil
+      }
     }
-    
-    //Non-optional Array<JSON>
-    public var arrayValue: Array<JSON> {
-        get {
-            return self.array ?? []
-        }
+  }
+  
+  //Non-optional [JSON]
+  public var arrayValue: [JSON] {
+    get {
+      return self.array ?? []
     }
-    
-    //Optional Array<AnyObject>
-    public var arrayObject: Array<AnyObject>? {
-        get {
-            switch self.type {
-            case .Array:
-                return self.object as? Array<AnyObject>
-            default:
-                return nil
-            }
-        }
-        set {
-            if newValue != nil {
-                self.object = NSMutableArray(array: newValue!, copyItems: true)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  }
+  
+  //Optional [AnyObject]
+  public var arrayObject: [AnyObject]? {
+    get {
+      switch self.type {
+      case .Array:
+        return self.object as? [AnyObject]
+      default:
+        return nil
+      }
     }
+    set {
+      if newValue != nil {
+        self.object = NSMutableArray(array: newValue!, copyItems: true)
+      } else {
+        self.object = NSNull()
+      }
+    }
+  }
 }
 
 // MARK: - Dictionary
+
 extension JSON {
-    
-    //Optional Dictionary<String, JSON>
-    public var dictionary: Dictionary<String, JSON>? {
-        get {
-            switch self.type {
-            case .Dictionary:
-                var jsonDictionary_ = Dictionary<String, JSON>()
-                for (key_, value_) in self.object as Dictionary<String, AnyObject> {
-                    jsonDictionary_[key_] = JSON( value_)
-                }
-                return jsonDictionary_
-            default:
-                return nil
-            }
-        }
+  
+  private func _map<Key:Hashable ,Value, NewValue>(source: [Key: Value], transform: Value -> NewValue) -> [Key: NewValue] {
+    var result = [Key: NewValue](minimumCapacity:source.count)
+    for (key,value) in source {
+      result[key] = transform(value)
     }
-    
-    //Non-optional Dictionary<String, JSON>
-    public var dictionaryValue: Dictionary<String, JSON> {
-        get {
-            return self.dictionary ?? [:]
-        }
+    return result
+  }
+  
+  //Optional [String : JSON]
+  public var dictionary: [String : JSON]? {
+    get {
+      if self.type == .Dictionary {
+        return _map(self.object as [String : AnyObject]){ JSON($0) }
+      } else {
+        return nil
+      }
     }
-    
-    //Optional Dictionary<String, AnyObject>
-    public var dictionaryObject: Dictionary<String, AnyObject>? {
-        get {
-            switch self.type {
-            case .Dictionary:
-                return self.object as? Dictionary<String, AnyObject>
-            default:
-                return nil
-            }
-        }
-        set {
-            if newValue != nil {
-                self.object = NSMutableDictionary(dictionary: newValue!, copyItems: true)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  }
+  
+  //Non-optional [String : JSON]
+  public var dictionaryValue: [String : JSON] {
+    get {
+      return self.dictionary ?? [:]
     }
+  }
+  
+  //Optional [String : AnyObject]
+  public var dictionaryObject: [String : AnyObject]? {
+    get {
+      switch self.type {
+      case .Dictionary:
+        return self.object as? [String : AnyObject]
+      default:
+        return nil
+      }
+    }
+    set {
+      if newValue != nil {
+        self.object = NSMutableDictionary(dictionary: newValue!, copyItems: true)
+      } else {
+        self.object = NSNull()
+      }
+    }
+  }
 }
 
-//MARK: - Bool
+// MARK: - Bool
+
 extension JSON: BooleanType {
-    
-    //Optional bool
-    public var bool: Bool? {
-        get {
-            switch self.type {
-            case .Bool:
-                return self.object.boolValue
-            default:
-                return nil
-            }
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(bool: newValue!)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  
+  //Optional bool
+  public var bool: Bool? {
+    get {
+      switch self.type {
+      case .Bool:
+        return self.object.boolValue
+      default:
+        return nil
+      }
     }
-
-    //Non-optional bool
-    public var boolValue: Bool {
-        get {
-            switch self.type {
-            case .Bool, .Number, .String:
-                return self.object.boolValue
-            case .Array:
-                return self.arrayValue.count > 0
-            case .Dictionary:
-                return self.dictionaryValue.count > 0
-            case .Null:
-                return false
-            default:
-                return false
-            }
-        }
-        set {
-            self.object = NSNumber(bool: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(bool: newValue!)
+      } else {
+        self.object = NSNull()
+      }
     }
+  }
+  
+  //Non-optional bool
+  public var boolValue: Bool {
+    get {
+      switch self.type {
+      case .Bool, .Number, .String:
+        return self.object.boolValue
+      default:
+        return false
+      }
+    }
+    set {
+      self.object = NSNumber(bool: newValue)
+    }
+  }
 }
 
-//MARK: - String
-extension JSON {
+// MARK: - String
 
-    //Optional string
-    public var string: String? {
-        get {
-            switch self.type {
-            case .String:
-                return self.object as? String
-            default:
-                return nil
-            }
-        }
-        set {
-            if newValue != nil {
-                self.object = NSString(string:newValue!)
-            } else {
-                self.object = NSNull()
-            }
-        }
+extension JSON {
+  
+  //Optional string
+  public var string: String? {
+    get {
+      switch self.type {
+      case .String:
+        return self.object as? String
+      default:
+        return nil
+      }
     }
-    
-    //Non-optional string
-    public var stringValue: String {
-        get {
-            switch self.type {
-            case .String:
-                return self.object as String
-            case .Number:
-                return self.object.stringValue
-            case .Bool:
-                return (self.object as Bool).description
-            default:
-                return ""
-            }
-        }
-        set {
-            self.object = NSString(string:newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSString(string:newValue!)
+      } else {
+        self.object = NSNull()
+      }
     }
+  }
+  
+  //Non-optional string
+  public var stringValue: String {
+    get {
+      switch self.type {
+      case .String:
+        return self.object as String
+      case .Number:
+        return self.object.stringValue
+      case .Bool:
+        return (self.object as Bool).description
+      default:
+        return ""
+      }
+    }
+    set {
+      self.object = NSString(string:newValue)
+    }
+  }
 }
 
-//MARK: - Number
+// MARK: - Number
 extension JSON {
-    
-    //Optional number
-    public var number: NSNumber? {
-        get {
-            switch self.type {
-            case .Number, .Bool:
-                return self.object as? NSNumber
-            default:
-                return nil
-            }
-        }
-        set {
-            if newValue != nil {
-                self.object = newValue!.copy()
-            } else {
-                self.object = NSNull()
-            }
-        }
+  
+  //Optional number
+  public var number: NSNumber? {
+    get {
+      switch self.type {
+      case .Number, .Bool:
+        return self.object as? NSNumber
+      default:
+        return nil
+      }
     }
-    
-    //Non-optional number
-    public var numberValue: NSNumber {
-        get {
-            switch self.type {
-            case .String:
-                let scanner = NSScanner(string: self.object as String)
-                if scanner.scanDouble(nil){
-                    if (scanner.atEnd) {
-                        return NSNumber(double:(self.object as NSString).doubleValue)
-                    }
-                }
-                return NSNumber(double: 0.0)
-            case .Number, .Bool:
-                return self.object as NSNumber
-            default:
-                return NSNumber(double: 0.0)
-            }
-        }
-        set {
-            self.object = newValue.copy()
-        }
+    set {
+      self.object = newValue?.copy() ?? NSNull()
     }
+  }
+  
+  //Non-optional number
+  public var numberValue: NSNumber {
+    get {
+      switch self.type {
+      case .String:
+        let scanner = NSScanner(string: self.object as String)
+        if scanner.scanDouble(nil){
+          if (scanner.atEnd) {
+            return NSNumber(double:(self.object as NSString).doubleValue)
+          }
+        }
+        return NSNumber(double: 0.0)
+      case .Number, .Bool:
+        return self.object as NSNumber
+      default:
+        return NSNumber(double: 0.0)
+      }
+    }
+    set {
+      self.object = newValue.copy()
+    }
+  }
 }
 
 //MARK: - Null
 extension JSON {
- 
-    public var null: NSNull? {
-        get {
-            switch self.type {
-            case .Null:
-                return NSNull()
-            default:
-                return nil
-            }
-        }
-        set {
-            self.object = NSNull()
-        }
+  
+  public var null: NSNull? {
+    get {
+      switch self.type {
+      case .Null:
+        return NSNull()
+      default:
+        return nil
+      }
     }
+    set {
+      self.object = NSNull()
+    }
+  }
 }
 
 //MARK: - URL
 extension JSON {
-    
-    //Optional URL
-    public var URL: NSURL? {
-        get {
-            switch self.type {
-            case .String:
-                if let encodedString_ = self.object.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-                    return NSURL(string: encodedString_)
-                } else {
-                    return nil
-                }
-            default:
-                return nil
-            }
+  
+  //Optional URL
+  public var URL: NSURL? {
+    get {
+      switch self.type {
+      case .String:
+        if let encodedString_ = self.object.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+          return NSURL(string: encodedString_)
+        } else {
+          return nil
         }
-        set {
-            self.object = newValue?.absoluteString ?? NSNull()
-        }
+      default:
+        return nil
+      }
     }
+    set {
+      self.object = newValue?.absoluteString ?? NSNull()
+    }
+  }
 }
 
-//MARK: - Int, Double, Float, Int8, Int16, Int32, Int64
+// MARK: - Int, Double, Float, Int8, Int16, Int32, Int64
+
 extension JSON {
-    
-    public var double: Double? {
-        get {
-            return self.number?.doubleValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(double: newValue!)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  
+  public var double: Double? {
+    get {
+      return self.number?.doubleValue
     }
-    
-    public var doubleValue: Double {
-        get {
-            return self.numberValue.doubleValue
-        }
-        set {
-            self.object = NSNumber(double: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(double: newValue!)
+      } else {
+        self.object = NSNull()
+      }
     }
-    
-    public var float: Float? {
-        get {
-            return self.number?.floatValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(float: newValue!)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  }
+  
+  public var doubleValue: Double {
+    get {
+      return self.numberValue.doubleValue
     }
-    
-    public var floatValue: Float {
-        get {
-            return self.numberValue.floatValue
-        }
-        set {
-            self.object = NSNumber(float: newValue)
-        }
+    set {
+      self.object = NSNumber(double: newValue)
     }
-    
-    public var int: Int? {
-        get {
-            return self.number?.longValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(integer: newValue!)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  }
+  
+  public var float: Float? {
+    get {
+      return self.number?.floatValue
     }
-    
-    public var intValue: Int {
-        get {
-            return self.numberValue.integerValue
-        }
-        set {
-            self.object = NSNumber(integer: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(float: newValue!)
+      } else {
+        self.object = NSNull()
+      }
     }
-    
-    public var uInt: UInt? {
-        get {
-            return self.number?.unsignedLongValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(unsignedLong: newValue!)
-            } else {
-                self.object = NSNull()
-            }
-        }
+  }
+  
+  public var floatValue: Float {
+    get {
+      return self.numberValue.floatValue
     }
-    
-    public var uIntValue: UInt {
-        get {
-            return self.numberValue.unsignedLongValue
-        }
-        set {
-            self.object = NSNumber(unsignedLong: newValue)
-        }
+    set {
+      self.object = NSNumber(float: newValue)
     }
-
-    public var int8: Int8? {
-        get {
-            return self.number?.charValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(char: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var int: Int? {
+    get {
+      return self.number?.longValue
     }
-    
-    public var int8Value: Int8 {
-        get {
-            return self.numberValue.charValue
-        }
-        set {
-            self.object = NSNumber(char: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(integer: newValue!)
+      } else {
+        self.object = NSNull()
+      }
     }
-    
-    public var uInt8: UInt8? {
-        get {
-            return self.number?.unsignedCharValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(unsignedChar: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var intValue: Int {
+    get {
+      return self.numberValue.integerValue
     }
-    
-    public var uInt8Value: UInt8 {
-        get {
-            return self.numberValue.unsignedCharValue
-        }
-        set {
-            self.object = NSNumber(unsignedChar: newValue)
-        }
+    set {
+      self.object = NSNumber(integer: newValue)
     }
-    
-    public var int16: Int16? {
-        get {
-            return self.number?.shortValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(short: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var uInt: UInt? {
+    get {
+      return self.number?.unsignedLongValue
     }
-    
-    public var int16Value: Int16 {
-        get {
-            return self.numberValue.shortValue
-        }
-        set {
-            self.object = NSNumber(short: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(unsignedLong: newValue!)
+      } else {
+        self.object = NSNull()
+      }
     }
-    
-    public var uInt16: UInt16? {
-        get {
-            return self.number?.unsignedShortValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(unsignedShort: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var uIntValue: UInt {
+    get {
+      return self.numberValue.unsignedLongValue
     }
-    
-    public var uInt16Value: UInt16 {
-        get {
-            return self.numberValue.unsignedShortValue
-        }
-        set {
-            self.object = NSNumber(unsignedShort: newValue)
-        }
+    set {
+      self.object = NSNumber(unsignedLong: newValue)
     }
-
-    public var int32: Int32? {
-        get {
-            return self.number?.intValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(int: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var int8: Int8? {
+    get {
+      return self.number?.charValue
     }
-    
-    public var int32Value: Int32 {
-        get {
-            return self.numberValue.intValue
-        }
-        set {
-            self.object = NSNumber(int: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(char: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
     }
-    
-    public var uInt32: UInt32? {
-        get {
-            return self.number?.unsignedIntValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(unsignedInt: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var int8Value: Int8 {
+    get {
+      return self.numberValue.charValue
     }
-    
-    public var uInt32Value: UInt32 {
-        get {
-            return self.numberValue.unsignedIntValue
-        }
-        set {
-            self.object = NSNumber(unsignedInt: newValue)
-        }
+    set {
+      self.object = NSNumber(char: newValue)
     }
-    
-    public var int64: Int64? {
-        get {
-            return self.number?.longLongValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(longLong: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var uInt8: UInt8? {
+    get {
+      return self.number?.unsignedCharValue
     }
-    
-    public var int64Value: Int64 {
-        get {
-            return self.numberValue.longLongValue
-        }
-        set {
-            self.object = NSNumber(longLong: newValue)
-        }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(unsignedChar: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
     }
-    
-    public var uInt64: UInt64? {
-        get {
-            return self.number?.unsignedLongLongValue
-        }
-        set {
-            if newValue != nil {
-                self.object = NSNumber(unsignedLongLong: newValue!)
-            } else {
-                self.object =  NSNull()
-            }
-        }
+  }
+  
+  public var uInt8Value: UInt8 {
+    get {
+      return self.numberValue.unsignedCharValue
     }
-    
-    public var uInt64Value: UInt64 {
-        get {
-            return self.numberValue.unsignedLongLongValue
-        }
-        set {
-            self.object = NSNumber(unsignedLongLong: newValue)
-        }
+    set {
+      self.object = NSNumber(unsignedChar: newValue)
     }
+  }
+  
+  public var int16: Int16? {
+    get {
+      return self.number?.shortValue
+    }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(short: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
+    }
+  }
+  
+  public var int16Value: Int16 {
+    get {
+      return self.numberValue.shortValue
+    }
+    set {
+      self.object = NSNumber(short: newValue)
+    }
+  }
+  
+  public var uInt16: UInt16? {
+    get {
+      return self.number?.unsignedShortValue
+    }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(unsignedShort: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
+    }
+  }
+  
+  public var uInt16Value: UInt16 {
+    get {
+      return self.numberValue.unsignedShortValue
+    }
+    set {
+      self.object = NSNumber(unsignedShort: newValue)
+    }
+  }
+  
+  public var int32: Int32? {
+    get {
+      return self.number?.intValue
+    }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(int: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
+    }
+  }
+  
+  public var int32Value: Int32 {
+    get {
+      return self.numberValue.intValue
+    }
+    set {
+      self.object = NSNumber(int: newValue)
+    }
+  }
+  
+  public var uInt32: UInt32? {
+    get {
+      return self.number?.unsignedIntValue
+    }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(unsignedInt: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
+    }
+  }
+  
+  public var uInt32Value: UInt32 {
+    get {
+      return self.numberValue.unsignedIntValue
+    }
+    set {
+      self.object = NSNumber(unsignedInt: newValue)
+    }
+  }
+  
+  public var int64: Int64? {
+    get {
+      return self.number?.longLongValue
+    }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(longLong: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
+    }
+  }
+  
+  public var int64Value: Int64 {
+    get {
+      return self.numberValue.longLongValue
+    }
+    set {
+      self.object = NSNumber(longLong: newValue)
+    }
+  }
+  
+  public var uInt64: UInt64? {
+    get {
+      return self.number?.unsignedLongLongValue
+    }
+    set {
+      if newValue != nil {
+        self.object = NSNumber(unsignedLongLong: newValue!)
+      } else {
+        self.object =  NSNull()
+      }
+    }
+  }
+  
+  public var uInt64Value: UInt64 {
+    get {
+      return self.numberValue.unsignedLongLongValue
+    }
+    set {
+      self.object = NSNumber(unsignedLongLong: newValue)
+    }
+  }
 }
 
 //MARK: - Comparable
 extension JSON: Comparable {}
 
 public func ==(lhs: JSON, rhs: JSON) -> Bool {
-    
-    switch (lhs.type, rhs.type) {
-    case (.Number, .Number):
-        return (lhs.object as NSNumber) == (rhs.object as NSNumber)
-    case (.String, .String):
-        return (lhs.object as String) == (rhs.object as String)
-    case (.Bool, .Bool):
-        return (lhs.object as Bool) == (rhs.object as Bool)
-    case (.Array, .Array):
-        return (lhs.object as NSArray) == (rhs.object as NSArray)
-    case (.Dictionary, .Dictionary):
-        return (lhs.object as NSDictionary) == (rhs.object as NSDictionary)
-    case (.Null, .Null):
-        return true
-    default:
-        return false
-    }
+  
+  switch (lhs.type, rhs.type) {
+  case (.Number, .Number):
+    return (lhs.object as NSNumber) == (rhs.object as NSNumber)
+  case (.String, .String):
+    return (lhs.object as String) == (rhs.object as String)
+  case (.Bool, .Bool):
+    return (lhs.object as Bool) == (rhs.object as Bool)
+  case (.Array, .Array):
+    return (lhs.object as NSArray) == (rhs.object as NSArray)
+  case (.Dictionary, .Dictionary):
+    return (lhs.object as NSDictionary) == (rhs.object as NSDictionary)
+  case (.Null, .Null):
+    return true
+  default:
+    return false
+  }
 }
 
 public func <=(lhs: JSON, rhs: JSON) -> Bool {
-    
-    switch (lhs.type, rhs.type) {
-    case (.Number, .Number):
-        return (lhs.object as NSNumber) <= (rhs.object as NSNumber)
-    case (.String, .String):
-        return (lhs.object as String) <= (rhs.object as String)
-    case (.Bool, .Bool):
-        return (lhs.object as Bool) == (rhs.object as Bool)
-    case (.Array, .Array):
-        return (lhs.object as NSArray) == (rhs.object as NSArray)
-    case (.Dictionary, .Dictionary):
-        return (lhs.object as NSDictionary) == (rhs.object as NSDictionary)
-    case (.Null, .Null):
-        return true
-    default:
-        return false
-    }
+  
+  switch (lhs.type, rhs.type) {
+  case (.Number, .Number):
+    return (lhs.object as NSNumber) <= (rhs.object as NSNumber)
+  case (.String, .String):
+    return (lhs.object as String) <= (rhs.object as String)
+  case (.Bool, .Bool):
+    return (lhs.object as Bool) == (rhs.object as Bool)
+  case (.Array, .Array):
+    return (lhs.object as NSArray) == (rhs.object as NSArray)
+  case (.Dictionary, .Dictionary):
+    return (lhs.object as NSDictionary) == (rhs.object as NSDictionary)
+  case (.Null, .Null):
+    return true
+  default:
+    return false
+  }
 }
 
 public func >=(lhs: JSON, rhs: JSON) -> Bool {
-    
-    switch (lhs.type, rhs.type) {
-    case (.Number, .Number):
-        return (lhs.object as NSNumber) >= (rhs.object as NSNumber)
-    case (.String, .String):
-        return (lhs.object as String) >= (rhs.object as String)
-    case (.Bool, .Bool):
-        return (lhs.object as Bool) == (rhs.object as Bool)
-    case (.Array, .Array):
-        return (lhs.object as NSArray) == (rhs.object as NSArray)
-    case (.Dictionary, .Dictionary):
-        return (lhs.object as NSDictionary) == (rhs.object as NSDictionary)
-    case (.Null, .Null):
-        return true
-    default:
-        return false
-    }
+  
+  switch (lhs.type, rhs.type) {
+  case (.Number, .Number):
+    return (lhs.object as NSNumber) >= (rhs.object as NSNumber)
+  case (.String, .String):
+    return (lhs.object as String) >= (rhs.object as String)
+  case (.Bool, .Bool):
+    return (lhs.object as Bool) == (rhs.object as Bool)
+  case (.Array, .Array):
+    return (lhs.object as NSArray) == (rhs.object as NSArray)
+  case (.Dictionary, .Dictionary):
+    return (lhs.object as NSDictionary) == (rhs.object as NSDictionary)
+  case (.Null, .Null):
+    return true
+  default:
+    return false
+  }
 }
 
 public func >(lhs: JSON, rhs: JSON) -> Bool {
-    
-    switch (lhs.type, rhs.type) {
-    case (.Number, .Number):
-        return (lhs.object as NSNumber) > (rhs.object as NSNumber)
-    case (.String, .String):
-        return (lhs.object as String) > (rhs.object as String)
-    default:
-        return false
-    }
+  
+  switch (lhs.type, rhs.type) {
+  case (.Number, .Number):
+    return (lhs.object as NSNumber) > (rhs.object as NSNumber)
+  case (.String, .String):
+    return (lhs.object as String) > (rhs.object as String)
+  default:
+    return false
+  }
 }
 
 public func <(lhs: JSON, rhs: JSON) -> Bool {
-    
-    switch (lhs.type, rhs.type) {
-    case (.Number, .Number):
-        return (lhs.object as NSNumber) < (rhs.object as NSNumber)
-    case (.String, .String):
-        return (lhs.object as String) < (rhs.object as String)
-    default:
-        return false
-    }
+  
+  switch (lhs.type, rhs.type) {
+  case (.Number, .Number):
+    return (lhs.object as NSNumber) < (rhs.object as NSNumber)
+  case (.String, .String):
+    return (lhs.object as String) < (rhs.object as String)
+  default:
+    return false
+  }
 }
 
+private let trueNumber = NSNumber(bool: true)
+private let falseNumber = NSNumber(bool: false)
+private let trueObjCType = String.fromCString(trueNumber.objCType)
+private let falseObjCType = String.fromCString(falseNumber.objCType)
+
 // MARK: - NSNumber: Comparable
+
 extension NSNumber: Comparable {
-    var isBool:Bool {
-        get {
-            switch String.fromCString(self.objCType)! {
-            case "c", "C":
-                if self.compare(NSNumber(bool: true)) == NSComparisonResult.OrderedSame || self.compare(NSNumber(bool: false)) == NSComparisonResult.OrderedSame {
-                    return true
-                } else {
-                    return false
-                }
-            default:
-                return false
-            }
-        }
+  var isBool:Bool {
+    get {
+      let objCType = String.fromCString(self.objCType)
+      if (self.compare(trueNumber) == NSComparisonResult.OrderedSame &&  objCType == trueObjCType) ||  (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
+        return true
+      } else {
+        return false
+      }
     }
+  }
 }
 
 public func ==(lhs: NSNumber, rhs: NSNumber) -> Bool {
-    switch (lhs.isBool, rhs.isBool) {
-    case (false, true):
-        return false
-    case (true, false):
-        return false
-    default:
-        return lhs.compare(rhs) == NSComparisonResult.OrderedSame
-    }
+  switch (lhs.isBool, rhs.isBool) {
+  case (false, true):
+    return false
+  case (true, false):
+    return false
+  default:
+    return lhs.compare(rhs) == NSComparisonResult.OrderedSame
+  }
 }
 
 public func !=(lhs: NSNumber, rhs: NSNumber) -> Bool {
-    return !(rhs == rhs)
+  return !(rhs == rhs)
 }
 
 public func <(lhs: NSNumber, rhs: NSNumber) -> Bool {
-    
-    switch (lhs.isBool, rhs.isBool) {
-    case (false, true):
-        return false
-    case (true, false):
-        return false
-    default:
-        return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
-    }
+  
+  switch (lhs.isBool, rhs.isBool) {
+  case (false, true):
+    return false
+  case (true, false):
+    return false
+  default:
+    return lhs.compare(rhs) == NSComparisonResult.OrderedAscending
+  }
 }
 
 public func >(lhs: NSNumber, rhs: NSNumber) -> Bool {
-    
-    switch (lhs.isBool, rhs.isBool) {
-    case (false, true):
-        return false
-    case (true, false):
-        return false
-    default:
-        return lhs.compare(rhs) == NSComparisonResult.OrderedDescending
-    }
+  
+  switch (lhs.isBool, rhs.isBool) {
+  case (false, true):
+    return false
+  case (true, false):
+    return false
+  default:
+    return lhs.compare(rhs) == NSComparisonResult.OrderedDescending
+  }
 }
 
 public func <=(lhs: NSNumber, rhs: NSNumber) -> Bool {
-
-    switch (lhs.isBool, rhs.isBool) {
-    case (false, true):
-        return false
-    case (true, false):
-        return false
-    default:
-        return lhs.compare(rhs) != NSComparisonResult.OrderedDescending
-    }
+  
+  switch (lhs.isBool, rhs.isBool) {
+  case (false, true):
+    return false
+  case (true, false):
+    return false
+  default:
+    return lhs.compare(rhs) != NSComparisonResult.OrderedDescending
+  }
 }
 
 public func >=(lhs: NSNumber, rhs: NSNumber) -> Bool {
-
-    switch (lhs.isBool, rhs.isBool) {
-    case (false, true):
-        return false
-    case (true, false):
-        return false
-    default:
-        return lhs.compare(rhs) != NSComparisonResult.OrderedAscending
-    }
+  
+  switch (lhs.isBool, rhs.isBool) {
+  case (false, true):
+    return false
+  case (true, false):
+    return false
+  default:
+    return lhs.compare(rhs) != NSComparisonResult.OrderedAscending
+  }
 }
 
 //MARK:- Unavailable
+
+@availability(*, unavailable, renamed="JSON")
+public typealias JSONValue = JSON
+
 extension JSON {
-    
-    @availability(*, unavailable, message="use 'init(_ object:AnyObject)' instead")
-    public init(object: AnyObject) {
-        self = JSON(object)
+  
+  @availability(*, unavailable, message="use 'init(_ object:AnyObject)' instead")
+  public init(object: AnyObject) {
+    self = JSON(object)
+  }
+  
+  @availability(*, unavailable, renamed="dictionaryObject")
+  public var dictionaryObjects: [String : AnyObject]? {
+    get { return self.dictionaryObject }
+  }
+  
+  @availability(*, unavailable, renamed="arrayObject")
+  public var arrayObjects: [AnyObject]? {
+    get { return self.arrayObject }
+  }
+  
+  @availability(*, unavailable, renamed="int8")
+  public var char: Int8? {
+    get {
+      return self.number?.charValue
     }
-    
-    @availability(*, unavailable, renamed="dictionaryObject")
-    public var dictionaryObjects: Dictionary<String, AnyObject>? {
-        get { return self.dictionaryObject }
+  }
+  
+  @availability(*, unavailable, renamed="int8Value")
+  public var charValue: Int8 {
+    get {
+      return self.numberValue.charValue
     }
-    
-    @availability(*, unavailable, renamed="arrayObject")
-    public var arrayObjects: Array<AnyObject>? {
-        get { return self.arrayObject }
+  }
+  
+  @availability(*, unavailable, renamed="uInt8")
+  public var unsignedChar: UInt8? {
+    get{
+      return self.number?.unsignedCharValue
     }
-    
-    @availability(*, unavailable, renamed="int8")
-    public var char: Int8? {
-        get {
-            return self.number?.charValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt8Value")
+  public var unsignedCharValue: UInt8 {
+    get{
+      return self.numberValue.unsignedCharValue
     }
-    
-    @availability(*, unavailable, renamed="int8Value")
-    public var charValue: Int8 {
-        get {
-            return self.numberValue.charValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="int16")
+  public var short: Int16? {
+    get{
+      return self.number?.shortValue
     }
-    
-    @availability(*, unavailable, renamed="uInt8")
-    public var unsignedChar: UInt8? {
-        get{
-            return self.number?.unsignedCharValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="int16Value")
+  public var shortValue: Int16 {
+    get{
+      return self.numberValue.shortValue
     }
-    
-    @availability(*, unavailable, renamed="uInt8Value")
-    public var unsignedCharValue: UInt8 {
-        get{
-            return self.numberValue.unsignedCharValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt16")
+  public var unsignedShort: UInt16? {
+    get{
+      return self.number?.unsignedShortValue
     }
-    
-    @availability(*, unavailable, renamed="int16")
-    public var short: Int16? {
-        get{
-            return self.number?.shortValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt16Value")
+  public var unsignedShortValue: UInt16 {
+    get{
+      return self.numberValue.unsignedShortValue
     }
-    
-    @availability(*, unavailable, renamed="int16Value")
-    public var shortValue: Int16 {
-        get{
-            return self.numberValue.shortValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="int")
+  public var long: Int? {
+    get{
+      return self.number?.longValue
     }
-    
-    @availability(*, unavailable, renamed="uInt16")
-    public var unsignedShort: UInt16? {
-        get{
-            return self.number?.unsignedShortValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="intValue")
+  public var longValue: Int {
+    get{
+      return self.numberValue.longValue
     }
-    
-    @availability(*, unavailable, renamed="uInt16Value")
-    public var unsignedShortValue: UInt16 {
-        get{
-            return self.numberValue.unsignedShortValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt")
+  public var unsignedLong: UInt? {
+    get{
+      return self.number?.unsignedLongValue
     }
-    
-    @availability(*, unavailable, renamed="int")
-    public var long: Int? {
-        get{
-            return self.number?.longValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uIntValue")
+  public var unsignedLongValue: UInt {
+    get{
+      return self.numberValue.unsignedLongValue
     }
-    
-    @availability(*, unavailable, renamed="intValue")
-    public var longValue: Int {
-        get{
-            return self.numberValue.longValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="int64")
+  public var longLong: Int64? {
+    get{
+      return self.number?.longLongValue
     }
-    
-    @availability(*, unavailable, renamed="uInt")
-    public var unsignedLong: UInt? {
-        get{
-            return self.number?.unsignedLongValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="int64Value")
+  public var longLongValue: Int64 {
+    get{
+      return self.numberValue.longLongValue
     }
-    
-    @availability(*, unavailable, renamed="uIntValue")
-    public var unsignedLongValue: UInt {
-        get{
-            return self.numberValue.unsignedLongValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt64")
+  public var unsignedLongLong: UInt64? {
+    get{
+      return self.number?.unsignedLongLongValue
     }
-    
-    @availability(*, unavailable, renamed="int64")
-    public var longLong: Int64? {
-        get{
-            return self.number?.longLongValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt64Value")
+  public var unsignedLongLongValue: UInt64 {
+    get{
+      return self.numberValue.unsignedLongLongValue
     }
-    
-    @availability(*, unavailable, renamed="int64Value")
-    public var longLongValue: Int64 {
-        get{
-            return self.numberValue.longLongValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="int")
+  public var integer: Int? {
+    get {
+      return self.number?.integerValue
     }
-    
-    @availability(*, unavailable, renamed="uInt64")
-    public var unsignedLongLong: UInt64? {
-        get{
-            return self.number?.unsignedLongLongValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="intValue")
+  public var integerValue: Int {
+    get {
+      return self.numberValue.integerValue
     }
-    
-    @availability(*, unavailable, renamed="uInt64Value")
-    public var unsignedLongLongValue: UInt64 {
-        get{
-            return self.numberValue.unsignedLongLongValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uInt")
+  public var unsignedInteger: Int? {
+    get {
+      return self.number?.unsignedIntegerValue
     }
-    
-    @availability(*, unavailable, renamed="int")
-    public var integer: Int? {
-        get {
-            return self.number?.integerValue
-        }
+  }
+  
+  @availability(*, unavailable, renamed="uIntValue")
+  public var unsignedIntegerValue: Int {
+    get {
+      return self.numberValue.unsignedIntegerValue
     }
-    
-    @availability(*, unavailable, renamed="intValue")
-    public var integerValue: Int {
-        get {
-            return self.numberValue.integerValue
-        }
-    }
-    
-    @availability(*, unavailable, renamed="uInt")
-    public var unsignedInteger: Int? {
-        get {
-            return self.number?.unsignedIntegerValue
-        }
-    }
-    
-    @availability(*, unavailable, renamed="uIntValue")
-    public var unsignedIntegerValue: Int {
-        get {
-            return self.numberValue.unsignedIntegerValue
-        }
-    }
+  }
 }

@@ -32,7 +32,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
   private func setupUI() {
     self.layoutMargins = UIEdgeInsetsZero
     let image = UIImage(named: "roman")
-    personImageView.image = image.roundedImage()
+    personImageView.image = image?.roundedImage()
   }
 }
 

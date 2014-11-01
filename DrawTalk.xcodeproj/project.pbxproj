@@ -20,6 +20,8 @@
 		A11E8F3F19E88CEE0055772A /* ArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */; };
 		A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */; };
 		A14549D519F2C8B4000513A6 /* DWTColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14549D419F2C8B4000513A6 /* DWTColorTests.swift */; };
+		A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */; };
+		A14C1FCA1A0483CE0035A5F6 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC91A0483CE0035A5F6 /* Operations.swift */; };
 		A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */; };
 		A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */; };
 		A19C69EC19F9DF4600848370 /* ContactCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */; };
@@ -35,6 +37,7 @@
 		A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */; };
 		A1DACD3F19FC3F9700D02B5D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */; };
 		A1E33D141A0470060039339E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E33D131A0470060039339E /* MainViewController.swift */; };
+		A1E33D241A047C220039339E /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E33D231A047C220039339E /* Alamofire.swift */; };
 		A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */; };
 		A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539919FC27F900DBABE7 /* Contact.swift */; };
 		A1EF259F19F2CC2D00F52A85 /* PathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* PathJson.swift */; };
@@ -78,6 +81,8 @@
 		A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		A14549D419F2C8B4000513A6 /* DWTColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTColorTests.swift; sourceTree = "<group>"; };
 		A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawTalkTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		A14C1FC91A0483CE0035A5F6 /* Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
 		A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewController.swift; sourceTree = "<group>"; };
 		A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionDataSource.swift; sourceTree = "<group>"; };
 		A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewController.xib; sourceTree = "<group>"; };
@@ -93,6 +98,7 @@
 		A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A1E33D131A0470060039339E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A1E33D231A047C220039339E /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactABRecord.swift; sourceTree = "<group>"; };
 		A1E6539919FC27F900DBABE7 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		A1EF259E19F2CC2D00F52A85 /* PathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathJson.swift; sourceTree = "<group>"; };
@@ -170,14 +176,15 @@
 			children = (
 				A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */,
 				A19C69E819F9DB4B00848370 /* Assets */,
+				A1D269CB19F31774004C82C6 /* Constants.swift */,
 				A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */,
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
-				A1D269CB19F31774004C82C6 /* Constants.swift */,
-				A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */,
 				A11E8F4219E8A5940055772A /* Extensions */,
 				A19C69E719F9DB1F00848370 /* Functional */,
 				A1D269CD19F319FD004C82C6 /* Messaging */,
 				A185DD4C19F2419E0030415E /* Models */,
+				A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */,
+				A14C1FC61A0481600035A5F6 /* Operations */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
 				A1D269CE19F31B27004C82C6 /* ThirdParty */,
 				A1E6539B19FC2BB500DBABE7 /* Utilities */,
@@ -220,6 +227,15 @@
 				A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		A14C1FC61A0481600035A5F6 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */,
+				A14C1FC91A0483CE0035A5F6 /* Operations.swift */,
+			);
+			name = Operations;
 			sourceTree = "<group>";
 		};
 		A185DD4C19F2419E0030415E /* Models */ = {
@@ -301,6 +317,7 @@
 		A1D269CE19F31B27004C82C6 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				A1E33D231A047C220039339E /* Alamofire.swift */,
 				A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */,
 			);
 			name = ThirdParty;
@@ -515,8 +532,10 @@
 				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
 				A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */,
 				A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */,
+				A1E33D241A047C220039339E /* Alamofire.swift in Sources */,
 				A1EF25A519F2CF3C00F52A85 /* Drawing.swift in Sources */,
 				A1EF25A119F2CC3500F52A85 /* Path.swift in Sources */,
+				A14C1FCA1A0483CE0035A5F6 /* Operations.swift in Sources */,
 				A1D269CA19F313A1004C82C6 /* MqqtClientWrapper.swift in Sources */,
 				A19C69F019F9E19C00848370 /* ContactCollectionViewCell.swift in Sources */,
 				A1E33D141A0470060039339E /* MainViewController.swift in Sources */,
@@ -526,6 +545,7 @@
 				A1EF25A319F2CF3400F52A85 /* DrawingJson.swift in Sources */,
 				A11E8F3C19E8895B0055772A /* ArtboardViewController.swift in Sources */,
 				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
+				A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
 				A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */,
 			);

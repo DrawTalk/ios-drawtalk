@@ -23,7 +23,7 @@ extension UIColor {
     var blue:CGFloat  = 0.0
     var alpha:CGFloat = 1.0
     
-    let scanner = NSScanner.scannerWithString(hex)
+    let scanner = NSScanner(string: hex)
     var hexValue: UInt32 = 0
     if scanner.scanHexInt(&hexValue) {
       if countElements(hex) == 8 {

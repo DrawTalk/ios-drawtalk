@@ -17,6 +17,9 @@ class Constants {
   class var port: UInt16 {
     return 16056
   }
+  class var apiUrl: String {
+    return "http://www.roman-i.com/drawtalk/api"
+  }
 }
 
 func DWTLocalizedStringWithDefaultValue(key: String, #tableName: String, #bundle: NSBundle, #value: String, #comment: String) -> String {
