@@ -148,6 +148,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A100D2851A06BD3200664C66 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A1D269CB19F31774004C82C6 /* Constants.swift */,
+				A19C69E819F9DB4B00848370 /* Assets */,
+				A11E8F4219E8A5940055772A /* Extensions */,
+				A19C69E719F9DB1F00848370 /* Functional */,
+				A100D2861A06BD6E00664C66 /* i18n */,
+				A1D269CD19F319FD004C82C6 /* Messaging */,
+				A185DD4C19F2419E0030415E /* Models */,
+				A14C1FC61A0481600035A5F6 /* Operations */,
+				A10935F019F4BF0C00D618EA /* Views */,
+				A1E6539B19FC2BB500DBABE7 /* Utilities */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		A100D2861A06BD6E00664C66 /* i18n */ = {
+			isa = PBXGroup;
+			children = (
+				A10658B719FD7E5800618C15 /* Localizable.strings */,
+				A10658C419FD87B700618C15 /* Localizable.stringsdict */,
+			);
+			name = i18n;
+			sourceTree = "<group>";
+		};
 		A10935F019F4BF0C00D618EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,19 +208,11 @@
 			isa = PBXGroup;
 			children = (
 				A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */,
-				A19C69E819F9DB4B00848370 /* Assets */,
-				A1D269CB19F31774004C82C6 /* Constants.swift */,
+				A100D2851A06BD3200664C66 /* Core */,
 				A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */,
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
-				A11E8F4219E8A5940055772A /* Extensions */,
-				A19C69E719F9DB1F00848370 /* Functional */,
-				A1D269CD19F319FD004C82C6 /* Messaging */,
-				A185DD4C19F2419E0030415E /* Models */,
-				A14C1FC61A0481600035A5F6 /* Operations */,
 				A11E8F0B19E882E70055772A /* Supporting Files */,
 				A1D269CE19F31B27004C82C6 /* ThirdParty */,
-				A1E6539B19FC2BB500DBABE7 /* Utilities */,
-				A10935F019F4BF0C00D618EA /* Views */,
 			);
 			path = DrawTalk;
 			sourceTree = "<group>";
@@ -203,8 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				A11E8F0C19E882E70055772A /* Info.plist */,
-				A10658B719FD7E5800618C15 /* Localizable.strings */,
-				A10658C419FD87B700618C15 /* Localizable.stringsdict */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
