@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class ArtboardViewController : UIViewController {
+public class ArtboardViewController : UIViewController, MessageCollectionDataSourceDelegate {
 
   @IBOutlet weak var messageContainerView: UIView!
   @IBOutlet weak var canvasView: CanvasView!
@@ -39,9 +39,15 @@ public class ArtboardViewController : UIViewController {
     messageController.didMoveToParentViewController(self)
     messageContainerView.backgroundColor = UIColor.redColor()
     
+    messageController.messageCollectionDataSource.messageCollectionDelegate = self
+    
     //canvasView.viewOnly = true
     
     observerMessagingEvent()
+  }
+  
+  func didSelectMessage(drawing: Drawing) {
+    canvasView.replay(drawing, animated: true)
   }
   
   

@@ -58,6 +58,8 @@ public class CanvasView: UIView {
   private var currPath: DrawTalk.Path?
   private var paths: [DrawTalk.Path] = []
   
+  private var stopped = false
+  
   var viewOnly: Bool = false
   
   override init(frame: CGRect) {
@@ -102,6 +104,8 @@ public class CanvasView: UIView {
   }
   
   override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    super.touchesBegan(touches, withEvent: event)
+    
     if viewOnly {
       return
     }
@@ -118,6 +122,8 @@ public class CanvasView: UIView {
   }
   
   override public func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+    super.touchesMoved(touches, withEvent: event)
+    
     if viewOnly {
       return
     }
@@ -145,6 +151,8 @@ public class CanvasView: UIView {
   }
   
   override public func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    super.touchesEnded(touches, withEvent: event)
+    
     if viewOnly {
       return
     }
@@ -183,6 +191,16 @@ public class CanvasView: UIView {
     drawingImageView.image = nil
     copyImageView.image = nil
     copyImageView.layer.sublayers = nil
+    
+    /*
+    if let layers = copyImageView.layer.sublayers {
+      for layer: AnyObject in layers {
+        if layer is CAShapeLayer {
+          (layer as CAShapeLayer).removeAllAnimations()
+        }
+      }
+    }
+    */
   }
   
   func replay() {

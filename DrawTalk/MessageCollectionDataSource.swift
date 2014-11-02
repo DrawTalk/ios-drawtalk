@@ -11,10 +11,16 @@ import UIKit
 
 private let kNumberOfSections = 1
 
+protocol MessageCollectionDataSourceDelegate {
+  func didSelectMessage(drawing: Drawing)
+}
+
 class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
   private var messageCollectionView: UICollectionView!
   private var messages: [Drawing?]!
+  
+  var messageCollectionDelegate: MessageCollectionDataSourceDelegate?
   
   init(collectionView: UICollectionView) {
     super.init()
@@ -30,7 +36,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func loadWithMessages(messages: [Drawing]?) {
-    self.messages = messages//.replaceRange(Range<Int>(start: 0, end: self.messageItems.count-1), with: messageItems)
+    self.messages = messages
     messageCollectionView.reloadData()
   }
   
@@ -59,6 +65,10 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
       
       var drawing = messages[indexPath.row] as Drawing!
       cell.bindObject(drawing)
+      cell.tapHandler = { (drawing: Drawing) in
+        self.messageCollectionDelegate?.didSelectMessage(drawing)
+        return
+      }
       
       return cell
   }

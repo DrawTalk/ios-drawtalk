@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
+
 class MessageCollectionViewController : UIViewController, UICollectionViewDelegate {
   
   @IBOutlet weak var messageCollectionView: UICollectionView!
-  
+
   private(set) var messageCollectionDataSource: MessageCollectionDataSource!
   
   class func controller() -> MessageCollectionViewController {

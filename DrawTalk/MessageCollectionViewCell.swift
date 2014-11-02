@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 class MessageCollectionViewCell: UICollectionViewCell {
-  
-  //@IBOutlet weak var personImageView: UIImageView!
+
   @IBOutlet weak var canvasView: CanvasView!
   @IBOutlet weak var pressableControl: PressableControl!
   
   private var drawing: Drawing!
+  
+  var tapHandler: ((Drawing) -> Void)?
   
   class var reuseIdentifier: String {
     return "MessageCollectionViewCell"
@@ -30,6 +31,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
     canvasView.viewOnly = true
     setupUI()
     userInteractionEnabled = true
+    canvasView.userInteractionEnabled = false
   }
   
   override func prepareForReuse() {
@@ -42,12 +44,14 @@ class MessageCollectionViewCell: UICollectionViewCell {
   }
   
   func bindObject(drawing: Drawing) {
-    var d = drawing.normalizedToSize(canvasView.frame.size)
-    canvasView.replay(d, animated: false)
+    // TODO: cache the normalized view, so it's not calculated every time the cell comes
+    // into view
+    self.drawing = drawing.normalizedToSize(canvasView.frame.size)
+    canvasView.replay(self.drawing, animated: false)
   }
   
   @IBAction func pressableControlPressed(sender : AnyObject) {
-    println("here I am")
+    tapHandler?(self.drawing)
   }
 }
 
