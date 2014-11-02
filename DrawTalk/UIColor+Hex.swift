@@ -79,9 +79,7 @@ extension UIColor {
   // returns RGBA format for color string
   public func hex() -> String? {
     let rgba = rgbaValues()
-    
-    println(rgba.red, rgba.green, rgba.blue, rgba.alpha)
-    
+
     var hexString = String(format: "#%0.2X%0.2X%0.2X%0.2X",
       Int(rgba.red * 255),
       Int(rgba.green * 255),
@@ -93,10 +91,10 @@ extension UIColor {
   
   public func rgbaValues() -> RGBA {
     let components = CGColorGetComponents(self.CGColor);
-    let red = components[0]
-    let green = components[1]
-    let blue = components[2]
-    let alpha = CGColorGetAlpha(self.CGColor)
+    let red = min(components[0], 1)
+    let green = min(components[1], 1)
+    let blue = min(components[2], 1)
+    let alpha = min(CGColorGetAlpha(self.CGColor), 1)
     
     return RGBA(red: red, green: green, blue: blue, alpha: alpha)
   }

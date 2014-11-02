@@ -14,29 +14,18 @@ private struct Line {
   let p2: CGPoint
   
   // Slope
-  var m: CGFloat {
-    get {
-      return _m
-    }
-  }
+  private(set) var m: CGFloat
   
-  // y-intercept
-  var b: CGFloat {
-    get {
-      return _b
-    }
-  }
-  
+  // Y-intercept
+  private(set) var b: CGFloat
+
   private init(p1: CGPoint, p2: CGPoint) {
     self.p1 = p1
     self.p2 = p2
     
-    _m = (p2.y - p1.y) / (p2.x - p1.x)
-    _b = p1.y - _m * p1.x
+    m = (p2.y - p1.y) / (p2.x - p1.x)
+    b = p1.y - m * p1.x
   }
-  
-  private var _m: CGFloat = 0
-  private var _b: CGFloat = 0
 }
 
 
@@ -62,6 +51,8 @@ public class CanvasView: UIView {
   
   var viewOnly: Bool = false
   
+  // MARK: - Initializers
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
@@ -76,6 +67,8 @@ public class CanvasView: UIView {
     super.init(coder: aDecoder)
     setupUI()
   }
+  
+  // MARK: - Setup
 
   private func setupUI() {
     contentView = UIView()
@@ -102,6 +95,8 @@ public class CanvasView: UIView {
   override public func updateConstraints() {
     super.updateConstraints()
   }
+  
+  // MARK: - Touch handling
   
   override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
     super.touchesBegan(touches, withEvent: event)
@@ -131,8 +126,10 @@ public class CanvasView: UIView {
     let touch : UITouch = touches.anyObject() as UITouch
     let currentPoint : CGPoint = touch.locationInView(self)
     
-    UIGraphicsBeginImageContext(self.frame.size)
-    drawingImageView.image?.drawInRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
+    let size = frame.size
+    
+    UIGraphicsBeginImageContext(size)
+    drawingImageView.image?.drawInRect(CGRectMake(0, 0, size.width, size.height))
     CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y)
     CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y)
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound)
@@ -157,8 +154,10 @@ public class CanvasView: UIView {
       return
     }
     
-    UIGraphicsBeginImageContext(self.frame.size);
-    drawingImageView.image?.drawInRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
+    let size = frame.size
+    
+    UIGraphicsBeginImageContext(frame.size);
+    drawingImageView.image?.drawInRect(CGRectMake(0, 0, size.width, size.height))
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
     CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
     CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
@@ -170,17 +169,35 @@ public class CanvasView: UIView {
     UIGraphicsEndImageContext()
     
     UIGraphicsBeginImageContext(copyImageView.frame.size)
-    copyImageView.image?.drawInRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
-    drawingImageView.image?.drawInRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height), blendMode: kCGBlendModeNormal, alpha: opacity)
+    copyImageView.image?.drawInRect(CGRectMake(0, 0, size.width, size.height), blendMode: kCGBlendModeNormal, alpha: 1.0)
+    drawingImageView.image?.drawInRect(CGRectMake(0, 0, size.width, size.height), blendMode: kCGBlendModeNormal, alpha: opacity)
     copyImageView.image = UIGraphicsGetImageFromCurrentImageContext()
     drawingImageView.image = nil
     UIGraphicsEndImageContext()
     
+    // Even split the duration.
+    // This isn't really accurate, but close enough.
     if var p: DrawTalk.Path = currPath {
       p.duration = (NSDate.timeIntervalSinceReferenceDate() - p.duration) / Double(p.coords.count)
       paths.append(p)
     }
   }
+}
+
+// MARK: - Conversion
+
+extension CanvasView {
+  
+  func drawing() -> Drawing {
+    let size = self.frame.size
+    let drawing = Drawing(paths: paths, grid: size)
+    return drawing
+  }
+}
+
+// MARK: - Playback
+
+extension CanvasView {
   
   func reset() {
     paths.removeAll(keepCapacity: false)
@@ -194,11 +211,11 @@ public class CanvasView: UIView {
     
     /*
     if let layers = copyImageView.layer.sublayers {
-      for layer: AnyObject in layers {
-        if layer is CAShapeLayer {
-          (layer as CAShapeLayer).removeAllAnimations()
-        }
-      }
+    for layer: AnyObject in layers {
+    if layer is CAShapeLayer {
+    (layer as CAShapeLayer).removeAllAnimations()
+    }
+    }
     }
     */
   }
@@ -283,7 +300,7 @@ public class CanvasView: UIView {
     
     next(0, 0)
   }
-
+  
   private func drawPath(path: UIBezierPath, brush: CGFloat, color: UIColor, duration: CFTimeInterval, animated: Bool, completion: (() -> Void)?) {
     // 2) Create a shape layer for above created path.
     var layer: CAShapeLayer = CAShapeLayer()
@@ -316,11 +333,5 @@ public class CanvasView: UIView {
     } else {
       completion?()
     }
-  }
-  
-  func drawing() -> Drawing {
-    let size = self.frame.size
-    let drawing = Drawing(paths: paths, grid: size)
-    return drawing
   }
 }

@@ -14,7 +14,8 @@ class MessageCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var canvasView: CanvasView!
   @IBOutlet weak var pressableControl: PressableControl!
   
-  private var drawing: Drawing!
+  private var originalDrawing: Drawing!
+  private var scaledDrawing: Drawing!
   
   var tapHandler: ((Drawing) -> Void)?
   
@@ -24,6 +25,10 @@ class MessageCollectionViewCell: UICollectionViewCell {
   
   class var cellNib: UINib {
     return UINib(nibName: "MessageCollectionViewCell", bundle: nil)
+  }
+  
+  class var cellSize: CGSize {
+    return CGSizeMake(80, 80)
   }
   
   override func awakeFromNib() {
@@ -39,6 +44,9 @@ class MessageCollectionViewCell: UICollectionViewCell {
   
   private func setupUI() {
     layoutMargins = UIEdgeInsetsZero
+    pressableControl.backgroundColor = UIColor.grayColor()
+    pressableControl.round(pressableControl.frame.size.width)
+    canvasView.backgroundColor = UIColor.yellowColor()
     //let image = UIImage(named: "roman")
     //personImageView.image = image?.roundedImage()
   }
@@ -46,12 +54,23 @@ class MessageCollectionViewCell: UICollectionViewCell {
   func bindObject(drawing: Drawing) {
     // TODO: cache the normalized view, so it's not calculated every time the cell comes
     // into view
-    self.drawing = drawing.normalizedToSize(canvasView.frame.size)
-    canvasView.replay(self.drawing, animated: false)
+    originalDrawing = drawing
+    scaledDrawing = drawing.normalizedToSize(canvasView.frame.size)
+    canvasView.replay(scaledDrawing, animated: false)
   }
   
   @IBAction func pressableControlPressed(sender : AnyObject) {
-    tapHandler?(self.drawing)
+    tapHandler?(originalDrawing)
+  }
+}
+
+extension UIView {
+  func round(diameter: CGFloat) {
+    //let savedCenter = self.center
+    //let f = CGRectMake(self.frame.origin.x, self.frame.origin.y, diameter, diameter)
+    //self.frame = f
+    self.layer.cornerRadius = diameter / 2.0
+    //self.center = savedCenter
   }
 }
 

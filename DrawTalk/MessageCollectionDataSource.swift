@@ -55,7 +55,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-      return CGSizeMake(80, 80)
+      return MessageCollectionViewCell.cellSize
   }
   
   func collectionView(collectionView: UICollectionView,
