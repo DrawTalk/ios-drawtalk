@@ -24,11 +24,25 @@ class MessageCollectionViewController : UIViewController, UICollectionViewDelega
     super.viewDidLoad()
     
     setupMessageCollectionView()
+    observerMessagingEvent()
+  }
+  
+  private func observerMessagingEvent() {
+    MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
+      let chatMessage = event as ChatMessage
+      var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
+      var drawingJson =  DrawingJson(json: d)
+      dispatch_async(dispatch_get_main_queue(), {
+        self.messageCollectionDataSource.addDrawing(drawingJson.toDrawing())
+        //vc.canvasView.reset()
+        //vc.canvasView.replay(drawingJson.toDrawing())
+      })
+    })
   }
   
   private func setupMessageCollectionView() {
     messageCollectionDataSource = MessageCollectionDataSource(collectionView: messageCollectionView)
     messageCollectionView.dataSource = messageCollectionDataSource;
-    messageCollectionDataSource.loadWithMessages([1,2,3,4,5,6,7,8,9,10])
+    messageCollectionDataSource.loadWithMessages([nil])
   }
 }

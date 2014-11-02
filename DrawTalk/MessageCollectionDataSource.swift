@@ -9,14 +9,16 @@
 import Foundation
 import UIKit
 
+private let kNumberOfSections = 1
+
 class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
   private var messageCollectionView: UICollectionView!
-  private var messages: [Int]!
+  private var messages: [Drawing?]!
   
   init(collectionView: UICollectionView) {
     super.init()
-    messages = []
+    messages = [nil]
     messageCollectionView = collectionView
     
     var flowLayout = UICollectionViewFlowLayout()
@@ -27,8 +29,8 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
     registerCells()
   }
   
-  func loadWithMessages(messages: [Int]?) {
-    self.messages = messages;
+  func loadWithMessages(messages: [Drawing?]) {
+    self.messages = messages//.replaceRange(Range<Int>(start: 0, end: self.messageItems.count-1), with: messageItems)
     messageCollectionView.reloadData()
   }
   
@@ -37,11 +39,11 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    return 1
+    return kNumberOfSections
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return messages.count + 1
   }
   
   func collectionView(collectionView: UICollectionView,
@@ -77,5 +79,12 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
     layout collectionViewLayout: UICollectionViewLayout,
     minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
       return 0
+  }
+  
+  func addDrawing(drawing: Drawing?) {
+    messages.append(drawing)
+    let lastIndexPath = NSIndexPath(forRow: messages.count, inSection: 0)
+    messageCollectionView.insertItemsAtIndexPaths([lastIndexPath])
+    messageCollectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
   }
 }

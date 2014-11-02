@@ -30,12 +30,12 @@ public class ChatMessage: MessageEvent {
     self.state = state
   }
   
-  public class func outgoing(payload: String) -> ChatMessage {
+  public class func outgoing(payload: String, channel: String) -> ChatMessage {
     var message = ChatMessage(
       text: payload,
-      clientId: UIDevice.currentDevice().identifierForVendor.UUIDString,
+      clientId: Constants.deviceId,
       id: NSUUID().UUIDString,
-      channel: "hello/world",
+      channel: Constants.topicPrefix + channel,
       state: MessageState.OUTGOING)
     
     return message
@@ -46,12 +46,13 @@ public class ChatMessage: MessageEvent {
     let clientId = json["clientId"].stringValue
     let id = json["id"].stringValue
     let text = json["message"].stringValue
+    let channel = json["channel"].stringValue
     
     var message = ChatMessage(
       text: text,
       clientId: clientId,
       id: id,
-      channel: "hello/world",
+      channel: channel,
       state: MessageState.INCOMING)
     
     return message

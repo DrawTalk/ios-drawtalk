@@ -58,6 +58,8 @@ public class CanvasView: UIView {
   private var currPath: DrawTalk.Path?
   private var paths: [DrawTalk.Path] = []
   
+  var viewOnly: Bool = false
+  
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupUI()
@@ -90,6 +92,10 @@ public class CanvasView: UIView {
   }
   
   override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    if viewOnly {
+      return
+    }
+    
     let touch : UITouch = touches.anyObject() as UITouch
     lastPoint = touch.locationInView(self)
     
@@ -102,6 +108,10 @@ public class CanvasView: UIView {
   }
   
   override public func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+    if viewOnly {
+      return
+    }
+    
     let touch : UITouch = touches.anyObject() as UITouch
     let currentPoint : CGPoint = touch.locationInView(self)
     
@@ -125,6 +135,10 @@ public class CanvasView: UIView {
   }
   
   override public func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    if viewOnly {
+      return
+    }
+    
     UIGraphicsBeginImageContext(self.frame.size);
     drawingImageView.image?.drawInRect(CGRectMake(0, 0, self.frame.size.width, self.frame.size.height))
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);

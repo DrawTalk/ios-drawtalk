@@ -11,7 +11,7 @@ import UIKit
 
 public class MqttClientWrapper {
   
-  private let topic = "hello/world"
+  private let topic = "6504047096"
   private let client: MQTTClient
   private let clientId: String
   
@@ -38,12 +38,12 @@ public class MqttClientWrapper {
       case ConnectionAccepted.value:
         println("successfully connected")
       default:
-        println("wtf is the code!")
+        println("wtf is this code!")
         break
       }
     }
-    
-    client.subscribe(topic, withCompletionHandler: { ([AnyObject]!) -> Void in
+
+    client.subscribe(Constants.topicPrefix + "6504047096", withCompletionHandler: { ([AnyObject]!) -> Void in
       println("subscribed to the topic")
     })
     
@@ -54,9 +54,9 @@ public class MqttClientWrapper {
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       let m = ChatMessage.incoming(message.payload)
-      if m.clientId != self.clientId {
+      //if m.clientId != self.clientId {
         MessageEventBus.defaultBus.post(kMessageEventIncoming, event: m)
-      }
+      //}
     }
   }
   

@@ -25,17 +25,6 @@ public class ArtboardViewController : UIViewController {
   
   public class func controller() -> ArtboardViewController {
     let vc = ArtboardViewController(nibName:"ArtboardViewController", bundle: nil)
-
-    MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
-      let chatMessage = event as ChatMessage
-      var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
-      var drawingJson =  DrawingJson(json: d)
-      dispatch_async(dispatch_get_main_queue(), {
-        vc.canvasView.reset()
-        vc.canvasView.replay(drawingJson.toDrawing())
-      })
-    })
-    
     return vc
   }
   
@@ -47,6 +36,8 @@ public class ArtboardViewController : UIViewController {
     messageContainerView.addSubview(messageController.view)
     messageController.didMoveToParentViewController(self)
     messageContainerView.backgroundColor = UIColor.redColor()
+    
+    canvasView.viewOnly = true
   }
   
   @IBAction func resetButtonTapped(sender : AnyObject) {
@@ -151,7 +142,8 @@ public class ArtboardViewController : UIViewController {
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let drawingJson = DrawingJson(drawing: canvasView.drawing())
-    var message = ChatMessage.outgoing(drawingJson.jsonString())
+    // 4086855484
+    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: "6504047096")
     
     MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
     
