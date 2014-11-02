@@ -60,7 +60,7 @@ class ContactCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-      return UIEdgeInsetsMake(0, 0, 1, 0)
+      return UIEdgeInsetsMake(0, 0, 0, 0)
   }
   
   func collectionView(collectionView: UICollectionView,

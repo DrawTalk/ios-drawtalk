@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
+		A100D2841A05E31900664C66 /* PressableControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2831A05E31900664C66 /* PressableControl.swift */; };
 		A10658B519FD7E5800618C15 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A10658B719FD7E5800618C15 /* Localizable.strings */; };
 		A10658C219FD87B700618C15 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = A10658C419FD87B700618C15 /* Localizable.stringsdict */; };
 		A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10935F119F4BF2000D618EA /* CanvasView.swift */; };
@@ -65,6 +66,7 @@
 		3D961AF35B16402E93D17D13 /* Pods-DrawTalkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalkTests.xcconfig"; path = "Pods/Pods-DrawTalkTests.xcconfig"; sourceTree = "<group>"; };
 		73856A6D01F8473F8290FCB1 /* Pods-DrawTalk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.xcconfig"; path = "Pods/Pods-DrawTalk.xcconfig"; sourceTree = "<group>"; };
 		8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A100D2831A05E31900664C66 /* PressableControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressableControl.swift; sourceTree = "<group>"; };
 		A10658B619FD7E5800618C15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A10658C319FD87B700618C15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		A10935F119F4BF2000D618EA /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				A10935F119F4BF2000D618EA /* CanvasView.swift */,
+				A100D2831A05E31900664C66 /* PressableControl.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				A1DAEF671A059ABA00287E97 /* SendVerificationCodeOperation.swift in Sources */,
 				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
 				A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */,
+				A100D2841A05E31900664C66 /* PressableControl.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
 				A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */,
 			);

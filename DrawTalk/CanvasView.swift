@@ -60,6 +60,16 @@ public class CanvasView: UIView {
   
   var viewOnly: Bool = false
   
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setupUI()
+  }
+  
+  override init() {
+    super.init()
+    setupUI()
+  }
+  
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupUI()
@@ -176,15 +186,15 @@ public class CanvasView: UIView {
   }
   
   func replay() {
-    replay(paths)
+    replay(paths, animated: true)
   }
   
-  func replay(drawing: Drawing) {
+  func replay(drawing: Drawing, animated: Bool) {
     let newDrawing = drawing.normalizedToSize(copyImageView.frame.size)
-    replay(newDrawing.paths)
+    replay(newDrawing.paths, animated: animated)
   }
   
-  func replay(paths: [DrawTalk.Path]) {
+  private func replay(paths: [DrawTalk.Path], animated: Bool) {
     clear()
     
     var path: UIBezierPath = UIBezierPath()
@@ -239,11 +249,12 @@ public class CanvasView: UIView {
           path.addLineToPoint(point)
         }
         
-        self.animatePath(
+        self.drawPath(
           path,
           brush: p.brush,
           color: p.color,//index % 2 == 0 ? p.color : UIColor.redColor(),
           duration: p.duration,
+          animated: animated,
           completion: { () -> Void in
             next(section, index+1)
         })
@@ -254,8 +265,8 @@ public class CanvasView: UIView {
     
     next(0, 0)
   }
-  
-  private func animatePath(path: UIBezierPath, brush: CGFloat, color: UIColor, duration: CFTimeInterval, completion: (() -> Void)?) {
+
+  private func drawPath(path: UIBezierPath, brush: CGFloat, color: UIColor, duration: CFTimeInterval, animated: Bool, completion: (() -> Void)?) {
     // 2) Create a shape layer for above created path.
     var layer: CAShapeLayer = CAShapeLayer()
     layer.strokeColor = color.CGColor
@@ -267,22 +278,26 @@ public class CanvasView: UIView {
     layer.path = path.CGPath
     copyImageView.layer.addSublayer(layer)
     
-    // 3) Animate the path
-    CATransaction.begin()
-    
-    CATransaction.setCompletionBlock { () -> Void in
-      if completion != nil {
-        completion!()
+    if animated {
+      // 3) Animate the path
+      CATransaction.begin()
+      
+      CATransaction.setCompletionBlock { () -> Void in
+        if completion != nil {
+          completion!()
+        }
       }
+      var drawAnimation: CABasicAnimation = CABasicAnimation(keyPath:"strokeEnd")
+      drawAnimation.duration = duration
+      drawAnimation.fromValue = 0
+      drawAnimation.toValue = 1.0
+      drawAnimation.timingFunction = CAMediaTimingFunction(name: "linear")
+      layer.addAnimation(drawAnimation, forKey:"drawLineAnimation")
+      
+      CATransaction.commit()
+    } else {
+      completion?()
     }
-    var drawAnimation: CABasicAnimation = CABasicAnimation(keyPath:"strokeEnd")
-    drawAnimation.duration = duration
-    drawAnimation.fromValue = 0
-    drawAnimation.toValue = 1.0
-    drawAnimation.timingFunction = CAMediaTimingFunction(name: "linear")
-    layer.addAnimation(drawAnimation, forKey:"drawLineAnimation")
-    
-    CATransaction.commit()
   }
   
   func drawing() -> Drawing {

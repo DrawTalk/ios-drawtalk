@@ -13,7 +13,7 @@ class ContactCollectionViewController : UIViewController, UICollectionViewDelega
   
   @IBOutlet weak var mainCollectionView: UICollectionView!
   
-  private var mainCollectionDataSource: ContactCollectionDataSource!
+  private(set) var mainCollectionDataSource: ContactCollectionDataSource!
   
   class func controller() -> ContactCollectionViewController {
     let vc = ContactCollectionViewController(nibName:"ContactCollectionViewController", bundle: nil)

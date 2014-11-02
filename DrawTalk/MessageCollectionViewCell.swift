@@ -11,28 +11,43 @@ import UIKit
 
 class MessageCollectionViewCell: UICollectionViewCell {
   
-  @IBOutlet weak var personImageView: UIImageView!
+  //@IBOutlet weak var personImageView: UIImageView!
+  @IBOutlet weak var canvasView: CanvasView!
+  @IBOutlet weak var pressableControl: PressableControl!
+  
+  private var drawing: Drawing!
   
   class var reuseIdentifier: String {
-  return "MessageCollectionViewCell"
+    return "MessageCollectionViewCell"
   }
   
   class var cellNib: UINib {
-  return UINib(nibName: "MessageCollectionViewCell", bundle: nil)
+    return UINib(nibName: "MessageCollectionViewCell", bundle: nil)
   }
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    canvasView.viewOnly = true
     setupUI()
+    userInteractionEnabled = true
   }
   
   override func prepareForReuse() {
   }
   
   private func setupUI() {
-    self.layoutMargins = UIEdgeInsetsZero
-    let image = UIImage(named: "roman")
-    personImageView.image = image?.roundedImage()
+    layoutMargins = UIEdgeInsetsZero
+    //let image = UIImage(named: "roman")
+    //personImageView.image = image?.roundedImage()
+  }
+  
+  func bindObject(drawing: Drawing) {
+    var d = drawing.normalizedToSize(canvasView.frame.size)
+    canvasView.replay(d, animated: false)
+  }
+  
+  @IBAction func pressableControlPressed(sender : AnyObject) {
+    println("here I am")
   }
 }
 

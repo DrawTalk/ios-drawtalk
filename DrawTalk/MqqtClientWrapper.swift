@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 DrawTalk. All rights reserved.
 //
 
+// https://github.com/mobile-web-messaging/MQTTKit
+
 import Foundation
 import UIKit
 

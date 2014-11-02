@@ -18,7 +18,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   
   init(collectionView: UICollectionView) {
     super.init()
-    messages = [nil]
+    messages = []
     messageCollectionView = collectionView
     
     var flowLayout = UICollectionViewFlowLayout()
@@ -29,7 +29,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
     registerCells()
   }
   
-  func loadWithMessages(messages: [Drawing?]) {
+  func loadWithMessages(messages: [Drawing]?) {
     self.messages = messages//.replaceRange(Range<Int>(start: 0, end: self.messageItems.count-1), with: messageItems)
     messageCollectionView.reloadData()
   }
@@ -43,7 +43,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return messages.count + 1
+    return messages.count
   }
   
   func collectionView(collectionView: UICollectionView,
@@ -57,8 +57,8 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
       
       var cell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(MessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as MessageCollectionViewCell
       
-      //var message = messages[indexPath.row] as Contact
-      //cell.bindObject(contact)
+      var drawing = messages[indexPath.row] as Drawing!
+      cell.bindObject(drawing)
       
       return cell
   }
@@ -66,7 +66,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-      return UIEdgeInsetsMake(0, 0, 1, 0)
+      return UIEdgeInsetsMake(0, 0, 0, 0)
   }
   
   func collectionView(collectionView: UICollectionView,
@@ -82,8 +82,8 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func addDrawing(drawing: Drawing?) {
-    messages.append(drawing)
     let lastIndexPath = NSIndexPath(forRow: messages.count, inSection: 0)
+    messages.append(drawing)
     messageCollectionView.insertItemsAtIndexPaths([lastIndexPath])
     messageCollectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
   }

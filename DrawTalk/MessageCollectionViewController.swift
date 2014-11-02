@@ -13,7 +13,7 @@ class MessageCollectionViewController : UIViewController, UICollectionViewDelega
   
   @IBOutlet weak var messageCollectionView: UICollectionView!
   
-  private var messageCollectionDataSource: MessageCollectionDataSource!
+  private(set) var messageCollectionDataSource: MessageCollectionDataSource!
   
   class func controller() -> MessageCollectionViewController {
     let vc = MessageCollectionViewController(nibName:"MessageCollectionViewController", bundle: nil)
@@ -22,27 +22,11 @@ class MessageCollectionViewController : UIViewController, UICollectionViewDelega
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupMessageCollectionView()
-    observerMessagingEvent()
-  }
-  
-  private func observerMessagingEvent() {
-    MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
-      let chatMessage = event as ChatMessage
-      var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
-      var drawingJson =  DrawingJson(json: d)
-      dispatch_async(dispatch_get_main_queue(), {
-        self.messageCollectionDataSource.addDrawing(drawingJson.toDrawing())
-        //vc.canvasView.reset()
-        //vc.canvasView.replay(drawingJson.toDrawing())
-      })
-    })
   }
   
   private func setupMessageCollectionView() {
     messageCollectionDataSource = MessageCollectionDataSource(collectionView: messageCollectionView)
     messageCollectionView.dataSource = messageCollectionDataSource;
-    messageCollectionDataSource.loadWithMessages([nil])
   }
 }

@@ -47,11 +47,13 @@ extension Drawing {
       newGrid = CGSizeMake(size.height * otherRatio, size.height)
       offset = CGPointMake((size.width - newGrid.width) / 2, 0)
     }
+    
+    newDrawing.grid = newGrid
 
     newDrawing.paths = self.paths.map { (path: DrawTalk.Path) -> DrawTalk.Path in
       var newPath = Path()
       newPath.color = path.color
-      newPath.brush = path.brush
+      newPath.brush = path.brush * factor
       newPath.duration = path.duration
       newPath.coords = path.coords.map({ (point: CGPoint) -> CGPoint in
         return CGPointMake(point.x * factor + offset.x, point.y * factor + offset.y)
