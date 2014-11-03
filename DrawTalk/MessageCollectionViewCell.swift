@@ -11,7 +11,6 @@ import UIKit
 
 class MessageCollectionViewCell: UICollectionViewCell {
 
-  //@IBOutlet weak var canvasView: CanvasView!
   //@IBOutlet weak var pressableControl: PressableControl!
   
   @IBOutlet weak var thumbnail: ThumbnailView!
@@ -37,13 +36,11 @@ class MessageCollectionViewCell: UICollectionViewCell {
     super.awakeFromNib()
     thumbnail.thumbnailCanvasView.viewOnly = true
     thumbnail.thumbnailCanvasView.userInteractionEnabled = false
-    //canvasView.viewOnly = true
     setupUI()
-    //userInteractionEnabled = true
-    //canvasView.userInteractionEnabled = false
   }
   
   override func prepareForReuse() {
+    thumbnail.thumbnailCanvasView.reset()
   }
   
   private func setupUI() {

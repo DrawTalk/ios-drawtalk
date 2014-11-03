@@ -20,8 +20,8 @@
 		A10E60CE19F9E6B100A69F18 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10E60CD19F9E6B100A69F18 /* AddressBook.framework */; };
 		A11E8F1919E882E70055772A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1819E882E70055772A /* Images.xcassets */; };
 		A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1A19E882E70055772A /* LaunchScreen.xib */; };
-		A11E8F3C19E8895B0055772A /* ArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */; };
-		A11E8F3F19E88CEE0055772A /* ArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */; };
+		A11E8F3C19E8895B0055772A /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* ConversationViewController.swift */; };
+		A11E8F3F19E88CEE0055772A /* ConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* ConversationViewController.xib */; };
 		A11E8F4419E8A63C0055772A /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Utils.swift */; };
 		A14549D519F2C8B4000513A6 /* DWTColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14549D419F2C8B4000513A6 /* DWTColorTests.swift */; };
 		A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */; };
@@ -44,6 +44,8 @@
 		A1DAEF671A059ABA00287E97 /* SendVerificationCodeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DAEF661A059ABA00287E97 /* SendVerificationCodeOperation.swift */; };
 		A1E33D141A0470060039339E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E33D131A0470060039339E /* MainViewController.swift */; };
 		A1E33D241A047C220039339E /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E33D231A047C220039339E /* Alamofire.swift */; };
+		A1E450F11A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E450F01A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift */; };
+		A1E450F31A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1E450F21A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib */; };
 		A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */; };
 		A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E6539919FC27F900DBABE7 /* Contact.swift */; };
 		A1EF259F19F2CC2D00F52A85 /* PathJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF259E19F2CC2D00F52A85 /* PathJson.swift */; };
@@ -86,8 +88,8 @@
 		A11E8F2619E882E70055772A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Bridging-Header.h"; sourceTree = "<group>"; };
 		A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Prefix.pch"; sourceTree = "<group>"; };
-		A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtboardViewController.swift; sourceTree = "<group>"; };
-		A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtboardViewController.xib; sourceTree = "<group>"; };
+		A11E8F3A19E8895B0055772A /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		A11E8F3E19E88CEE0055772A /* ConversationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConversationViewController.xib; sourceTree = "<group>"; };
 		A11E8F4319E8A63C0055772A /* UIColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		A14549D419F2C8B4000513A6 /* DWTColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTColorTests.swift; sourceTree = "<group>"; };
 		A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawTalkTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -111,6 +113,8 @@
 		A1DAEF661A059ABA00287E97 /* SendVerificationCodeOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendVerificationCodeOperation.swift; sourceTree = "<group>"; };
 		A1E33D131A0470060039339E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A1E33D231A047C220039339E /* Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
+		A1E450F01A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateMessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1E450F21A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMessageCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1E6539719FC268F00DBABE7 /* ContactABRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactABRecord.swift; sourceTree = "<group>"; };
 		A1E6539919FC27F900DBABE7 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		A1EF259E19F2CC2D00F52A85 /* PathJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathJson.swift; sourceTree = "<group>"; };
@@ -295,7 +299,6 @@
 		A19C69E719F9DB1F00848370 /* Functional */ = {
 			isa = PBXGroup;
 			children = (
-				A19C69F119F9E1A600848370 /* Artboard */,
 				A19C69F219F9E1AE00848370 /* Contacts */,
 				A19C69F319F9E1D000848370 /* Conversations */,
 				A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */,
@@ -313,15 +316,6 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
-		A19C69F119F9E1A600848370 /* Artboard */ = {
-			isa = PBXGroup;
-			children = (
-				A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */,
-				A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */,
-			);
-			name = Artboard;
-			sourceTree = "<group>";
-		};
 		A19C69F219F9E1AE00848370 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,9 +331,10 @@
 		A19C69F319F9E1D000848370 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				A1E450EF1A0750AB00EE82A7 /* Cells */,
+				A11E8F3A19E8895B0055772A /* ConversationViewController.swift */,
+				A11E8F3E19E88CEE0055772A /* ConversationViewController.xib */,
 				A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */,
-				A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */,
-				A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */,
 				A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */,
 				A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */,
 			);
@@ -363,6 +358,17 @@
 				A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */,
 			);
 			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		A1E450EF1A0750AB00EE82A7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				A1E450F01A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift */,
+				A1E450F21A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib */,
+				A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */,
+				A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		A1E6539B19FC2BB500DBABE7 /* Utilities */ = {
@@ -466,8 +472,9 @@
 				A19C69EC19F9DF4600848370 /* ContactCollectionViewController.xib in Resources */,
 				A10658B519FD7E5800618C15 /* Localizable.strings in Resources */,
 				A1CF82731A03285C00E93F65 /* MessageCollectionViewController.xib in Resources */,
+				A1E450F31A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib in Resources */,
 				A11E8F1919E882E70055772A /* Images.xcassets in Resources */,
-				A11E8F3F19E88CEE0055772A /* ArtboardViewController.xib in Resources */,
+				A11E8F3F19E88CEE0055772A /* ConversationViewController.xib in Resources */,
 				A10658C219FD87B700618C15 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -565,6 +572,7 @@
 			files = (
 				A1DACD3F19FC3F9700D02B5D /* MainTabBarController.swift in Sources */,
 				A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */,
+				A1E450F11A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift in Sources */,
 				A100D28A1A06BE4C00664C66 /* UIView+Utils.swift in Sources */,
 				A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* ChatMessage.swift in Sources */,
@@ -588,7 +596,7 @@
 				A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */,
 				A10E60CC19F9E62400A69F18 /* AddressBookImport.swift in Sources */,
 				A1EF25A319F2CF3400F52A85 /* DrawingJson.swift in Sources */,
-				A11E8F3C19E8895B0055772A /* ArtboardViewController.swift in Sources */,
+				A11E8F3C19E8895B0055772A /* ConversationViewController.swift in Sources */,
 				A1DAEF671A059ABA00287E97 /* SendVerificationCodeOperation.swift in Sources */,
 				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
 				A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */,

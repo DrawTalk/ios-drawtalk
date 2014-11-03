@@ -17,9 +17,9 @@ class MainViewController: UIViewController {
   }
   
   func setup() {
-    let artboard = ArtboardViewController.controller()
-    artboard.edgesForExtendedLayout = UIRectEdge.None;
-    let navigationController = UINavigationController(rootViewController: artboard)
+    let conversation = ConversationViewController.controller(channel: "6504047096")
+    conversation.edgesForExtendedLayout = UIRectEdge.None;
+    let navigationController = UINavigationController(rootViewController: conversation)
     addContentController(navigationController)
   }
   

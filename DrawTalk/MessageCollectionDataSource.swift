@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private let kNumberOfSections = 1
+private let kNumberOfSections = 2
 
 protocol MessageCollectionDataSourceDelegate {
   func didSelectMessage(drawing: Drawing)
@@ -42,6 +42,8 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   
   func registerCells() {
     messageCollectionView.registerNib(MessageCollectionViewCell.cellNib, forCellWithReuseIdentifier:MessageCollectionViewCell.reuseIdentifier)
+    
+    messageCollectionView.registerNib(CreateMessageCollectionViewCell.cellNib, forCellWithReuseIdentifier:CreateMessageCollectionViewCell.reuseIdentifier)
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -49,7 +51,11 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return messages.count
+    if section == 0 {
+      return messages.count
+    } else {
+      return 1 // for "send" cell
+    }
   }
   
   func collectionView(collectionView: UICollectionView,
@@ -61,13 +67,19 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func collectionView(collectionView: UICollectionView,
     cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
       
-      var cell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(MessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as MessageCollectionViewCell
-      
-      var drawing = messages[indexPath.row] as Drawing!
-      cell.bindObject(drawing)
-      cell.tapHandler = { (drawing: Drawing) in
-        self.messageCollectionDelegate?.didSelectMessage(drawing)
-        return
+      var cell: UICollectionViewCell!
+      if indexPath.section == 0 {
+        cell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(MessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as MessageCollectionViewCell
+        
+        var drawing = messages[indexPath.row] as Drawing!
+        var messageCollectionViewCell = cell as MessageCollectionViewCell
+        messageCollectionViewCell.bindObject(drawing)
+        messageCollectionViewCell.tapHandler = { (drawing: Drawing) in
+          self.messageCollectionDelegate?.didSelectMessage(drawing)
+          return
+        }
+      } else {
+        cell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(CreateMessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as CreateMessageCollectionViewCell
       }
       
       return cell
@@ -94,15 +106,26 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func addDrawing(drawing: Drawing?) {
     let lastIndexPath = NSIndexPath(forRow: messages.count, inSection: 0)
     messages.append(drawing)
-    messageCollectionView.insertItemsAtIndexPaths([lastIndexPath])
-    messageCollectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+    
+    messageCollectionView.performBatchUpdates({ () -> Void in
+      self.messageCollectionView.insertItemsAtIndexPaths([lastIndexPath])
+    }, completion: { (complete) -> Void in
+      self.messageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 1),
+        atScrollPosition: UICollectionViewScrollPosition.Right,
+        animated: true)
+    })
+
+    
+
   }
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    var drawing = messages[indexPath.row] as Drawing!
-    var cell = collectionView.cellForItemAtIndexPath(indexPath) as MessageCollectionViewCell
-    
-    cell.thumbnail.play(drawing.duration)
-    messageCollectionDelegate?.didSelectMessage(drawing)  
+    if indexPath.section == 0 {
+      var drawing = messages[indexPath.row] as Drawing!
+      var cell = collectionView.cellForItemAtIndexPath(indexPath) as MessageCollectionViewCell
+      
+      cell.thumbnail.play(drawing.duration)
+      messageCollectionDelegate?.didSelectMessage(drawing)
+    }
   }
 }

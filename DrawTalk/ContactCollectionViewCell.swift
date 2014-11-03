@@ -14,11 +14,11 @@ class ContactCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var nameLabel: UILabel!
   
   class var reuseIdentifier: String {
-    return "DWTContactCollectionViewCell"
+    return "ContactCollectionViewCell"
   }
   
   class var cellNib: UINib {
-    return UINib(nibName: "DWTContactCollectionViewCell", bundle: nil)
+    return UINib(nibName: "ContactCollectionViewCell", bundle: nil)
   }
   
   override func awakeFromNib() {

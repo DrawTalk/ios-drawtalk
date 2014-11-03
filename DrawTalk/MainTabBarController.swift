@@ -101,8 +101,8 @@ private class ChatTabContent: TabContent {
       comment: "Name for chats' tab")
   }
   func controller() -> UINavigationController {
-    let artboard = ArtboardViewController.controller()
-    let nav = UINavigationController(rootViewController: artboard)
+    let conversation = ConversationViewController.controller(channel: "")
+    let nav = UINavigationController(rootViewController: conversation)
     return nav
   }
 }

@@ -9,11 +9,25 @@
 import Foundation
 import UIKit
 
+enum PlaybackState {
+    case Stop, Play
+    mutating func toggle() {
+        switch self {
+        case Stop:
+            self = Play
+        case Play:
+            self = Stop
+        }
+    }
+}
+
 class ThumbnailView: UIView {
 
   private var progressImageView: UIImageView!
   private var backgroundImageView: UIImageView!
   private(set) var thumbnailCanvasView: CanvasView!
+  
+  private var state = PlaybackState.Stop
   
   // MARK: - Initializers
   
@@ -65,7 +79,19 @@ class ThumbnailView: UIView {
   
   private var progressIndicator: CAShapeLayer?
   
+  func changeState() {
+    state.toggle()
+    
+    switch state {
+    case .Play:
+      play(1)
+    case .Stop:
+      stop()
+    }
+  }
+  
   func stop() {
+    state = .Stop
     progressIndicator?.removeAllAnimations()
     progressIndicator?.removeFromSuperlayer()
     progressIndicator = nil
@@ -73,6 +99,8 @@ class ThumbnailView: UIView {
 
   func play(duration: NSTimeInterval) {
     stop()
+    
+    state = .Play
     
     // What a majestic pain
     let radius: CGFloat = progressImageView.frame.size.width/2
@@ -92,6 +120,13 @@ class ThumbnailView: UIView {
     CATransaction.begin()
     
     CATransaction.setCompletionBlock { () -> Void in
+      
+      CATransaction.begin()
+      
+      CATransaction.setCompletionBlock { () -> Void in
+        self.stop()
+      }
+      
       // Fade it out
       var opacityAnimation: CABasicAnimation = CABasicAnimation(keyPath:"opacity")
       opacityAnimation.duration = 0.33
@@ -102,6 +137,8 @@ class ThumbnailView: UIView {
       opacityAnimation.timingFunction = CAMediaTimingFunction(name: "linear")
       opacityAnimation.repeatCount = 0
       circle.addAnimation(opacityAnimation, forKey:"opacityAnimation")
+      
+      CATransaction.commit()
     }
     // Configure animation
     var drawAnimation: CABasicAnimation = CABasicAnimation(keyPath:"strokeEnd")
@@ -114,7 +151,6 @@ class ThumbnailView: UIView {
     
     drawAnimation.timingFunction = CAMediaTimingFunction(name: "linear")
     circle.addAnimation(drawAnimation, forKey:"drawCircleAnimation")
-    
     
     CATransaction.commit()
   }

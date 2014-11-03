@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtboardViewController" customModule="DrawTalk" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConversationViewController" customModule="DrawTalk" customModuleProvider="target">
             <connections>
                 <outlet property="canvasView" destination="z9q-aF-xZ6" id="y1x-oC-ESW"/>
                 <outlet property="messageContainerView" destination="pUP-gO-hTo" id="QvQ-h9-Bom"/>

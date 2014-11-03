@@ -45,7 +45,7 @@ public class MqttClientWrapper {
       }
     }
 
-    client.subscribe(Constants.topicPrefix + "6504047096", withCompletionHandler: { ([AnyObject]!) -> Void in
+    client.subscribe(Constants.topicPrefix + topic, withCompletionHandler: { ([AnyObject]!) -> Void in
       println("subscribed to the topic")
     })
     

@@ -1,5 +1,5 @@
 //
-//  DWTArtboardViewController.swift
+//  ConversationViewController.swift
 //  DrawTalk
 //
 //  Created by Kirollos Risk on 10/10/14.
@@ -9,13 +9,15 @@
 import Foundation
 import UIKit
 
-public class ArtboardViewController : UIViewController, MessageCollectionDataSourceDelegate {
+public class ConversationViewController : UIViewController, MessageCollectionDataSourceDelegate {
 
   @IBOutlet weak var messageContainerView: UIView!
   @IBOutlet weak var canvasView: CanvasView!
   @IBOutlet weak var sendButton: UIButton!
   
   private var messageController: MessageCollectionViewController!
+  
+  private var channel: String!
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -25,8 +27,9 @@ public class ArtboardViewController : UIViewController, MessageCollectionDataSou
     fatalError("init(coder:) has not been implemented")
   }
   
-  public class func controller() -> ArtboardViewController {
-    let vc = ArtboardViewController(nibName:"ArtboardViewController", bundle: nil)
+  public class func controller(#channel: String) -> ConversationViewController {
+    let vc = ConversationViewController(nibName:"ConversationViewController", bundle: nil)
+    vc.channel = channel
     return vc
   }
   
@@ -59,7 +62,7 @@ public class ArtboardViewController : UIViewController, MessageCollectionDataSou
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let drawingJson = DrawingJson(drawing: canvasView.drawing())
-    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: "6504047096")
+    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: channel)
     MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
   }
   
@@ -71,8 +74,6 @@ public class ArtboardViewController : UIViewController, MessageCollectionDataSou
       dispatch_async(dispatch_get_main_queue(), {
         var drawing = drawingJson.toDrawing()
         self.messageController.messageCollectionDataSource.addDrawing(drawing)
-        self.canvasView.reset()
-        self.canvasView.replay(drawing, animated: true)
       })
     })
   }
