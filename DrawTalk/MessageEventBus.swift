@@ -10,7 +10,8 @@ import Foundation
 
 @objc
 public protocol MessageEvent {
-   func toPayload() -> AnyObject
+  func payload() -> AnyObject
+  var topic: String { get }
 }
 
 public typealias EventBusHandler = (MessageEvent) -> Void

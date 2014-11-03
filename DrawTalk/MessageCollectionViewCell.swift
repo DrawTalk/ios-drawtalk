@@ -11,8 +11,10 @@ import UIKit
 
 class MessageCollectionViewCell: UICollectionViewCell {
 
-  @IBOutlet weak var canvasView: CanvasView!
-  @IBOutlet weak var pressableControl: PressableControl!
+  //@IBOutlet weak var canvasView: CanvasView!
+  //@IBOutlet weak var pressableControl: PressableControl!
+  
+  @IBOutlet weak var thumbnail: ThumbnailView!
   
   private var originalDrawing: Drawing!
   private var scaledDrawing: Drawing!
@@ -28,15 +30,17 @@ class MessageCollectionViewCell: UICollectionViewCell {
   }
   
   class var cellSize: CGSize {
-    return CGSizeMake(80, 80)
+    return CGSizeMake(100, 150)
   }
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    canvasView.viewOnly = true
+    thumbnail.thumbnailCanvasView.viewOnly = true
+    thumbnail.thumbnailCanvasView.userInteractionEnabled = false
+    //canvasView.viewOnly = true
     setupUI()
-    userInteractionEnabled = true
-    canvasView.userInteractionEnabled = false
+    //userInteractionEnabled = true
+    //canvasView.userInteractionEnabled = false
   }
   
   override func prepareForReuse() {
@@ -44,19 +48,14 @@ class MessageCollectionViewCell: UICollectionViewCell {
   
   private func setupUI() {
     layoutMargins = UIEdgeInsetsZero
-    pressableControl.backgroundColor = UIColor.grayColor()
-    pressableControl.round(pressableControl.frame.size.width)
-    canvasView.backgroundColor = UIColor.yellowColor()
-    //let image = UIImage(named: "roman")
-    //personImageView.image = image?.roundedImage()
   }
   
   func bindObject(drawing: Drawing) {
     // TODO: cache the normalized view, so it's not calculated every time the cell comes
     // into view
     originalDrawing = drawing
-    scaledDrawing = drawing.normalizedToSize(canvasView.frame.size)
-    canvasView.replay(scaledDrawing, animated: false)
+    scaledDrawing = drawing.normalizedToSize(thumbnail.thumbnailCanvasView.frame.size)
+    thumbnail.thumbnailCanvasView.replay(scaledDrawing, animated: false)
   }
   
   @IBAction func pressableControlPressed(sender : AnyObject) {
@@ -64,30 +63,3 @@ class MessageCollectionViewCell: UICollectionViewCell {
   }
 }
 
-extension UIView {
-  func round(diameter: CGFloat) {
-    //let savedCenter = self.center
-    //let f = CGRectMake(self.frame.origin.x, self.frame.origin.y, diameter, diameter)
-    //self.frame = f
-    self.layer.cornerRadius = diameter / 2.0
-    //self.center = savedCenter
-  }
-}
-
-extension UIImage {
-  func roundedImage() -> UIImage  {
-    let imageSize = self.size;
-    let imageRect = CGRectMake(0, 0, imageSize.width, imageSize.height);
-    
-    UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0);
-    // Create the clipping path and add it
-    var path = UIBezierPath(ovalInRect: imageRect)
-    path.addClip()
-    
-    drawInRect(imageRect)
-    let roundedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return roundedImage
-  }
-}

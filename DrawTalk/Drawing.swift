@@ -13,6 +13,16 @@ import UIKit
   var paths: [DrawTalk.Path] = []
   var grid: CGSize = CGSizeZero
 
+  var duration: NSTimeInterval {
+    get {
+      var total: NSTimeInterval = 0
+      for path: DrawTalk.Path in paths {
+        total += path.duration * Double(path.coords.count)
+      }
+      return total
+    }
+  }
+  
   required init() {
   }
 
@@ -21,6 +31,7 @@ import UIKit
     self.paths = paths
     self.grid = grid
   }
+
 }
 
 extension Drawing {

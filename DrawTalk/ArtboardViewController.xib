@@ -17,19 +17,12 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUP-gO-hTo" userLabel="Message Container">
-                    <rect key="frame" x="0.0" y="520" width="600" height="80"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="M8j-eh-imo"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9q-aF-xZ6" customClass="CanvasView" customModule="DrawTalk" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="520"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrX-sS-REW">
-                    <rect key="frame" x="263" y="480" width="48" height="30"/>
+                    <rect key="frame" x="263" y="410" width="48" height="30"/>
                     <state key="normal" title="Replay">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -38,7 +31,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLH-Nt-zf6">
-                    <rect key="frame" x="207" y="480" width="36" height="30"/>
+                    <rect key="frame" x="207" y="410" width="36" height="30"/>
                     <state key="normal" title="Send">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -47,7 +40,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzn-zw-CVv">
-                    <rect key="frame" x="331" y="480" width="40" height="30"/>
+                    <rect key="frame" x="331" y="410" width="40" height="30"/>
                     <state key="normal" title="Reset">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -55,6 +48,13 @@
                         <action selector="resetButtonTapped:" destination="-1" eventType="touchUpInside" id="55w-Jq-J8R"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUP-gO-hTo" userLabel="Message Container">
+                    <rect key="frame" x="0.0" y="450" width="600" height="150"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="M8j-eh-imo"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

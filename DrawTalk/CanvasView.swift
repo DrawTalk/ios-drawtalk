@@ -29,7 +29,7 @@ private struct Line {
 }
 
 
-public class CanvasView: UIView {
+class CanvasView: UIView {
 
   private var contentView: UIView!
   private var drawingImageView: UIImageView!
@@ -48,7 +48,7 @@ public class CanvasView: UIView {
   private var paths: [DrawTalk.Path] = []
   
   private var stopped = false
-  
+
   var viewOnly: Bool = false
   
   // MARK: - Initializers
@@ -63,7 +63,7 @@ public class CanvasView: UIView {
     setupUI()
   }
   
-  required public init(coder aDecoder: NSCoder) {
+  required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setupUI()
   }
@@ -90,15 +90,17 @@ public class CanvasView: UIView {
     copyImageView.setTranslatesAutoresizingMaskIntoConstraints(true)
     copyImageView.autoresizingMask = .FlexibleHeight | .FlexibleWidth
     copyImageView.frame = contentView.bounds
+    
+    //copyImageView.backgroundColor = UIColor.orangeColor()
   }
   
-  override public func updateConstraints() {
+  override func updateConstraints() {
     super.updateConstraints()
   }
   
   // MARK: - Touch handling
   
-  override public func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+  override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
     super.touchesBegan(touches, withEvent: event)
     
     if viewOnly {
@@ -116,7 +118,7 @@ public class CanvasView: UIView {
     )
   }
   
-  override public func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+  override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
     super.touchesMoved(touches, withEvent: event)
     
     if viewOnly {
@@ -147,7 +149,7 @@ public class CanvasView: UIView {
     currPath?.coords.append(currentPoint)
   }
   
-  override public func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+  override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
     super.touchesEnded(touches, withEvent: event)
     
     if viewOnly {
@@ -187,7 +189,6 @@ public class CanvasView: UIView {
 // MARK: - Conversion
 
 extension CanvasView {
-  
   func drawing() -> Drawing {
     let size = self.frame.size
     let drawing = Drawing(paths: paths, grid: size)
@@ -198,7 +199,7 @@ extension CanvasView {
 // MARK: - Playback
 
 extension CanvasView {
-  
+
   func reset() {
     paths.removeAll(keepCapacity: false)
     clear()
@@ -218,6 +219,10 @@ extension CanvasView {
     }
     }
     */
+  }
+  
+  func play(drawing: Drawing) {
+    
   }
   
   func replay() {

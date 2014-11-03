@@ -10,6 +10,9 @@
 		3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A100D2841A05E31900664C66 /* PressableControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2831A05E31900664C66 /* PressableControl.swift */; };
+		A100D2881A06BE2300664C66 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2871A06BE2300664C66 /* UIImage+Utils.swift */; };
+		A100D28A1A06BE4C00664C66 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2891A06BE4C00664C66 /* UIView+Utils.swift */; };
+		A100D28C1A071CCA00664C66 /* ThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D28B1A071CCA00664C66 /* ThumbnailView.swift */; };
 		A10658B519FD7E5800618C15 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A10658B719FD7E5800618C15 /* Localizable.strings */; };
 		A10658C219FD87B700618C15 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = A10658C419FD87B700618C15 /* Localizable.stringsdict */; };
 		A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10935F119F4BF2000D618EA /* CanvasView.swift */; };
@@ -19,7 +22,7 @@
 		A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F1A19E882E70055772A /* LaunchScreen.xib */; };
 		A11E8F3C19E8895B0055772A /* ArtboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */; };
 		A11E8F3F19E88CEE0055772A /* ArtboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */; };
-		A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */; };
+		A11E8F4419E8A63C0055772A /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Utils.swift */; };
 		A14549D519F2C8B4000513A6 /* DWTColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14549D419F2C8B4000513A6 /* DWTColorTests.swift */; };
 		A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */; };
 		A14C1FCA1A0483CE0035A5F6 /* ApiOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC91A0483CE0035A5F6 /* ApiOperation.swift */; };
@@ -67,6 +70,9 @@
 		73856A6D01F8473F8290FCB1 /* Pods-DrawTalk.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.xcconfig"; path = "Pods/Pods-DrawTalk.xcconfig"; sourceTree = "<group>"; };
 		8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawTalk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A100D2831A05E31900664C66 /* PressableControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressableControl.swift; sourceTree = "<group>"; };
+		A100D2871A06BE2300664C66 /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		A100D2891A06BE4C00664C66 /* UIView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		A100D28B1A071CCA00664C66 /* ThumbnailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
 		A10658B619FD7E5800618C15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A10658C319FD87B700618C15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		A10935F119F4BF2000D618EA /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -82,7 +88,7 @@
 		A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrawTalk-Prefix.pch"; sourceTree = "<group>"; };
 		A11E8F3A19E8895B0055772A /* ArtboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtboardViewController.swift; sourceTree = "<group>"; };
 		A11E8F3E19E88CEE0055772A /* ArtboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtboardViewController.xib; sourceTree = "<group>"; };
-		A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		A11E8F4319E8A63C0055772A /* UIColor+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		A14549D419F2C8B4000513A6 /* DWTColorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DWTColorTests.swift; sourceTree = "<group>"; };
 		A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawTalkTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 			children = (
 				A10935F119F4BF2000D618EA /* CanvasView.swift */,
 				A100D2831A05E31900664C66 /* PressableControl.swift */,
+				A100D28B1A071CCA00664C66 /* ThumbnailView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -246,7 +253,9 @@
 		A11E8F4219E8A5940055772A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A11E8F4319E8A63C0055772A /* UIColor+Hex.swift */,
+				A11E8F4319E8A63C0055772A /* UIColor+Utils.swift */,
+				A100D2871A06BE2300664C66 /* UIImage+Utils.swift */,
+				A100D2891A06BE4C00664C66 /* UIView+Utils.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -556,6 +565,7 @@
 			files = (
 				A1DACD3F19FC3F9700D02B5D /* MainTabBarController.swift in Sources */,
 				A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */,
+				A100D28A1A06BE4C00664C66 /* UIView+Utils.swift in Sources */,
 				A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* ChatMessage.swift in Sources */,
 				A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */,
@@ -563,9 +573,10 @@
 				A1DAEF651A059AB100287E97 /* AcquireVerificationCodeOperation.swift in Sources */,
 				A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */,
 				A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */,
-				A11E8F4419E8A63C0055772A /* UIColor+Hex.swift in Sources */,
+				A11E8F4419E8A63C0055772A /* UIColor+Utils.swift in Sources */,
 				A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */,
 				A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */,
+				A100D28C1A071CCA00664C66 /* ThumbnailView.swift in Sources */,
 				A1E33D241A047C220039339E /* Alamofire.swift in Sources */,
 				A1EF25A519F2CF3C00F52A85 /* Drawing.swift in Sources */,
 				A1EF25A119F2CC3500F52A85 /* Path.swift in Sources */,
@@ -582,6 +593,7 @@
 				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
 				A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */,
 				A100D2841A05E31900664C66 /* PressableControl.swift in Sources */,
+				A100D2881A06BE2300664C66 /* UIImage+Utils.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
 				A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */,
 			);

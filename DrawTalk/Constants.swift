@@ -2,7 +2,7 @@
 //  DWTConstants.swift
 //  DrawTalk
 //
-//  Created by Kirollos Risk on 10/18/14.
+//  Created by Kirolblos Risk on 10/18/14.
 //  Copyright (c) 2014 DrawTalk. All rights reserved.
 //
 
@@ -26,7 +26,7 @@ extension Constants {
 
 extension Constants {
   class var deviceId: String {
-    return UIDevice.currentDevice().identifierForVendor.UUIDString
+    return "6504047096"//UIDevice.currentDevice().identifierForVendor.UUIDString
   }
 }
 

@@ -26,7 +26,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
     super.init()
     messages = []
     messageCollectionView = collectionView
-    
+    messageCollectionView.showsHorizontalScrollIndicator = false
     var flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     messageCollectionView.collectionViewLayout = flowLayout
@@ -76,13 +76,13 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-      return UIEdgeInsetsMake(0, 0, 0, 0)
+      return UIEdgeInsetsMake(0, 5, 0, 0)
   }
   
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-      return 0
+      return 5
   }
   
   func collectionView(collectionView: UICollectionView,
@@ -96,5 +96,13 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
     messages.append(drawing)
     messageCollectionView.insertItemsAtIndexPaths([lastIndexPath])
     messageCollectionView.scrollToItemAtIndexPath(lastIndexPath, atScrollPosition: UICollectionViewScrollPosition.Right, animated: true)
+  }
+  
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    var drawing = messages[indexPath.row] as Drawing!
+    var cell = collectionView.cellForItemAtIndexPath(indexPath) as MessageCollectionViewCell
+    
+    cell.thumbnail.play(drawing.duration)
+    messageCollectionDelegate?.didSelectMessage(drawing)  
   }
 }

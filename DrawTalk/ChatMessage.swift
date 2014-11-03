@@ -9,18 +9,24 @@
 import Foundation
 import UIKit
 
-public enum MessageState {
+enum MessageState {
   case OUTGOING
   case INCOMING
 }
 
-public class ChatMessage: MessageEvent {
+class ChatMessage: MessageEvent {
   var text: String
   var clientId: String
   
   private var id: String
   private var channel: String
   private var state: MessageState
+  
+  var topic: String {
+    get {
+      return channel
+    }
+  }
   
   init(text: String, clientId: String, id: String, channel: String, state: MessageState) {
     self.text = text
@@ -30,7 +36,7 @@ public class ChatMessage: MessageEvent {
     self.state = state
   }
   
-  public class func outgoing(payload: String, channel: String) -> ChatMessage {
+  class func outgoing(payload: String, channel: String) -> ChatMessage {
     var message = ChatMessage(
       text: payload,
       clientId: Constants.deviceId,
@@ -41,7 +47,7 @@ public class ChatMessage: MessageEvent {
     return message
   }
   
-  public class func incoming(data: NSData) -> ChatMessage {
+  class func incoming(data: NSData) -> ChatMessage {
     let json = JSON(data: data)
     let clientId = json["clientId"].stringValue
     let id = json["id"].stringValue
@@ -58,7 +64,7 @@ public class ChatMessage: MessageEvent {
     return message
   }
   
-  public func toPayload() -> AnyObject {
+  func payload() -> AnyObject {
     var json = [
       "message": text,
       "clientId": clientId,

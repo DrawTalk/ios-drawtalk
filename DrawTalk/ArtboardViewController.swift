@@ -37,8 +37,6 @@ public class ArtboardViewController : UIViewController, MessageCollectionDataSou
     addChildViewController(messageController)
     messageContainerView.addSubview(messageController.view)
     messageController.didMoveToParentViewController(self)
-    messageContainerView.backgroundColor = UIColor.redColor()
-    
     messageController.messageCollectionDataSource.messageCollectionDelegate = self
     
     //canvasView.viewOnly = true
@@ -61,9 +59,7 @@ public class ArtboardViewController : UIViewController, MessageCollectionDataSou
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let drawingJson = DrawingJson(drawing: canvasView.drawing())
-    // Roman: 4086855484
     var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: "6504047096")
-    
     MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
   }
   

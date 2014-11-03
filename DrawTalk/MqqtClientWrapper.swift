@@ -50,20 +50,20 @@ public class MqttClientWrapper {
     })
     
     MessageEventBus.defaultBus.subscribe(kMessageEventOutgoing, handler: { (event: MessageEvent) -> Void in
-      var message: AnyObject = event.toPayload()
-      self.sendMessage(message)
+      var message: AnyObject = event.payload()
+      self.sendMessage(message, topic: event.topic)
     })
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       let m = ChatMessage.incoming(message.payload)
-      //if m.clientId != self.clientId {
+      //if m.clientId != self.clientId {o
         MessageEventBus.defaultBus.post(kMessageEventIncoming, event: m)
       //}
     }
   }
   
   // message would be json serialized drawing
-  private func sendMessage(payload: AnyObject) {
+  private func sendMessage(payload: AnyObject, topic: String) {
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(payload, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)!

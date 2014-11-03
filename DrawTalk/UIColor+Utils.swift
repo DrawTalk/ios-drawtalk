@@ -91,9 +91,9 @@ extension UIColor {
   
   public func rgbaValues() -> RGBA {
     let components = CGColorGetComponents(self.CGColor);
-    let red = min(components[0], 1)
-    let green = min(components[1], 1)
-    let blue = min(components[2], 1)
+    let red = min(max(components[0], 0), 1)
+    let green = min(max(components[1], 0), 1)
+    let blue = min(max(components[2], 0), 1)
     let alpha = min(CGColorGetAlpha(self.CGColor), 1)
     
     return RGBA(red: red, green: green, blue: blue, alpha: alpha)
