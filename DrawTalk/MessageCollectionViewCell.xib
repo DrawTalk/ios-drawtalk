@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -13,15 +13,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Person" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Glu-0E-345">
-                        <rect key="frame" x="24" y="105" width="52" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Person" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Glu-0E-345">
+                        <rect key="frame" x="25" y="105" width="49" height="19"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5j-Fm-0Ch" customClass="ThumbnailView" customModule="DrawTalk" customModuleProvider="target"/>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2x-Iy-dlY">
-                        <rect key="frame" x="34" y="126" width="32" height="18"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5j-Fm-0Ch" customClass="ThumbnailView" customModule="DrawTalk" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="7ig-xC-4il"/>
+                            <constraint firstAttribute="height" constant="100" id="jPG-OB-1Pt"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2x-Iy-dlY">
+                        <rect key="frame" x="36" y="126" width="28" height="15.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -29,11 +35,19 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="V5j-Fm-0Ch" secondAttribute="centerX" id="9jn-dm-bJ8"/>
+                <constraint firstItem="o2x-Iy-dlY" firstAttribute="top" secondItem="Glu-0E-345" secondAttribute="bottom" constant="2" id="T7Z-l5-AFg"/>
+                <constraint firstItem="Glu-0E-345" firstAttribute="top" secondItem="V5j-Fm-0Ch" secondAttribute="bottom" constant="5" id="UcF-8C-3Lq"/>
+                <constraint firstItem="V5j-Fm-0Ch" firstAttribute="top" secondItem="TU2-Et-lo1" secondAttribute="top" id="hiB-v4-6HG"/>
+                <constraint firstAttribute="centerX" secondItem="o2x-Iy-dlY" secondAttribute="centerX" id="iv3-GI-jim"/>
+                <constraint firstAttribute="centerX" secondItem="Glu-0E-345" secondAttribute="centerX" id="mjZ-wA-4VZ"/>
+            </constraints>
             <size key="customSize" width="323" height="411.5"/>
             <connections>
                 <outlet property="thumbnail" destination="V5j-Fm-0Ch" id="saC-ol-NBy"/>
             </connections>
-            <point key="canvasLocation" x="403" y="431"/>
+            <point key="canvasLocation" x="214" y="291"/>
         </collectionViewCell>
     </objects>
 </document>

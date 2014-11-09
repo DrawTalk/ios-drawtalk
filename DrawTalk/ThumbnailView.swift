@@ -106,7 +106,7 @@ class ThumbnailView: UIView {
     let radius: CGFloat = progressImageView.frame.size.width/2
     progressIndicator = CAShapeLayer()
     
-    let circle = progressIndicator!
+    var circle = progressIndicator!
     
     var rect = CGRectMake(0, 0, 2.0 * radius, 2.0 * radius)
     circle.path = UIBezierPath(roundedRect: rect, cornerRadius: radius).CGPath

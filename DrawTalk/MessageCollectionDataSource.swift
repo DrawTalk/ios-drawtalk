@@ -115,8 +115,6 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
         animated: true)
     })
 
-    
-
   }
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
