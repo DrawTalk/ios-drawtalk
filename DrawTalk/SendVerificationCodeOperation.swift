@@ -9,12 +9,12 @@
 import Foundation
 
 struct SendVerificationCodeRequest: ServerRequest {
-  let number: String
+  let phoneNumber: String
   let code: String
   
   func toJson() -> RequestJson {
     var json = [
-      "phoneNumber": number,
+      "phoneNumber": phoneNumber,
       "code": code
     ]
     return json
@@ -22,7 +22,17 @@ struct SendVerificationCodeRequest: ServerRequest {
 }
 
 struct SendVerificationCodeResponse {
-  let B: String?
+  let phoneNumber: String
+  let userKey: String
+  let privateToken: String
+  
+  static func fromJson(JSON: AnyObject?) -> SendVerificationCodeResponse {
+    let result = JSON as? NSDictionary
+    let phoneNumber = result?["phoneNumber"] as String
+    let userKey = result?["userKey"] as String
+    let privateToken = result?["privateToken"] as String
+    return SendVerificationCodeResponse(phoneNumber: phoneNumber, userKey: userKey, privateToken: privateToken)
+  }
 }
 
 /*!
@@ -40,7 +50,7 @@ class SendVerificationCodeOperation: ApiOperation {
     request(Alamofire.Method.POST, url, parameters: serverRequest.toJson(), encoding: .JSON)
       .responseJSON { (request, response, JSON, error) in
         var result = ServerResponse<SendVerificationCodeResponse>(
-          result: SendVerificationCodeResponse(B: ""),
+          result: SendVerificationCodeResponse.fromJson(JSON),
           error: error
         )
         self.finish(result)

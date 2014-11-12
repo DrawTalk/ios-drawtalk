@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let kUsername = "vkgogxez"
     let kPassword = "oX02eF7V0I9Y"
     
-    
     MqttClientWrapper.defaultMQTT.setup(
       username: kUsername,
       password: kPassword,
@@ -30,21 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
     self.window!.rootViewController = MainViewController()
     self.window!.makeKeyAndVisible()
-
-    var q = NSOperationQueue()
     
-    // Acquire verification code
-    var op1 = AcquireVerificationCodeOperation(serverRequest: AcquireVerificationCodeRequest(number: "6504047096"))
-    op1.completionBlock = {
-    }
-    q.addOperation(op1)
-
-    // Send verification code
-    var op2 = SendVerificationCodeOperation(serverRequest: SendVerificationCodeRequest(number: "6504047096", code: "death"))
-    op2.completionBlock = {
-    }
-    op2.addDependency(op1)
-    q.addOperation(op2)
+    // start up
+    var queue = NSOperationQueue()
+    var operation = RegistrationOperation()
+    operation.controller = self.window!.rootViewController
+    queue.addOperation(operation)
 
     return true
   }

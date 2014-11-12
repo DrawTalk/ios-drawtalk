@@ -9,11 +9,11 @@
 import Foundation
 
 struct AcquireVerificationCodeRequest: ServerRequest {
-  let number: String
+  let phoneNumber: String
   
   func toJson() -> RequestJson {
     var json = [
-      "phoneNumber": number,
+      "phoneNumber": phoneNumber,
     ]
     return json
   }
