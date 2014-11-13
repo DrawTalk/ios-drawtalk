@@ -29,7 +29,7 @@ class ContactABRecord {
     
     parseIdentifier()
     parseName()
-    parseImage()
+    //parseImage()
     parseEmails()
     parsePhoneNumbers()
   }

@@ -8,9 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */; };
+		4834AEB91A14246200B5C2FA /* ChatCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEB41A14246200B5C2FA /* ChatCollectionDataSource.swift */; };
+		4834AEBA1A14246200B5C2FA /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEB51A14246200B5C2FA /* ChatCollectionViewCell.swift */; };
+		4834AEBB1A14246200B5C2FA /* ChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */; };
+		4834AEBC1A14246200B5C2FA /* ChatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEB71A14246200B5C2FA /* ChatCollectionViewController.swift */; };
+		4834AEBD1A14246200B5C2FA /* ChatCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4834AEB81A14246200B5C2FA /* ChatCollectionViewController.xib */; };
 		484F67741A11D35700867982 /* RegistrationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67731A11D35700867982 /* RegistrationOperation.swift */; };
 		484F677A1A11D52700867982 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67761A11D52700867982 /* RegistrationViewController.swift */; };
 		484F677B1A11D52700867982 /* RegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484F67771A11D52700867982 /* RegistrationViewController.xib */; };
+		484F677F1A13F90300867982 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F677E1A13F90300867982 /* User.swift */; };
+		484F67821A14029B00867982 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67811A14029B00867982 /* ContactsViewController.swift */; };
+		484F67851A1403B000867982 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484F67841A1403B000867982 /* ContactsViewController.xib */; };
 		48B088D31A11D272003417C2 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B088D21A11D272003417C2 /* AppSession.swift */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A100D2841A05E31900664C66 /* PressableControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2831A05E31900664C66 /* PressableControl.swift */; };
@@ -29,11 +37,6 @@
 		A11E8F4419E8A63C0055772A /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11E8F4319E8A63C0055772A /* UIColor+Utils.swift */; };
 		A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */; };
 		A14C1FCA1A0483CE0035A5F6 /* ApiOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14C1FC91A0483CE0035A5F6 /* ApiOperation.swift */; };
-		A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */; };
-		A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */; };
-		A19C69EC19F9DF4600848370 /* ContactCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */; };
-		A19C69EE19F9E19500848370 /* ContactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A19C69ED19F9E19500848370 /* ContactCollectionViewCell.xib */; };
-		A19C69F019F9E19C00848370 /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C69EF19F9E19C00848370 /* ContactCollectionViewCell.swift */; };
 		A1CF82711A03283A00E93F65 /* MessageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */; };
 		A1CF82731A03285C00E93F65 /* MessageCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */; };
 		A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */; };
@@ -72,9 +75,17 @@
 
 /* Begin PBXFileReference section */
 		43A09251A987DEB58F6C8B3B /* Pods-DrawTalkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalkTests/Pods-DrawTalkTests.release.xcconfig"; sourceTree = "<group>"; };
+		4834AEB41A14246200B5C2FA /* ChatCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionDataSource.swift; sourceTree = "<group>"; };
+		4834AEB51A14246200B5C2FA /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
+		4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCollectionViewCell.xib; sourceTree = "<group>"; };
+		4834AEB71A14246200B5C2FA /* ChatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewController.swift; sourceTree = "<group>"; };
+		4834AEB81A14246200B5C2FA /* ChatCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCollectionViewController.xib; sourceTree = "<group>"; };
 		484F67731A11D35700867982 /* RegistrationOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationOperation.swift; sourceTree = "<group>"; };
 		484F67761A11D52700867982 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		484F67771A11D52700867982 /* RegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationViewController.xib; sourceTree = "<group>"; };
+		484F677E1A13F90300867982 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		484F67811A14029B00867982 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		484F67841A1403B000867982 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
 		48B088D21A11D272003417C2 /* AppSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		55EF48391D7B425A126E8068 /* Pods-DrawTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalk/Pods-DrawTalk.release.xcconfig"; sourceTree = "<group>"; };
 		6E197F1F6ACC797A3A0CDA89 /* Pods-DrawTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalk/Pods-DrawTalk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -103,11 +114,6 @@
 		A14549D619F2C8EA000513A6 /* DrawTalkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrawTalkTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		A14C1FC71A0481790035A5F6 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		A14C1FC91A0483CE0035A5F6 /* ApiOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiOperation.swift; sourceTree = "<group>"; };
-		A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewController.swift; sourceTree = "<group>"; };
-		A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionDataSource.swift; sourceTree = "<group>"; };
-		A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewController.xib; sourceTree = "<group>"; };
-		A19C69ED19F9E19500848370 /* ContactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCollectionViewCell.xib; sourceTree = "<group>"; };
-		A19C69EF19F9E19C00848370 /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewController.swift; sourceTree = "<group>"; };
 		A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCollectionViewController.xib; sourceTree = "<group>"; };
 		A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionDataSource.swift; sourceTree = "<group>"; };
@@ -165,6 +171,18 @@
 				43A09251A987DEB58F6C8B3B /* Pods-DrawTalkTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		4834AEB31A14245800B5C2FA /* Chats */ = {
+			isa = PBXGroup;
+			children = (
+				4834AEB41A14246200B5C2FA /* ChatCollectionDataSource.swift */,
+				4834AEB51A14246200B5C2FA /* ChatCollectionViewCell.swift */,
+				4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */,
+				4834AEB71A14246200B5C2FA /* ChatCollectionViewController.swift */,
+				4834AEB81A14246200B5C2FA /* ChatCollectionViewController.xib */,
+			);
+			name = Chats;
 			sourceTree = "<group>";
 		};
 		484F67751A11D51C00867982 /* Registration */ = {
@@ -322,6 +340,7 @@
 				A1EF25A219F2CF3400F52A85 /* DrawingJson.swift */,
 				A1EF25A019F2CC3500F52A85 /* Path.swift */,
 				A1EF259E19F2CC2D00F52A85 /* PathJson.swift */,
+				484F677E1A13F90300867982 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -339,7 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				A19C69F219F9E1AE00848370 /* Contacts */,
-				A19C69F319F9E1D000848370 /* Conversations */,
+				A19C69F319F9E1D000848370 /* Chats */,
 				A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */,
 				A1E33D131A0470060039339E /* MainViewController.swift */,
 			);
@@ -358,18 +377,16 @@
 		A19C69F219F9E1AE00848370 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
-				A19C69E919F9DBFD00848370 /* ContactCollectionDataSource.swift */,
-				A19C69EF19F9E19C00848370 /* ContactCollectionViewCell.swift */,
-				A19C69ED19F9E19500848370 /* ContactCollectionViewCell.xib */,
-				A19C69E519F9DB1700848370 /* ContactCollectionViewController.swift */,
-				A19C69EB19F9DF4600848370 /* ContactCollectionViewController.xib */,
+				484F67811A14029B00867982 /* ContactsViewController.swift */,
+				484F67841A1403B000867982 /* ContactsViewController.xib */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
 		};
-		A19C69F319F9E1D000848370 /* Conversations */ = {
+		A19C69F319F9E1D000848370 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				4834AEB31A14245800B5C2FA /* Chats */,
 				A1E450EF1A0750AB00EE82A7 /* Cells */,
 				A11E8F3A19E8895B0055772A /* ConversationViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* ConversationViewController.xib */,
@@ -377,7 +394,7 @@
 				A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */,
 				A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */,
 			);
-			name = Conversations;
+			name = Chats;
 			sourceTree = "<group>";
 		};
 		A1D269CD19F319FD004C82C6 /* Messaging */ = {
@@ -506,9 +523,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11E8F1C19E882E70055772A /* LaunchScreen.xib in Resources */,
-				A19C69EE19F9E19500848370 /* ContactCollectionViewCell.xib in Resources */,
+				484F67851A1403B000867982 /* ContactsViewController.xib in Resources */,
 				A1CF82791A0329EF00E93F65 /* MessageCollectionViewCell.xib in Resources */,
-				A19C69EC19F9DF4600848370 /* ContactCollectionViewController.xib in Resources */,
+				4834AEBD1A14246200B5C2FA /* ChatCollectionViewController.xib in Resources */,
+				4834AEBB1A14246200B5C2FA /* ChatCollectionViewCell.xib in Resources */,
 				A10658B519FD7E5800618C15 /* Localizable.strings in Resources */,
 				484F677B1A11D52700867982 /* RegistrationViewController.xib in Resources */,
 				A1CF82731A03285C00E93F65 /* MessageCollectionViewController.xib in Resources */,
@@ -624,15 +642,17 @@
 				A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Utils.swift in Sources */,
 				A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */,
-				A19C69E619F9DB1700848370 /* ContactCollectionViewController.swift in Sources */,
+				4834AEB91A14246200B5C2FA /* ChatCollectionDataSource.swift in Sources */,
+				484F67821A14029B00867982 /* ContactsViewController.swift in Sources */,
 				A100D28C1A071CCA00664C66 /* ThumbnailView.swift in Sources */,
 				A1E33D241A047C220039339E /* Alamofire.swift in Sources */,
 				A1EF25A519F2CF3C00F52A85 /* Drawing.swift in Sources */,
+				484F677F1A13F90300867982 /* User.swift in Sources */,
 				A1EF25A119F2CC3500F52A85 /* Path.swift in Sources */,
+				4834AEBC1A14246200B5C2FA /* ChatCollectionViewController.swift in Sources */,
 				A14C1FCA1A0483CE0035A5F6 /* ApiOperation.swift in Sources */,
 				484F677A1A11D52700867982 /* RegistrationViewController.swift in Sources */,
 				A1D269CA19F313A1004C82C6 /* MqqtClientWrapper.swift in Sources */,
-				A19C69F019F9E19C00848370 /* ContactCollectionViewCell.swift in Sources */,
 				A1E33D141A0470060039339E /* MainViewController.swift in Sources */,
 				A1EF259F19F2CC2D00F52A85 /* PathJson.swift in Sources */,
 				A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */,
@@ -646,7 +666,7 @@
 				A100D2841A05E31900664C66 /* PressableControl.swift in Sources */,
 				A100D2881A06BE2300664C66 /* UIImage+Utils.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
-				A19C69EA19F9DBFD00848370 /* ContactCollectionDataSource.swift in Sources */,
+				4834AEBA1A14246200B5C2FA /* ChatCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

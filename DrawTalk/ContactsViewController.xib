@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsViewController" customModule="DrawTalk" customModuleProvider="target">
+            <connections>
+                <outlet property="searchDisplayController" destination="Ga7-Wl-l7V" id="O3N-Zr-dJF"/>
+                <outlet property="tableView" destination="9bb-0h-tSB" id="tLO-v6-Iht"/>
+                <outlet property="view" destination="iN0-l3-epB" id="rN6-oO-RPG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Hrc-SK-UYh">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9bb-0h-tSB">
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="hbu-mx-jQJ"/>
+                        <outlet property="delegate" destination="-1" id="RbU-7W-CVq"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Hrc-SK-UYh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="7ig-6e-7hl"/>
+                <constraint firstAttribute="trailing" secondItem="Hrc-SK-UYh" secondAttribute="trailing" id="8hX-yi-jcx"/>
+                <constraint firstItem="Hrc-SK-UYh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ItK-10-mkP"/>
+                <constraint firstItem="9bb-0h-tSB" firstAttribute="top" secondItem="Hrc-SK-UYh" secondAttribute="bottom" id="Len-7z-sJ9"/>
+                <constraint firstItem="9bb-0h-tSB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kIV-M7-lTv"/>
+                <constraint firstAttribute="trailing" secondItem="9bb-0h-tSB" secondAttribute="trailing" id="qZV-SO-EUS"/>
+                <constraint firstAttribute="bottom" secondItem="9bb-0h-tSB" secondAttribute="bottom" id="uib-1T-cTt"/>
+            </constraints>
+            <point key="canvasLocation" x="374" y="111"/>
+        </view>
+        <searchDisplayController id="Ga7-Wl-l7V">
+            <connections>
+                <outlet property="delegate" destination="-1" id="rrR-5y-FeC"/>
+                <outlet property="searchBar" destination="Hrc-SK-UYh" id="U41-2U-P1q"/>
+                <outlet property="searchContentsController" destination="-1" id="hIc-Zb-hBl"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="aaT-yt-kyB"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="f8w-eG-e9d"/>
+            </connections>
+        </searchDisplayController>
+    </objects>
+</document>

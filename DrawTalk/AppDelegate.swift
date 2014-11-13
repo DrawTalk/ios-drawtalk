@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+import AddressBook
+import AddressBookUI
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -27,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    self.window!.rootViewController = MainViewController()
+    self.window!.rootViewController = MainTabBarController()
     self.window!.makeKeyAndVisible()
     
     // start up
@@ -35,6 +38,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var operation = RegistrationOperation()
     operation.controller = self.window!.rootViewController
     queue.addOperation(operation)
+    
+    //let picker = ABPeoplePickerNavigationController()
+    //self.window!.rootViewController?.presentViewController(picker, animated: true, completion: nil)
 
     return true
   }

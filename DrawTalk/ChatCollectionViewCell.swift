@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-class ContactCollectionViewCell: UICollectionViewCell {
+class ChatCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var nameLabel: UILabel!
   
   class var reuseIdentifier: String {
-    return "ContactCollectionViewCell"
+    return "ChatCollectionViewCell"
   }
   
   class var cellNib: UINib {
-    return UINib(nibName: "ContactCollectionViewCell", bundle: nil)
+    return UINib(nibName: "ChatCollectionViewCell", bundle: nil)
   }
   
   override func awakeFromNib() {

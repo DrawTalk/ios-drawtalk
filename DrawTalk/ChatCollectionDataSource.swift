@@ -9,27 +9,27 @@
 import Foundation
 import UIKit
 
-class ContactCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+class ChatCollectionDataSource : NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
   
-  private var contactCollectionView: UICollectionView!
-  private var contacts: [Contact]!
+  private var chatCollectionView: UICollectionView!
+  private var chats: [Contact]!
   
   init(collectionView: UICollectionView) {
     super.init()
-    contacts = []
-    contactCollectionView = collectionView
-    contactCollectionView.delegate = self
-    contactCollectionView.backgroundColor = UIColor.whiteColor()
+    chats = []
+    chatCollectionView = collectionView
+    chatCollectionView.delegate = self
+    chatCollectionView.backgroundColor = UIColor.whiteColor()
     registerCells()
   }
   
-  func loadWithContacts(contacts: [Contact]?) {
-    self.contacts = contacts;
-    contactCollectionView.reloadData()
+  func loadWithChats(chats: [Contact]?) {
+    self.chats = chats;
+    chatCollectionView.reloadData()
   }
   
   func registerCells() {
-    contactCollectionView.registerNib(ContactCollectionViewCell.cellNib, forCellWithReuseIdentifier:ContactCollectionViewCell.reuseIdentifier)
+    chatCollectionView.registerNib(ChatCollectionViewCell.cellNib, forCellWithReuseIdentifier:ChatCollectionViewCell.reuseIdentifier)
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -37,21 +37,21 @@ class ContactCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return contacts.count
+    return chats.count
   }
   
   func collectionView(collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-      return CGSizeMake(contactCollectionView.frame.size.width, 100)
+      return CGSizeMake(chatCollectionView.frame.size.width, 100)
   }
   
   func collectionView(collectionView: UICollectionView,
     cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
       
-      var cell = contactCollectionView.dequeueReusableCellWithReuseIdentifier(ContactCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as ContactCollectionViewCell
+      var cell = chatCollectionView.dequeueReusableCellWithReuseIdentifier(ChatCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as ChatCollectionViewCell
       
-      var contact = contacts[indexPath.row] as Contact
+      var contact = chats[indexPath.row] as Contact
       cell.bindObject(contact)
       
       return cell
