@@ -9,19 +9,78 @@
 import Foundation
 import UIKit
 
-struct Candy {
-  let category : String
-  let name : String
+extension String {
+  subscript (i: Int) -> String {
+    return String(Array(self)[i])
+  }
+}
+
+protocol Item {
+  var section: Int? { get }
+  var localizedTitle: String { get }
+}
+
+class Section<T> {
+  var items: [T] = []
+  func addItem(item: T) {
+    self.items.append(item)
+  }
+}
+
+class ContactItem: NSObject, Item {
+  let contact: Contact
+  var section: Int?
+  var localizedTitle: String
+  
+  init(contact: Contact) {
+    self.contact = contact
+    self.localizedTitle = contact.firstName![0]
+  }
 }
 
 class ContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   
-  var contacts = [Contact]()
-  var filteredContacts = [Contact]()
+  private var sections = [Section<ContactItem>]()
+  private var contacts: [Contact] {
+    didSet {
+      let selector: Selector = "localizedTitle"
+
+      // create items from the contacts list
+      var items: [ContactItem] = contacts.map { contact in
+        var item = ContactItem(contact: contact)
+        item.section = self.collation.sectionForObject(item, collationStringSelector: selector)
+        return item
+      }
+      
+      
+      // create empty sections
+      var sections = [Section<ContactItem>]()
+      for i in 0..<self.collation.sectionIndexTitles.count {
+        sections.append(Section())
+      }
+      
+      // put each item in a section
+      for item in items {
+        sections[item.section!].addItem(item)
+      }
+      
+      // sort each section
+      for section in sections {
+        section.items = self.collation.sortedArrayFromArray(section.items, collationStringSelector: selector) as [ContactItem]
+      }
+      
+      self.sections = sections;
+    }
+  }
   
+  var filteredContacts = [Contact]()
+
+  let collation = UILocalizedIndexedCollation.currentCollation() as UILocalizedIndexedCollation
+
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    self.contacts = []
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
   
@@ -57,48 +116,55 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     AddressBookImport.defaultAddressBookImport.contacts { (contacts: [Contact]?, error: NSError?) in
       dispatch_async(dispatch_get_main_queue(), {
         self.contacts = contacts!
-
-        for contact: Contact in self.contacts {
-          contact.token = "e10059ef-292b-4306-95dc-df8ff9d75982"
-        }
-          
-        //let phoneNumbers = contacts?.map({ (contact: Contact) -> String in
-        //  return contact.firstName!
-        //})
-        
-        // start up
-        //var queue = NSOperationQueue()
-        //let request = ContactsLookupRequest(phoneNumbers: ["4086855484", "6504047096"])
-       // var lookup = ContactsLookupOperation(serverRequest: request)
-       // queue.addOperation(lookup)
-        
-        //for contact: Contact in self.contacts {
-          
-        //}
-        
-        self.tableView.reloadData()
+        let contactsTokenDecorator = ContactsTokenDecorator(self.contacts)
+        contactsTokenDecorator.decorate({ (success, error) -> Void in
+          if success {
+            self.tableView.reloadData()
+          }
+        })
       })
     }
   }
   
-  /*
+  func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+    if tableView != self.searchDisplayController!.searchResultsTableView {
+      // do not display empty `Section`s
+      if !self.sections[section].items.isEmpty {
+        return self.collation.sectionTitles[section] as String
+      }
+    }
+    return ""
+  }
+
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    if tableView == self.searchDisplayController!.searchResultsTableView {
+      return 1
+    } else {
+      return self.sections.count
+    }
   }
-  */
-  
-  /*
+
   func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-    
+    if tableView == self.searchDisplayController!.searchResultsTableView {
+      return []
+    } else {
+      return collation.sectionIndexTitles
+    }
   }
+  
   func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+    if tableView == self.searchDisplayController!.searchResultsTableView {
+      return 1
+    } else {
+      return collation.sectionForSectionIndexTitleAtIndex(index)
+    }
   }
-  */
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if tableView == self.searchDisplayController!.searchResultsTableView {
       return filteredContacts.count
     } else {
-      return contacts.count
+      return sections[section].items.count
     }
   }
   
@@ -114,12 +180,15 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     if tableView == self.searchDisplayController!.searchResultsTableView {
       contact = filteredContacts[indexPath.row]
     } else {
-      contact = contacts[indexPath.row]
+      let item = sections[indexPath.section].items[indexPath.row]
+      contact = item.contact
     }
     
     // Configure the cell
     cell!.textLabel.text = contact.firstName
-    cell!.detailTextLabel?.text = "I'm on DrawTalk"
+    if contact.token != nil {
+      cell!.detailTextLabel?.text = "I'm on DrawTalk"
+    }
     cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
     
     return cell!
@@ -138,7 +207,13 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let selectedContact = contacts[indexPath.item]
+    var selectedContact: Contact
+    if tableView == self.searchDisplayController!.searchResultsTableView {
+      selectedContact = filteredContacts[indexPath.item]
+    } else {
+      selectedContact = sections[indexPath.section].items[indexPath.row].contact
+    }
+
     let ctrl = ConversationViewController.controller(channel: AppSession.mainSession.currentUser!.userKey!, contact: selectedContact)
     ctrl.hidesBottomBarWhenPushed = true
     navigationController?.pushViewController(ctrl, animated: true)

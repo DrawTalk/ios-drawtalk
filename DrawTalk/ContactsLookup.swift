@@ -20,17 +20,17 @@ struct ContactsLookupRequest: ServerRequest {
 }
 
 struct ContactsLookupResponse {
-  let tokens: [String : AnyObject]
+  let tokens: [String : String]
   
   func tokenForPhoneNumber(phone: String) -> String? {
-    return tokens[phone] as? String
+    return tokens[phone]
   }
   
   static func fromJson(json: AnyObject?) -> ContactsLookupResponse? {
     if let j: AnyObject = json {
       let json = JSON(j)
       let pairs = json["phoneTokens"].dictionaryObject!
-      return ContactsLookupResponse(tokens: pairs)
+      return ContactsLookupResponse(tokens: pairs as [String : String])
     }
     return nil
   }
@@ -50,7 +50,7 @@ class ContactsLookupOperation: ApiOperation {
   override func main () {
     request(Alamofire.Method.POST, url, parameters: serverRequest.toJson(), encoding: .JSON)
       .responseJSON { (request, response, JSON, error) in
-        print("")
+        print(JSON)
         var result = ServerResponse<ContactsLookupResponse>(
           result: ContactsLookupResponse.fromJson(JSON),
           error: error

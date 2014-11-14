@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A778919F5F74604A4A283BF /* libPods-DrawTalkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADCA02E18B8C48048C220D39 /* libPods-DrawTalkTests.a */; };
+		481256811A16B8890012139E /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481256801A16B8890012139E /* Localization.swift */; };
 		4834AEB91A14246200B5C2FA /* ChatCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEB41A14246200B5C2FA /* ChatCollectionDataSource.swift */; };
 		4834AEBA1A14246200B5C2FA /* ChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEB51A14246200B5C2FA /* ChatCollectionViewCell.swift */; };
 		4834AEBB1A14246200B5C2FA /* ChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */; };
@@ -20,6 +21,7 @@
 		484F677F1A13F90300867982 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F677E1A13F90300867982 /* User.swift */; };
 		484F67821A14029B00867982 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67811A14029B00867982 /* ContactsViewController.swift */; };
 		484F67851A1403B000867982 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484F67841A1403B000867982 /* ContactsViewController.xib */; };
+		486A0FC61A169AB800D83363 /* ContactsTokenDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */; };
 		48B088D31A11D272003417C2 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B088D21A11D272003417C2 /* AppSession.swift */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A100D2841A05E31900664C66 /* PressableControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2831A05E31900664C66 /* PressableControl.swift */; };
@@ -76,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		43A09251A987DEB58F6C8B3B /* Pods-DrawTalkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalkTests/Pods-DrawTalkTests.release.xcconfig"; sourceTree = "<group>"; };
+		481256801A16B8890012139E /* Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		4834AEB41A14246200B5C2FA /* ChatCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionDataSource.swift; sourceTree = "<group>"; };
 		4834AEB51A14246200B5C2FA /* ChatCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		484F677E1A13F90300867982 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		484F67811A14029B00867982 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		484F67841A1403B000867982 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
+		486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTokenDecorator.swift; sourceTree = "<group>"; };
 		48B088D21A11D272003417C2 /* AppSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		55EF48391D7B425A126E8068 /* Pods-DrawTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalk/Pods-DrawTalk.release.xcconfig"; sourceTree = "<group>"; };
 		6E197F1F6ACC797A3A0CDA89 /* Pods-DrawTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalk/Pods-DrawTalk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +200,14 @@
 			name = Registration;
 			sourceTree = "<group>";
 		};
+		486A0FC41A169AAB00D83363 /* Decorators */ = {
+			isa = PBXGroup;
+			children = (
+				486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */,
+			);
+			name = Decorators;
+			sourceTree = "<group>";
+		};
 		487D33821A0E18FF006F8B9A /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +250,7 @@
 			children = (
 				A10658B719FD7E5800618C15 /* Localizable.strings */,
 				A10658C419FD87B700618C15 /* Localizable.stringsdict */,
+				481256801A16B8890012139E /* Localization.swift */,
 			);
 			name = i18n;
 			sourceTree = "<group>";
@@ -360,8 +373,9 @@
 		A19C69E719F9DB1F00848370 /* Functional */ = {
 			isa = PBXGroup;
 			children = (
-				A19C69F219F9E1AE00848370 /* Contacts */,
 				A19C69F319F9E1D000848370 /* Chats */,
+				A19C69F219F9E1AE00848370 /* Contacts */,
+				486A0FC41A169AAB00D83363 /* Decorators */,
 				A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */,
 				A1E33D131A0470060039339E /* MainViewController.swift */,
 			);
@@ -389,8 +403,8 @@
 		A19C69F319F9E1D000848370 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				4834AEB31A14245800B5C2FA /* Chats */,
 				A1E450EF1A0750AB00EE82A7 /* Cells */,
+				4834AEB31A14245800B5C2FA /* Chats */,
 				A11E8F3A19E8895B0055772A /* ConversationViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* ConversationViewController.xib */,
 				A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */,
@@ -633,6 +647,7 @@
 			files = (
 				A1DACD3F19FC3F9700D02B5D /* MainTabBarController.swift in Sources */,
 				484F67741A11D35700867982 /* RegistrationOperation.swift in Sources */,
+				481256811A16B8890012139E /* Localization.swift in Sources */,
 				A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */,
 				A1E450F11A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift in Sources */,
 				A100D28A1A06BE4C00664C66 /* UIView+Utils.swift in Sources */,
@@ -670,6 +685,7 @@
 				A100D2841A05E31900664C66 /* PressableControl.swift in Sources */,
 				A100D2881A06BE2300664C66 /* UIImage+Utils.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
+				486A0FC61A169AB800D83363 /* ContactsTokenDecorator.swift in Sources */,
 				4834AEBA1A14246200B5C2FA /* ChatCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

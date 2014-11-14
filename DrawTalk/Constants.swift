@@ -26,7 +26,7 @@ extension Constants {
 
 extension Constants {
   class var deviceId: String {
-    return "6504047096"//UIDevice.currentDevice().identifierForVendor.UUIDString
+    return UIDevice.currentDevice().identifierForVendor.UUIDString
   }
 }
 
@@ -34,12 +34,4 @@ extension Constants {
   class var apiUrl: String {
     return "http://www.roman-i.com/drawtalk/api"
   }
-}
-
-func DWTLocalizedStringWithDefaultValue(key: String, #tableName: String, #bundle: NSBundle, #value: String, #comment: String) -> String {
-  return NSLocalizedString(key,
-    tableName: tableName,
-    bundle: bundle,
-    value: value,
-    comment: comment)
 }

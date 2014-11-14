@@ -17,17 +17,11 @@ enum MessageState {
 class ChatMessage: MessageEvent {
   var text: String
   var clientId: String
+  var channel: String
   
   private var id: String
-  private var channel: String
   private var state: MessageState
-  
-  var topic: String {
-    get {
-      return channel
-    }
-  }
-  
+
   init(text: String, clientId: String, id: String, channel: String, state: MessageState) {
     self.text = text
     self.clientId = clientId
@@ -41,7 +35,7 @@ class ChatMessage: MessageEvent {
       text: text,
       clientId: AppSession.mainSession.currentUser!.userKey!,
       id: NSUUID().UUIDString,
-      channel: Constants.topicPrefix + channel,
+      channel: channel,
       state: MessageState.OUTGOING)
     
     return message

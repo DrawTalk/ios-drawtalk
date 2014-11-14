@@ -13,7 +13,6 @@ import UIKit
 
 public class MqttClientWrapper {
   
-  private let topic = "6504047096"
   private let client: MQTTClient
   private let clientId: String
   
@@ -51,7 +50,7 @@ public class MqttClientWrapper {
     
     MessageEventBus.defaultBus.subscribe(kMessageEventOutgoing, handler: { (event: MessageEvent) -> Void in
       var message: AnyObject = event.payload()
-      self.sendMessage(message, topic: event.topic)
+      self.sendMessage(message, channel: event.channel)
     })
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
@@ -63,7 +62,7 @@ public class MqttClientWrapper {
   }
   
   // message would be json serialized drawing
-  private func sendMessage(payload: AnyObject, topic: String) {
+  private func sendMessage(payload: AnyObject, channel: String) {
     var jsonError: NSError?
     let encodedJsonData: NSData? = NSJSONSerialization.dataWithJSONObject(payload, options: nil, error: &jsonError)
     let encodedJsonString: NSString = NSString(data:encodedJsonData!, encoding:NSUTF8StringEncoding)!
@@ -73,7 +72,7 @@ public class MqttClientWrapper {
     
     client.publishString(
       encodedJsonString,
-      toTopic: topic,
+      toTopic: channel,
       withQos: ExactlyOnce,
       retain: false,
       completionHandler: { (mid: Int32) -> Void in

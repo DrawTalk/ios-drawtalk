@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class ConversationViewController : UIViewController, MessageCollectionDataSourceDelegate {
-
+  
   @IBOutlet weak var messageContainerView: UIView!
   @IBOutlet weak var canvasView: CanvasView!
   @IBOutlet weak var sendButton: UIButton!
@@ -37,7 +37,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     messageController = MessageCollectionViewController.controller()
     addChildViewController(messageController)
     messageContainerView.addSubview(messageController.view)
@@ -63,20 +63,24 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
   }
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
-    let drawingJson = DrawingJson(drawing: canvasView.drawing())
+    let drawing = canvasView.drawing()
+    let drawingJson = DrawingJson(drawing: drawing)
     var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.token!)
     MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
+    messageController.messageCollectionDataSource.addDrawing(drawing)
   }
   
   private func observerMessagingEvent() {
     MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
-      var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
-      var drawingJson =  DrawingJson(json: d)
-      dispatch_async(dispatch_get_main_queue(), {
-        var drawing = drawingJson.toDrawing()
-        self.messageController.messageCollectionDataSource.addDrawing(drawing)
-      })
+      if chatMessage.channel == self.channel {
+        var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
+        var drawingJson =  DrawingJson(json: d)
+        dispatch_async(dispatch_get_main_queue(), {
+          var drawing = drawingJson.toDrawing()
+          self.messageController.messageCollectionDataSource.addDrawing(drawing)
+        })
+      }
     })
   }
   

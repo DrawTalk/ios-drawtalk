@@ -11,7 +11,7 @@ import Foundation
 @objc
 public protocol MessageEvent {
   func payload() -> AnyObject
-  var topic: String { get }
+  var channel: String { get }
 }
 
 public typealias EventBusHandler = (MessageEvent) -> Void
