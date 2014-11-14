@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class ConversationViewController : UIViewController, MessageCollectionDataSourceDelegate {
+class ConversationViewController : UIViewController, MessageCollectionDataSourceDelegate {
 
   @IBOutlet weak var messageContainerView: UIView!
   @IBOutlet weak var canvasView: CanvasView!
@@ -18,22 +18,24 @@ public class ConversationViewController : UIViewController, MessageCollectionDat
   private var messageController: MessageCollectionViewController!
   
   private var channel: String!
+  private var contact: Contact!
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
   
-  required public init(coder aDecoder: NSCoder) {
+  required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public class func controller(#channel: String) -> ConversationViewController {
+  class func controller(#channel: String, contact: Contact) -> ConversationViewController {
     let vc = ConversationViewController(nibName:"ConversationViewController", bundle: nil)
     vc.channel = channel
+    vc.contact = contact
     return vc
   }
   
-  override public func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
 
     messageController = MessageCollectionViewController.controller()
@@ -62,7 +64,7 @@ public class ConversationViewController : UIViewController, MessageCollectionDat
   
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let drawingJson = DrawingJson(drawing: canvasView.drawing())
-    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: channel)
+    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.token!)
     MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
   }
   

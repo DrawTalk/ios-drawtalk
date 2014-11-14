@@ -57,6 +57,25 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     AddressBookImport.defaultAddressBookImport.contacts { (contacts: [Contact]?, error: NSError?) in
       dispatch_async(dispatch_get_main_queue(), {
         self.contacts = contacts!
+
+        for contact: Contact in self.contacts {
+          contact.token = "e10059ef-292b-4306-95dc-df8ff9d75982"
+        }
+          
+        //let phoneNumbers = contacts?.map({ (contact: Contact) -> String in
+        //  return contact.firstName!
+        //})
+        
+        // start up
+        //var queue = NSOperationQueue()
+        //let request = ContactsLookupRequest(phoneNumbers: ["4086855484", "6504047096"])
+       // var lookup = ContactsLookupOperation(serverRequest: request)
+       // queue.addOperation(lookup)
+        
+        //for contact: Contact in self.contacts {
+          
+        //}
+        
         self.tableView.reloadData()
       })
     }
@@ -119,7 +138,8 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
   }
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let ctrl = ConversationViewController.controller(channel: "6504047096")
+    let selectedContact = contacts[indexPath.item]
+    let ctrl = ConversationViewController.controller(channel: AppSession.mainSession.currentUser!.userKey!, contact: selectedContact)
     ctrl.hidesBottomBarWhenPushed = true
     navigationController?.pushViewController(ctrl, animated: true)
   }

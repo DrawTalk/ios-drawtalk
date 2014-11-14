@@ -26,12 +26,15 @@ struct SendVerificationCodeResponse {
   let userKey: String
   let privateToken: String
   
-  static func fromJson(JSON: AnyObject?) -> SendVerificationCodeResponse {
-    let result = JSON as? NSDictionary
-    let phoneNumber = result?["phoneNumber"] as String
-    let userKey = result?["userKey"] as String
-    let privateToken = result?["privateToken"] as String
-    return SendVerificationCodeResponse(phoneNumber: phoneNumber, userKey: userKey, privateToken: privateToken)
+  static func fromJson(JSON: AnyObject?) -> SendVerificationCodeResponse? {
+    if let JSON: AnyObject = JSON {
+      let result = JSON as? NSDictionary
+      let phoneNumber = result?["phoneNumber"] as String
+      let userKey = result?["userKey"] as String
+      let privateToken = result?["privateToken"] as String
+      return SendVerificationCodeResponse(phoneNumber: phoneNumber, userKey: userKey, privateToken: privateToken)
+    }
+    return nil
   }
 }
 

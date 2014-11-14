@@ -17,10 +17,10 @@ class MainViewController: UIViewController {
   }
   
   func setup() {
-    let conversation = ConversationViewController.controller(channel: "6504047096")
-    conversation.edgesForExtendedLayout = UIRectEdge.None;
-    let navigationController = UINavigationController(rootViewController: conversation)
-    addContentController(navigationController)
+    //let conversation = ConversationViewController.controller(channel: "6504047096")
+    //conversation.edgesForExtendedLayout = UIRectEdge.None;
+    //let navigationController = UINavigationController(rootViewController: conversation)
+    //addContentController(navigationController)
   }
   
   func addContentController(controller: UIViewController) {

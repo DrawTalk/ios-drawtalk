@@ -13,6 +13,7 @@
 		4834AEBB1A14246200B5C2FA /* ChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */; };
 		4834AEBC1A14246200B5C2FA /* ChatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEB71A14246200B5C2FA /* ChatCollectionViewController.swift */; };
 		4834AEBD1A14246200B5C2FA /* ChatCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4834AEB81A14246200B5C2FA /* ChatCollectionViewController.xib */; };
+		4834AEC11A15B2C900B5C2FA /* ContactsLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4834AEC01A15B2C900B5C2FA /* ContactsLookup.swift */; };
 		484F67741A11D35700867982 /* RegistrationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67731A11D35700867982 /* RegistrationOperation.swift */; };
 		484F677A1A11D52700867982 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67761A11D52700867982 /* RegistrationViewController.swift */; };
 		484F677B1A11D52700867982 /* RegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484F67771A11D52700867982 /* RegistrationViewController.xib */; };
@@ -80,6 +81,7 @@
 		4834AEB61A14246200B5C2FA /* ChatCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		4834AEB71A14246200B5C2FA /* ChatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewController.swift; sourceTree = "<group>"; };
 		4834AEB81A14246200B5C2FA /* ChatCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatCollectionViewController.xib; sourceTree = "<group>"; };
+		4834AEC01A15B2C900B5C2FA /* ContactsLookup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsLookup.swift; sourceTree = "<group>"; };
 		484F67731A11D35700867982 /* RegistrationOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationOperation.swift; sourceTree = "<group>"; };
 		484F67761A11D52700867982 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		484F67771A11D52700867982 /* RegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationViewController.xib; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				A1DAEF641A059AB100287E97 /* AcquireVerificationCodeOperation.swift */,
 				A1DAEF661A059ABA00287E97 /* SendVerificationCodeOperation.swift */,
 				484F67731A11D35700867982 /* RegistrationOperation.swift */,
+				4834AEC01A15B2C900B5C2FA /* ContactsLookup.swift */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				A11E8F3C19E8895B0055772A /* ConversationViewController.swift in Sources */,
 				A1DAEF671A059ABA00287E97 /* SendVerificationCodeOperation.swift in Sources */,
 				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
+				4834AEC11A15B2C900B5C2FA /* ContactsLookup.swift in Sources */,
 				A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */,
 				48B088D31A11D272003417C2 /* AppSession.swift in Sources */,
 				A100D2841A05E31900664C66 /* PressableControl.swift in Sources */,

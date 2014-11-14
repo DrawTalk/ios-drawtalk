@@ -36,10 +36,10 @@ class ChatMessage: MessageEvent {
     self.state = state
   }
   
-  class func outgoing(payload: String, channel: String) -> ChatMessage {
+  class func outgoing(text: String, channel: String) -> ChatMessage {
     var message = ChatMessage(
-      text: payload,
-      clientId: Constants.deviceId,
+      text: text,
+      clientId: AppSession.mainSession.currentUser!.userKey!,
       id: NSUUID().UUIDString,
       channel: Constants.topicPrefix + channel,
       state: MessageState.OUTGOING)

@@ -20,6 +20,8 @@ class Contact {
   var imageData: NSData?
   var emails: [String]?
   var phoneNumbers: [PhoneNumber]?
+  
+  var token: String?
 
   init() {
     

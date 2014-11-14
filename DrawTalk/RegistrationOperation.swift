@@ -69,14 +69,41 @@ class RegistrationOperation: ConcurrentOperation, RegistrationViewControllerDele
     let request = SendVerificationCodeRequest(phoneNumber: user.phoneNumber!, code: code)
     var operation = SendVerificationCodeOperation(serverRequest: request)
     operation.completionBlock = {
-      let result: SendVerificationCodeResponse? = operation.serverReponse?.result
-      user.phoneNumber = result?.phoneNumber
-      user.userKey = result?.userKey
-      user.privateToken = result?.privateToken
-      AppSession.mainSession.logUserIn(user)
+      let response: ServerResponse<SendVerificationCodeResponse>? = operation.serverReponse
+      if let result = response?.result? {
+        user.phoneNumber = result.phoneNumber
+        user.userKey = result.userKey
+        user.privateToken = result.privateToken
+        AppSession.mainSession.logUserIn(user)
+      } else {
+        self.showError(response?.error, inController: controller)
+      }
       weakSelf?.finish()
     }
     queue.addOperation(operation)
+  }
+  
+  private func showError(error: NSError?, inController controller: UIViewController) {
+    dispatch_async(dispatch_get_main_queue(), {
+      
+      let title = DWTLocalizedStringWithDefaultValue(
+        "registration.verification.alert.title",
+        tableName: "Localizable",
+        bundle: NSBundle.mainBundle(),
+        value: "Ooops!",
+        comment: "Title for verification screen alert error")
+      
+      let message = DWTLocalizedStringWithDefaultValue(
+        "registration.verification.alert.message",
+        tableName: "Localizable",
+        bundle: NSBundle.mainBundle(),
+        value: "Looks like something went wrong. Try sending the code again",
+        comment: "Message for verification screen alert error")
+      
+      var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+      alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+      controller.presentViewController(alert, animated: true, completion: nil)
+    })
   }
   
 }

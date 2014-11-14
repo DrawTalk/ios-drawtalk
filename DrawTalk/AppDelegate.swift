@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-import AddressBook
-import AddressBookUI
+//import AddressBook
+//import AddressBookUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,11 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window!.rootViewController = MainTabBarController()
     self.window!.makeKeyAndVisible()
     
+    
     // start up
     var queue = NSOperationQueue()
-    var operation = RegistrationOperation()
-    operation.controller = self.window!.rootViewController
-    queue.addOperation(operation)
+    var register = RegistrationOperation()
+    register.controller = self.window!.rootViewController
+    queue.addOperation(register)
+    
+    //let request = ContactsLookupRequest(phoneNumbers: ["4086855484", "6504047096"])
+    //var lookup = ContactsLookupOperation(serverRequest: request)
+    //queue.addOperation(lookup)
     
     //let picker = ABPeoplePickerNavigationController()
     //self.window!.rootViewController?.presentViewController(picker, animated: true, completion: nil)
