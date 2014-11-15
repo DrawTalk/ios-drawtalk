@@ -224,11 +224,23 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     if selectedContact.token != nil {
       let ctrl = ConversationViewController.controller(contact: selectedContact)
       ctrl.hidesBottomBarWhenPushed = true
-      //let c = ChatCollectionViewController.controller()
-      navigationController?.presentViewController(ctrl, animated: true, completion: { () -> Void in
-        
+      var nav = UINavigationController(rootViewController: ctrl)
+      
+      let title = DWTLocalizedStringWithDefaultValue(
+        "screen.chat.navigation-bar.left-button",
+        tableName: "Localizable",
+        bundle: NSBundle.mainBundle(),
+        value: "Chats",
+        comment: "Text for the left button in the navigation bar of the chat screen (when coming from the contact list)")
+      
+      ctrl.navigationItem.leftBarButtonItem = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("didClickOnNavigationBarLeftButton"))
+      self.presentViewController(nav, animated: true, completion: { () -> Void in
+        // TODO: go to chats tab
       })
-      //navigationController?.viewControllers.insert(c, atIndex: 1)
     }
+  }
+  
+  func didClickOnNavigationBarLeftButton() {
+    self.dismissViewControllerAnimated(true, completion: nil)
   }
 }

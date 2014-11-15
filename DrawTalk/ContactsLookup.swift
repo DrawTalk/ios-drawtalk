@@ -50,7 +50,6 @@ class ContactsLookupOperation: ApiOperation {
   override func main () {
     request(Alamofire.Method.POST, url, parameters: serverRequest.toJson(), encoding: .JSON)
       .responseJSON { (request, response, JSON, error) in
-        print(JSON)
         var result = ServerResponse<ContactsLookupResponse>(
           result: ContactsLookupResponse.fromJson(JSON),
           error: error

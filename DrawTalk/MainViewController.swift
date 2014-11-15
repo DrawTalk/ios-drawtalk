@@ -14,6 +14,8 @@ class MainViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    
+    view.backgroundColor = UIColor.whiteColor()
   }
   
   func setup() {
@@ -22,6 +24,7 @@ class MainViewController: UIViewController {
     register.controller = self
     register.completionBlock = {
       dispatch_sync(dispatch_get_main_queue(), {
+        println("register")
         self.addContentController(MainTabBarController())
         self.setupMQTT()
       })

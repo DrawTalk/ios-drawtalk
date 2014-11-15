@@ -33,9 +33,9 @@ class RegistrationOperation: ConcurrentOperation, RegistrationViewControllerDele
   
   func finish() {
     dispatch_async(dispatch_get_main_queue(), {
+      self.state = .Finished
       self.controller.dismissViewControllerAnimated(true, completion: nil)
     })
-    self.state = .Finished
   }
   
   private func showRegistrationAnimated(animated: Bool) {
