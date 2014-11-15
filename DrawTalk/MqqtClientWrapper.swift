@@ -33,6 +33,7 @@ public class MqttClientWrapper {
     client.password = password
     client.host = host
     client.port = port
+    client.cleanSession = false;
     
     client.connectWithCompletionHandler { (code: MQTTConnectionReturnCode) -> Void in
       switch code.value {
