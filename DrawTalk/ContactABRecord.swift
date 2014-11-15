@@ -110,6 +110,7 @@ extension ContactABRecord {
   func toContact() -> Contact {
     var contact = Contact()
     
+    contact.identifier = result[kDWTContactABRecordIndentifier] as AnyObject? as? String
     contact.firstName = result[kDWTContactABRecordFirstNameProperty] as AnyObject? as? String
     contact.lastName = result[kDWTContactABRecordLastNameProperty] as AnyObject? as? String
     contact.imageData = result[kDWTContactABRecordImageData] as AnyObject? as? NSData

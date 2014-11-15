@@ -32,6 +32,6 @@ extension Constants {
 
 extension Constants {
   class var apiUrl: String {
-    return "http://www.roman-i.com/drawtalk/api"
+    return "http://drawtalk.herokuapp.com/drawtalk/api"
   }
 }

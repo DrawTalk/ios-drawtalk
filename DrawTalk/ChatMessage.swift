@@ -17,12 +17,12 @@ enum MessageState {
 class ChatMessage: MessageEvent {
   var text: String
   var clientId: String
-  var channel: String
+  var channel: String?
   
   private var id: String
   private var state: MessageState
 
-  init(text: String, clientId: String, id: String, channel: String, state: MessageState) {
+  init(text: String, clientId: String, id: String, channel: String?, state: MessageState) {
     self.text = text
     self.clientId = clientId
     self.id = id
@@ -46,13 +46,12 @@ class ChatMessage: MessageEvent {
     let clientId = json["clientId"].stringValue
     let id = json["id"].stringValue
     let text = json["message"].stringValue
-    let channel = json["channel"].stringValue
-    
+
     var message = ChatMessage(
       text: text,
       clientId: clientId,
       id: id,
-      channel: channel,
+      channel: nil,
       state: MessageState.INCOMING)
     
     return message

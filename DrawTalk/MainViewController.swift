@@ -17,10 +17,28 @@ class MainViewController: UIViewController {
   }
   
   func setup() {
-    //let conversation = ConversationViewController.controller(channel: "6504047096")
-    //conversation.edgesForExtendedLayout = UIRectEdge.None;
-    //let navigationController = UINavigationController(rootViewController: conversation)
-    //addContentController(navigationController)
+    var queue = NSOperationQueue()
+    var register = RegistrationOperation()
+    register.controller = self
+    register.completionBlock = {
+      dispatch_sync(dispatch_get_main_queue(), {
+        self.addContentController(MainTabBarController())
+        self.setupMQTT()
+      })
+    }
+    queue.addOperation(register)
+  }
+  
+  private func setupMQTT() {
+    let kUsername = "vkgogxez"
+    let kPassword = "oX02eF7V0I9Y"
+    
+    MqttClientWrapper.defaultMQTT.setup(
+      username: kUsername,
+      password: kPassword,
+      host: Constants.host,
+      port: Constants.port
+    )
   }
   
   func addContentController(controller: UIViewController) {

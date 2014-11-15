@@ -222,9 +222,13 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     if selectedContact.token != nil {
-      let ctrl = ConversationViewController.controller(channel: AppSession.mainSession.currentUser!.userKey!, contact: selectedContact)
+      let ctrl = ConversationViewController.controller(contact: selectedContact)
       ctrl.hidesBottomBarWhenPushed = true
-      navigationController?.pushViewController(ctrl, animated: true)
+      //let c = ChatCollectionViewController.controller()
+      navigationController?.presentViewController(ctrl, animated: true, completion: { () -> Void in
+        
+      })
+      //navigationController?.viewControllers.insert(c, atIndex: 1)
     }
   }
 }

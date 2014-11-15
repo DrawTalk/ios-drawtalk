@@ -22,6 +22,14 @@
 		484F67821A14029B00867982 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484F67811A14029B00867982 /* ContactsViewController.swift */; };
 		484F67851A1403B000867982 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484F67841A1403B000867982 /* ContactsViewController.xib */; };
 		486A0FC61A169AB800D83363 /* ContactsTokenDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */; };
+		48A13DAB1A17142D0090BAF1 /* CINAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA41A17142D0090BAF1 /* CINAssert.swift */; };
+		48A13DAC1A17142D0090BAF1 /* CINCoreDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA51A17142D0090BAF1 /* CINCoreDataPersistence.swift */; };
+		48A13DAD1A17142D0090BAF1 /* CINLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA71A17142D0090BAF1 /* CINLogging.m */; };
+		48A13DAE1A17142D0090BAF1 /* CINPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA81A17142D0090BAF1 /* CINPersistence.swift */; };
+		48A13DAF1A17142D0090BAF1 /* CINPersistenceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA91A17142D0090BAF1 /* CINPersistenceProtocol.swift */; };
+		48A13DB21A1714A60090BAF1 /* drawtalk.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DB01A1714A60090BAF1 /* drawtalk.xcdatamodeld */; };
+		48A13DC01A1719750090BAF1 /* CDContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DBF1A1719750090BAF1 /* CDContact.swift */; };
+		48A13DC21A1719A50090BAF1 /* CDContact+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DC11A1719A50090BAF1 /* CDContact+Utility.swift */; };
 		48B088D31A11D272003417C2 /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B088D21A11D272003417C2 /* AppSession.swift */; };
 		8EF6BDE1EE4F4FEC93FE14AE /* libPods-DrawTalk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8114F06F395947D1B7A07CAC /* libPods-DrawTalk.a */; };
 		A100D2841A05E31900664C66 /* PressableControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100D2831A05E31900664C66 /* PressableControl.swift */; };
@@ -92,6 +100,16 @@
 		484F67811A14029B00867982 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		484F67841A1403B000867982 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
 		486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTokenDecorator.swift; sourceTree = "<group>"; };
+		48A13DA41A17142D0090BAF1 /* CINAssert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CINAssert.swift; sourceTree = "<group>"; };
+		48A13DA51A17142D0090BAF1 /* CINCoreDataPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CINCoreDataPersistence.swift; sourceTree = "<group>"; };
+		48A13DA61A17142D0090BAF1 /* CINLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CINLogging.h; sourceTree = "<group>"; };
+		48A13DA71A17142D0090BAF1 /* CINLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CINLogging.m; sourceTree = "<group>"; };
+		48A13DA81A17142D0090BAF1 /* CINPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CINPersistence.swift; sourceTree = "<group>"; };
+		48A13DA91A17142D0090BAF1 /* CINPersistenceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CINPersistenceProtocol.swift; sourceTree = "<group>"; };
+		48A13DAA1A17142D0090BAF1 /* Cintra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cintra.h; sourceTree = "<group>"; };
+		48A13DB11A1714A60090BAF1 /* drawtalk.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = drawtalk.xcdatamodel; sourceTree = "<group>"; };
+		48A13DBF1A1719750090BAF1 /* CDContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDContact.swift; sourceTree = "<group>"; };
+		48A13DC11A1719A50090BAF1 /* CDContact+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDContact+Utility.swift"; sourceTree = "<group>"; };
 		48B088D21A11D272003417C2 /* AppSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
 		55EF48391D7B425A126E8068 /* Pods-DrawTalk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalk/Pods-DrawTalk.release.xcconfig"; sourceTree = "<group>"; };
 		6E197F1F6ACC797A3A0CDA89 /* Pods-DrawTalk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawTalk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrawTalk/Pods-DrawTalk.debug.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +197,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		481256821A16D5000012139E /* Carousel */ = {
+			isa = PBXGroup;
+			children = (
+				A1E450F01A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift */,
+				A1E450F21A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib */,
+				A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */,
+				A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */,
+				A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */,
+				A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */,
+				A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */,
+			);
+			name = Carousel;
+			sourceTree = "<group>";
+		};
 		4834AEB31A14245800B5C2FA /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,8 +243,25 @@
 		487D33821A0E18FF006F8B9A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				48A13DB01A1714A60090BAF1 /* drawtalk.xcdatamodeld */,
+				48A13DBF1A1719750090BAF1 /* CDContact.swift */,
+				48A13DC11A1719A50090BAF1 /* CDContact+Utility.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		48A13DA31A17142D0090BAF1 /* Cintra */ = {
+			isa = PBXGroup;
+			children = (
+				48A13DA41A17142D0090BAF1 /* CINAssert.swift */,
+				48A13DA51A17142D0090BAF1 /* CINCoreDataPersistence.swift */,
+				48A13DA61A17142D0090BAF1 /* CINLogging.h */,
+				48A13DA71A17142D0090BAF1 /* CINLogging.m */,
+				48A13DA81A17142D0090BAF1 /* CINPersistence.swift */,
+				48A13DA91A17142D0090BAF1 /* CINPersistenceProtocol.swift */,
+				48A13DAA1A17142D0090BAF1 /* Cintra.h */,
+			);
+			path = Cintra;
 			sourceTree = "<group>";
 		};
 		706A4F7972AC4C41BE43FE30 /* Frameworks */ = {
@@ -403,13 +452,10 @@
 		A19C69F319F9E1D000848370 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				A1E450EF1A0750AB00EE82A7 /* Cells */,
+				481256821A16D5000012139E /* Carousel */,
 				4834AEB31A14245800B5C2FA /* Chats */,
 				A11E8F3A19E8895B0055772A /* ConversationViewController.swift */,
 				A11E8F3E19E88CEE0055772A /* ConversationViewController.xib */,
-				A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */,
-				A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */,
-				A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */,
 			);
 			name = Chats;
 			sourceTree = "<group>";
@@ -427,21 +473,11 @@
 		A1D269CE19F31B27004C82C6 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				48A13DA31A17142D0090BAF1 /* Cintra */,
 				A1E33D231A047C220039339E /* Alamofire.swift */,
 				A1EF25A719F2DA9600F52A85 /* SwiftyJSON.swift */,
 			);
 			name = ThirdParty;
-			sourceTree = "<group>";
-		};
-		A1E450EF1A0750AB00EE82A7 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				A1E450F01A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift */,
-				A1E450F21A0750E400EE82A7 /* CreateMessageCollectionViewCell.xib */,
-				A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */,
-				A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		A1E6539B19FC2BB500DBABE7 /* Utilities */ = {
@@ -652,11 +688,13 @@
 				A1E450F11A0750C500EE82A7 /* CreateMessageCollectionViewCell.swift in Sources */,
 				A100D28A1A06BE4C00664C66 /* UIView+Utils.swift in Sources */,
 				A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */,
+				48A13DAF1A17142D0090BAF1 /* CINPersistenceProtocol.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* ChatMessage.swift in Sources */,
 				A1EF25AC19F2F35A00F52A85 /* MessageEventBus.swift in Sources */,
 				A1CF82711A03283A00E93F65 /* MessageCollectionViewController.swift in Sources */,
 				A1DAEF651A059AB100287E97 /* AcquireVerificationCodeOperation.swift in Sources */,
 				A1DACD3D19FC3D4700D02B5D /* AppDelegate.swift in Sources */,
+				48A13DC01A1719750090BAF1 /* CDContact.swift in Sources */,
 				A1EF25A819F2DA9600F52A85 /* SwiftyJSON.swift in Sources */,
 				A11E8F4419E8A63C0055772A /* UIColor+Utils.swift in Sources */,
 				A1E6539A19FC27F900DBABE7 /* Contact.swift in Sources */,
@@ -664,12 +702,15 @@
 				484F67821A14029B00867982 /* ContactsViewController.swift in Sources */,
 				A100D28C1A071CCA00664C66 /* ThumbnailView.swift in Sources */,
 				A1E33D241A047C220039339E /* Alamofire.swift in Sources */,
+				48A13DAD1A17142D0090BAF1 /* CINLogging.m in Sources */,
 				A1EF25A519F2CF3C00F52A85 /* Drawing.swift in Sources */,
 				484F677F1A13F90300867982 /* User.swift in Sources */,
+				48A13DB21A1714A60090BAF1 /* drawtalk.xcdatamodeld in Sources */,
 				A1EF25A119F2CC3500F52A85 /* Path.swift in Sources */,
 				4834AEBC1A14246200B5C2FA /* ChatCollectionViewController.swift in Sources */,
 				A14C1FCA1A0483CE0035A5F6 /* ApiOperation.swift in Sources */,
 				484F677A1A11D52700867982 /* RegistrationViewController.swift in Sources */,
+				48A13DAC1A17142D0090BAF1 /* CINCoreDataPersistence.swift in Sources */,
 				A1D269CA19F313A1004C82C6 /* MqqtClientWrapper.swift in Sources */,
 				A1E33D141A0470060039339E /* MainViewController.swift in Sources */,
 				A1EF259F19F2CC2D00F52A85 /* PathJson.swift in Sources */,
@@ -677,8 +718,10 @@
 				A10E60CC19F9E62400A69F18 /* AddressBookImport.swift in Sources */,
 				A1EF25A319F2CF3400F52A85 /* DrawingJson.swift in Sources */,
 				A11E8F3C19E8895B0055772A /* ConversationViewController.swift in Sources */,
+				48A13DAB1A17142D0090BAF1 /* CINAssert.swift in Sources */,
 				A1DAEF671A059ABA00287E97 /* SendVerificationCodeOperation.swift in Sources */,
 				A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */,
+				48A13DC21A1719A50090BAF1 /* CDContact+Utility.swift in Sources */,
 				4834AEC11A15B2C900B5C2FA /* ContactsLookup.swift in Sources */,
 				A14C1FC81A0481790035A5F6 /* ConcurrentOperation.swift in Sources */,
 				48B088D31A11D272003417C2 /* AppSession.swift in Sources */,
@@ -686,6 +729,7 @@
 				A100D2881A06BE2300664C66 /* UIImage+Utils.swift in Sources */,
 				A1D269CC19F31774004C82C6 /* Constants.swift in Sources */,
 				486A0FC61A169AB800D83363 /* ContactsTokenDecorator.swift in Sources */,
+				48A13DAE1A17142D0090BAF1 /* CINPersistence.swift in Sources */,
 				4834AEBA1A14246200B5C2FA /* ChatCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,6 +960,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		48A13DB01A1714A60090BAF1 /* drawtalk.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				48A13DB11A1714A60090BAF1 /* drawtalk.xcdatamodel */,
+			);
+			currentVersion = 48A13DB11A1714A60090BAF1 /* drawtalk.xcdatamodel */;
+			path = drawtalk.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A11E8F0019E882E70055772A /* Project object */;
 }

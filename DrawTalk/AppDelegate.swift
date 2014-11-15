@@ -15,28 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-    let kUsername = "vkgogxez"
-    let kPassword = "oX02eF7V0I9Y"
-    
-    MqttClientWrapper.defaultMQTT.setup(
-      username: kUsername,
-      password: kPassword,
-      host: Constants.host,
-      port: Constants.port
-    )
-    
+
+    setupPersistence()
+
     // Override point for customization after application launch.
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    self.window!.rootViewController = MainTabBarController()
+    self.window!.rootViewController = MainViewController()
     self.window!.makeKeyAndVisible()
-    
-    
-    // start up
-    var queue = NSOperationQueue()
-    var register = RegistrationOperation()
-    register.controller = self.window!.rootViewController
-    queue.addOperation(register)
-    
+
     return true
+  }
+
+  private func setupPersistence() {
+    let persistence = CINCoreDataPersistence.sharedInstance()
+    CINPersistence.registerDefaultPersistence(persistence)
+    CINPersistence.defaultPersistence?.setupStorage("drawtalk", storage: "drawtalk.sqlite")
+  }
+  
+  func applicationWillResignActive(application: UIApplication) {
+    CINPersistence.defaultPersistence?.persistData()
   }
 }

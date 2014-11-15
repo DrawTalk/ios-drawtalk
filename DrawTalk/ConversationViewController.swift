@@ -17,7 +17,6 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
   
   private var messageController: MessageCollectionViewController!
   
-  private var channel: String!
   private var contact: Contact!
   
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
@@ -28,9 +27,8 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
     fatalError("init(coder:) has not been implemented")
   }
   
-  class func controller(#channel: String, contact: Contact) -> ConversationViewController {
+  class func controller(#contact: Contact) -> ConversationViewController {
     let vc = ConversationViewController(nibName:"ConversationViewController", bundle: nil)
-    vc.channel = channel
     vc.contact = contact
     return vc
   }
@@ -73,7 +71,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
   private func observerMessagingEvent() {
     MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
-      if chatMessage.channel == self.channel {
+      if chatMessage.clientId == self.contact.token {
         var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
         var drawingJson =  DrawingJson(json: d)
         dispatch_async(dispatch_get_main_queue(), {

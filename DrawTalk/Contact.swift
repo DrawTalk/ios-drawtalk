@@ -15,6 +15,7 @@ struct PhoneNumber {
 
 class Contact {
   
+  var identifier: String!
   var firstName: String?
   var lastName: String?
   var imageData: NSData?

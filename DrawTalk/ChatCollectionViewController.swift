@@ -38,7 +38,6 @@ class ChatCollectionViewController : UIViewController, UICollectionViewDelegate 
     navigationItem.title = navigationItemTitle
   }
   
-  
   private func setupMainCollectionView() {
     mainCollectionDataSource = ChatCollectionDataSource(collectionView: mainCollectionView)
     mainCollectionView.dataSource = mainCollectionDataSource;

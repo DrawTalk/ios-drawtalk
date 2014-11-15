@@ -51,7 +51,7 @@ public class MqttClientWrapper {
     
     MessageEventBus.defaultBus.subscribe(kMessageEventOutgoing, handler: { (event: MessageEvent) -> Void in
       var message: AnyObject = event.payload()
-      self.sendMessage(message, channel: event.channel)
+      self.sendMessage(message, channel: event.channel!)
     })
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
