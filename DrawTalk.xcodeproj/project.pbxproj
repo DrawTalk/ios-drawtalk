@@ -235,6 +235,7 @@
 				A11E8F4219E8A5940055772A /* Extensions */,
 				A19C69E719F9DB1F00848370 /* Functional */,
 				A100D2861A06BD6E00664C66 /* i18n */,
+				486A0FC41A169AAB00D83363 /* Decorators */,
 				A1D269CD19F319FD004C82C6 /* Messaging */,
 				A185DD4C19F2419E0030415E /* Models */,
 				A14C1FC61A0481600035A5F6 /* Operations */,
@@ -375,7 +376,6 @@
 			children = (
 				A19C69F319F9E1D000848370 /* Chats */,
 				A19C69F219F9E1AE00848370 /* Contacts */,
-				486A0FC41A169AAB00D83363 /* Decorators */,
 				A1DACD3E19FC3F9700D02B5D /* MainTabBarController.swift */,
 				A1E33D131A0470060039339E /* MainViewController.swift */,
 			);

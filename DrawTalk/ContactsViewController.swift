@@ -184,10 +184,17 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
       contact = item.contact
     }
     
+    let detailsText = DWTLocalizedStringWithDefaultValue(
+      "screen.contacts.label.details",
+      tableName: "Localizable",
+      bundle: NSBundle.mainBundle(),
+      value: "I'm using DrawTalk",
+      comment: "Label for contact entry that is using DrawTalk")
+    
     // Configure the cell
     cell!.textLabel.text = contact.firstName
     if contact.token != nil {
-      cell!.detailTextLabel?.text = "I'm on DrawTalk"
+      cell!.detailTextLabel?.text = detailsText
     }
     cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
     
@@ -213,9 +220,11 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     } else {
       selectedContact = sections[indexPath.section].items[indexPath.row].contact
     }
-
-    let ctrl = ConversationViewController.controller(channel: AppSession.mainSession.currentUser!.userKey!, contact: selectedContact)
-    ctrl.hidesBottomBarWhenPushed = true
-    navigationController?.pushViewController(ctrl, animated: true)
+    
+    if selectedContact.token != nil {
+      let ctrl = ConversationViewController.controller(channel: AppSession.mainSession.currentUser!.userKey!, contact: selectedContact)
+      ctrl.hidesBottomBarWhenPushed = true
+      navigationController?.pushViewController(ctrl, animated: true)
+    }
   }
 }
