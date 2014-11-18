@@ -20,7 +20,7 @@ class PathJson {
     color = UIColor.blackColor().hex()
   }
   
-  convenience init (json: JSON) {
+  convenience init(json: JSON) {
     self.init()
     let coords = json["coords"].arrayValue
 
@@ -32,7 +32,7 @@ class PathJson {
     self.duration = json["duration"].doubleValue
   }
   
-  convenience init (path: Path) {
+  convenience init(path: Path) {
     self.init()
     
     self.coords = path.coords.map({ (point: CGPoint) -> [CGFloat] in

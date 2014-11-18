@@ -29,5 +29,6 @@ class MessageCollectionViewController : UIViewController, UICollectionViewDelega
   private func setupMessageCollectionView() {
     messageCollectionDataSource = MessageCollectionDataSource(collectionView: messageCollectionView)
     messageCollectionView.dataSource = messageCollectionDataSource;
+    messageCollectionView.backgroundColor = UIColor(red: 224/255, green: 247/255, blue: 250/255, alpha: 1)
   }
 }

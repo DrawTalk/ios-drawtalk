@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-private let kNumberOfSections = 2
+private let kNumberOfSections = 1
 
 protocol MessageCollectionDataSourceDelegate {
   func didSelectMessage(drawing: Drawing)
@@ -42,8 +42,6 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   
   func registerCells() {
     messageCollectionView.registerNib(MessageCollectionViewCell.cellNib, forCellWithReuseIdentifier:MessageCollectionViewCell.reuseIdentifier)
-    
-    messageCollectionView.registerNib(CreateMessageCollectionViewCell.cellNib, forCellWithReuseIdentifier:CreateMessageCollectionViewCell.reuseIdentifier)
   }
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -51,11 +49,7 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   }
   
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    if section == 0 {
-      return messages.count
-    } else {
-      return 1 // for "send" cell
-    }
+    return messages.count
   }
   
   func collectionView(collectionView: UICollectionView,
@@ -67,21 +61,14 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
   func collectionView(collectionView: UICollectionView,
     cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
       
-      var cell: UICollectionViewCell!
-      if indexPath.section == 0 {
-        cell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(MessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as MessageCollectionViewCell
-        
-        var drawing = messages[indexPath.row] as Drawing!
-        var messageCollectionViewCell = cell as MessageCollectionViewCell
-        messageCollectionViewCell.bindObject(drawing)
-        messageCollectionViewCell.tapHandler = { (drawing: Drawing) in
-          self.messageCollectionDelegate?.didSelectMessage(drawing)
-          return
-        }
-      } else {
-        cell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(CreateMessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as CreateMessageCollectionViewCell
-      }
+      var cell: MessageCollectionViewCell = messageCollectionView.dequeueReusableCellWithReuseIdentifier(MessageCollectionViewCell.reuseIdentifier, forIndexPath:indexPath) as MessageCollectionViewCell
       
+      var drawing = messages[indexPath.row] as Drawing!
+      cell.bindObject(drawing)
+      cell.tapHandler = { (drawing: Drawing) in
+        self.messageCollectionDelegate?.didSelectMessage(drawing)
+        return
+      }
       return cell
   }
   
@@ -109,21 +96,19 @@ class MessageCollectionDataSource : NSObject, UICollectionViewDataSource, UIColl
     
     messageCollectionView.performBatchUpdates({ () -> Void in
       self.messageCollectionView.insertItemsAtIndexPaths([lastIndexPath])
-    }, completion: { (complete) -> Void in
-      self.messageCollectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 1),
-        atScrollPosition: UICollectionViewScrollPosition.Right,
-        animated: true)
+      }, completion: { (complete) -> Void in
+        self.messageCollectionView.scrollToItemAtIndexPath(lastIndexPath,
+          atScrollPosition: UICollectionViewScrollPosition.Right,
+          animated: true)
     })
-
+    
   }
   
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-    if indexPath.section == 0 {
-      var drawing = messages[indexPath.row] as Drawing!
-      var cell = collectionView.cellForItemAtIndexPath(indexPath) as MessageCollectionViewCell
-      
-      cell.thumbnail.play(drawing.duration)
-      messageCollectionDelegate?.didSelectMessage(drawing)
-    }
+    var drawing = messages[indexPath.row] as Drawing!
+    var cell = collectionView.cellForItemAtIndexPath(indexPath) as MessageCollectionViewCell
+    
+    cell.thumbnail.play(drawing.duration)
+    messageCollectionDelegate?.didSelectMessage(drawing)
   }
 }

@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389a" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CDChat" representedClassName="CDChat" syncable="YES">
+        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDContact" inverseName="chats" inverseEntity="CDContact" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDMessage" inverseName="chats" inverseEntity="CDMessage" syncable="YES"/>
+    </entity>
     <entity name="CDContact" representedClassName="CDContact" syncable="YES">
         <attribute name="recordId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDChat" inverseName="contacts" inverseEntity="CDChat" syncable="YES"/>
     </entity>
-    <entity name="CDDrawing" syncable="YES"/>
+    <entity name="CDMessage" representedClassName="CDMessage" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="drawing" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDContact" syncable="YES"/>
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDChat" inverseName="messages" inverseEntity="CDChat" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="CDContact" positionX="-27" positionY="18" width="128" height="75"/>
-        <element name="CDDrawing" positionX="18" positionY="63" width="128" height="45"/>
+        <element name="CDChat" positionX="9" positionY="54" width="128" height="73"/>
+        <element name="CDContact" positionX="-27" positionY="18" width="128" height="88"/>
+        <element name="CDMessage" positionX="18" positionY="63" width="128" height="103"/>
     </elements>
 </model>

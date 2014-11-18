@@ -27,6 +27,14 @@ class ChatCollectionViewController : UIViewController, UICollectionViewDelegate 
     setupMainCollectionView()
   }
   
+  private func loadChats() {
+    let cdChats = CINPersistence.defaultPersistence?.findAllForClass(CDChat.self,
+      withPredicate: nil,
+      sortedBy: nil,
+      ascending: false,
+      groupBy: nil) as [CDChat]
+  }
+  
   private func setupNavigationBar() {
     let navigationItemTitle = DWTLocalizedStringWithDefaultValue(
       "screen.chats.navigation-bar.title",

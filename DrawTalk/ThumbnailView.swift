@@ -112,7 +112,7 @@ class ThumbnailView: UIView {
     circle.path = UIBezierPath(roundedRect: rect, cornerRadius: radius).CGPath
     circle.position = CGPointMake(CGRectGetMidX(progressImageView.frame) - radius, CGRectGetMidY(progressImageView.frame) - radius);
     circle.fillColor = UIColor.clearColor().CGColor;
-    circle.strokeColor = UIColor.purpleColor().CGColor;
+    circle.strokeColor =  UIColor(red: 0/255, green: 96/255, blue: 100/255, alpha: 1).CGColor;
     circle.lineWidth = 10;
     
     progressImageView.layer.addSublayer(circle)
