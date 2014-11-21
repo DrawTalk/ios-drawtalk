@@ -23,8 +23,19 @@ class Contact {
   var phoneNumbers: [PhoneNumber]?
   
   var token: String?
-
+  
   init() {
     
+  }
+}
+
+extension Contact {
+  class func contact(#recordId: String, context: CINPersistenceContext) -> CDContact {
+    var contact: CDContact? = context.findFirstForClass(CDContact.self, attribute: "recordId", withValue: recordId) as? CDContact
+    if contact == nil {
+      contact = context.createEntity(CDContact.self) as? CDContact
+      contact?.recordId = recordId
+    }
+    return contact!
   }
 }

@@ -64,12 +64,12 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
     let drawing = canvasView.drawing()
     let drawingJson = DrawingJson(drawing: drawing)
     var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.token!)
-    MessageEventBus.defaultBus.post(kMessageEventOutgoing, event: message)
+    MessageEventBus.defaultBus.post(.Outgoing, event: message)
     messageController.messageCollectionDataSource.addDrawing(drawing)
   }
   
   private func observerMessagingEvent() {
-    MessageEventBus.defaultBus.subscribe(kMessageEventIncoming, handler: { (event: MessageEvent) -> Void in
+    MessageEventBus.defaultBus.subscribe(.Incoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
       if chatMessage.clientId == self.contact.token {
         var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)

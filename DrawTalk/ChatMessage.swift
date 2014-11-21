@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 
-enum MessageState {
-  case OUTGOING
-  case INCOMING
+enum MessageState: Int {
+  // Outbound message states
+  case Outgoing
+  case Sent
+  case Delivered
+
+  // Inbound message states
+  case Unread
+  case Read
 }
 
 class ChatMessage: MessageEvent {
@@ -19,8 +25,8 @@ class ChatMessage: MessageEvent {
   var clientId: String
   var channel: String?
   
-  private var id: String
-  private var state: MessageState
+  private(set) var id: String
+  private(set) var state: MessageState
 
   init(text: String, clientId: String, id: String, channel: String?, state: MessageState) {
     self.text = text
@@ -36,7 +42,7 @@ class ChatMessage: MessageEvent {
       clientId: AppSession.mainSession.currentUser!.userKey!,
       id: NSUUID().UUIDString,
       channel: channel,
-      state: MessageState.OUTGOING)
+      state: .Outgoing)
     
     return message
   }
@@ -52,7 +58,7 @@ class ChatMessage: MessageEvent {
       clientId: clientId,
       id: id,
       channel: nil,
-      state: MessageState.INCOMING)
+      state: .Unread)
     
     return message
   }

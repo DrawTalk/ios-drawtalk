@@ -49,16 +49,14 @@ public class MqttClientWrapper {
       println("subscribed to the topic")
     })
     
-    MessageEventBus.defaultBus.subscribe(kMessageEventOutgoing, handler: { (event: MessageEvent) -> Void in
+    MessageEventBus.defaultBus.subscribe(.Outgoing, handler: { (event: MessageEvent) -> Void in
       var message: AnyObject = event.payload()
       self.sendMessage(message, channel: event.channel!)
     })
     
     client.messageHandler = { (message: MQTTMessage!) -> Void in
       let m = ChatMessage.incoming(message.payload)
-      //if m.clientId != self.clientId {o
-        MessageEventBus.defaultBus.post(kMessageEventIncoming, event: m)
-      //}
+      MessageEventBus.defaultBus.post(.Incoming, event: m)
     }
   }
   

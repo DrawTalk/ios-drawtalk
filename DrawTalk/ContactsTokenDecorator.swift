@@ -17,11 +17,7 @@ class ContactsTokenDecorator {
   
   func decorate(completion: (Bool, NSError?) -> Void) {
     
-    let cdContacts = CINPersistence.defaultPersistence?.findAllForClass(CDContact.self,
-      withPredicate: nil,
-      sortedBy: nil,
-      ascending: false,
-      groupBy: nil) as [CDContact]
+    let cdContacts = ContactDataProvider.fetchAllCDContacts()
     
     var mapping = [String : CDContact]()
     for cdContact in cdContacts {
@@ -70,21 +66,11 @@ class ContactsTokenDecorator {
           }
           completion(true, nil)
           if contactsToSave.count > 0 {
-            self.save(contactsToSave)
+            ContactDataProvider.saveContacts(contactsToSave, completion: nil)
           }
         }
       })
     }
     queue.addOperation(operation)
-  }
-  
-  private func save(contacts: [Contact]) {
-    CINPersistence.defaultPersistence?.save({ (context: CINPersistenceContext!) -> () in
-      for contact in contacts {
-        let entity: CDContact = CDContact.contact(recordId: contact.identifier, context: context)
-        entity.token = contact.token!
-        entity.recordId = contact.identifier
-      }
-      }, completion: nil)
   }
 }

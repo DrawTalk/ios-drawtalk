@@ -35,3 +35,5 @@ extension Constants {
     return "http://drawtalk.herokuapp.com/drawtalk/api"
   }
 }
+
+func noop(){}

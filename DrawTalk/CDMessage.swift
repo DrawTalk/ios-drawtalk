@@ -2,7 +2,7 @@
 //  CDMessage.swift
 //  DrawTalk
 //
-//  Created by Kirollos Risk on 11/15/14.
+//  Created by Kirollos Risk on 11/20/14.
 //  Copyright (c) 2014 DrawTalk. All rights reserved.
 //
 
@@ -12,9 +12,12 @@ import CoreData
 @objc(CDMessage)
 class CDMessage: NSManagedObject {
 
+    @NSManaged var channel: String
     @NSManaged var date: NSDate
-    @NSManaged var drawing: NSString
-    @NSManaged var chats: String
+    @NSManaged var drawing: String
+    @NSManaged var identifier: String
+    @NSManaged var stateRaw: NSNumber
     @NSManaged var author: CDContact
+    @NSManaged var chats: NSSet
 
 }

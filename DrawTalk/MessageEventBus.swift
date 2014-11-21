@@ -17,12 +17,14 @@ public protocol MessageEvent {
 public typealias EventBusHandler = (MessageEvent) -> Void
 public typealias Observer = NSObjectProtocol
 
-public let kMessageEventOutgoing = "kMessageEventOutgoing"
-public let kMessageEventIncoming = "kMessageEventIncoming"
+enum MessageEventType: String {
+  case Outgoing = "kMessageEventOutgoing"
+  case Incoming = "kMessageEventIncoming"
+}
 
 private let kEvent = "event"
 
-public class MessageEventBus {
+class MessageEventBus {
   
   private var observers: [Observer] = []
   
@@ -33,13 +35,13 @@ public class MessageEventBus {
     return Static.instance
   }
 
-  public func post(name: String, event: MessageEvent!) {
-    NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil, userInfo: [kEvent : event])
+  func post(type: MessageEventType, event: MessageEvent!) {
+    NSNotificationCenter.defaultCenter().postNotificationName(type.rawValue, object: nil, userInfo: [kEvent : event])
   }
   
-  public func subscribe(name: String, handler: EventBusHandler!) -> Observer {
+  func subscribe(type: MessageEventType, handler: EventBusHandler!) -> Observer {
     let observer = NSNotificationCenter.defaultCenter().addObserverForName(
-      name,
+      type.rawValue,
       object: nil,
       queue: nil,
       usingBlock: { (note: NSNotification!) -> Void in
@@ -57,11 +59,11 @@ public class MessageEventBus {
     return observer
   }
   
-  public func unsubscribe(observer: Observer) {
+  func unsubscribe(observer: Observer) {
     NSNotificationCenter.defaultCenter().removeObserver(observer)
   }
   
-  public func unsubscribeAll() {
+  func unsubscribeAll() {
     for observer in observers {
       unsubscribe(observer)
     }
