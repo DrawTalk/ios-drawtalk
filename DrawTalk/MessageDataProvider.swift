@@ -40,9 +40,9 @@ class MessageDataProvider: DataProvider {
     var messages: [ChatMessage] = cdMessages.map { cdMessage in
       var item = ChatMessage(
         text: "",
-        clientId: cdMessage.author.token,
+        clientId: cdMessage.author.channel,
         id: cdMessage.identifier,
-        channel: cdMessage.channel,
+        channel: nil,
         state: MessageState(rawValue: Int(cdMessage.stateRaw))!)
       
       return item

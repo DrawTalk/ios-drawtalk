@@ -63,7 +63,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let drawing = canvasView.drawing()
     let drawingJson = DrawingJson(drawing: drawing)
-    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.token!)
+    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.channel!)
     MessageEventBus.defaultBus.post(.Outgoing, event: message)
     messageController.messageCollectionDataSource.addDrawing(drawing)
   }
@@ -71,7 +71,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
   private func observerMessagingEvent() {
     MessageEventBus.defaultBus.subscribe(.Incoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
-      if chatMessage.clientId == self.contact.token {
+      if chatMessage.clientId == self.contact.channel {
         var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
         var drawingJson =  DrawingJson(json: d)
         dispatch_async(dispatch_get_main_queue(), {

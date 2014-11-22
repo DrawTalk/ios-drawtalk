@@ -38,7 +38,7 @@ class ContactItem: NSObject, Item {
   }
 }
 
-class ContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate {
+class ContactsViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -125,25 +125,58 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
       })
     }
   }
+
+  func filterContentForSearchText(searchText: String) {
+    filteredContacts = contacts.filter({( contact : Contact) -> Bool in
+      var stringMatch = contact.firstName?.rangeOfString(searchText)
+      return stringMatch != nil
+    })
+  }
   
-  func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
-    if tableView != self.searchDisplayController!.searchResultsTableView {
-      // do not display empty `Section`s
-      if !self.sections[section].items.isEmpty {
-        return self.collation.sectionTitles[section] as String
-      }
-    }
-    return ""
+  func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
+    self.filterContentForSearchText(searchString)
+    return true
   }
 
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+  
+  func didClickOnNavigationBarLeftButton() {
+    self.dismissViewControllerAnimated(true, completion: nil)
+  }
+}
+
+extension ContactsViewController: UITableViewDelegate {
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    var selectedContact: Contact
     if tableView == self.searchDisplayController!.searchResultsTableView {
-      return 1
+      selectedContact = filteredContacts[indexPath.item]
     } else {
-      return self.sections.count
+      selectedContact = sections[indexPath.section].items[indexPath.row].contact
+    }
+    
+    if selectedContact.channel != nil {
+      let ctrl = ConversationViewController.controller(contact: selectedContact)
+      ctrl.hidesBottomBarWhenPushed = true
+      var nav = UINavigationController(rootViewController: ctrl)
+      
+      let title = DWTLocalizedStringWithDefaultValue(
+        "screen.chat.navigation-bar.left-button",
+        tableName: "Localizable",
+        bundle: NSBundle.mainBundle(),
+        value: "Chats",
+        comment: "Text for the left button in the navigation bar of the chat screen (when coming from the contact list)")
+      
+      ctrl.navigationItem.leftBarButtonItem = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("didClickOnNavigationBarLeftButton"))
+      self.presentViewController(nav, animated: true, completion: { () -> Void in
+        // TODO: go to chats tab
+      })
     }
   }
+  
+}
 
+extension ContactsViewController: UITableViewDataSource {
+  
   func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
     if tableView == self.searchDisplayController!.searchResultsTableView {
       return []
@@ -159,6 +192,14 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
       return collation.sectionForSectionIndexTitleAtIndex(index)
     }
   }
+  
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    if tableView == self.searchDisplayController!.searchResultsTableView {
+      return 1
+    } else {
+      return self.sections.count
+    }
+  }
 
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if tableView == self.searchDisplayController!.searchResultsTableView {
@@ -166,6 +207,16 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     } else {
       return sections[section].items.count
     }
+  }
+  
+  func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+    if tableView != self.searchDisplayController!.searchResultsTableView {
+      // do not display empty `Section`s
+      if !self.sections[section].items.isEmpty {
+        return self.collation.sectionTitles[section] as String
+      }
+    }
+    return ""
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -193,7 +244,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // Configure the cell
     cell!.textLabel.text = contact.firstName
-    if contact.token != nil {
+    if contact.channel != nil {
       cell!.detailTextLabel?.text = detailsText
     }
     cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -201,46 +252,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     return cell!
   }
   
-  func filterContentForSearchText(searchText: String) {
-    filteredContacts = contacts.filter({( contact : Contact) -> Bool in
-      var stringMatch = contact.firstName?.rangeOfString(searchText)
-      return stringMatch != nil
-    })
-  }
-  
-  func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-    self.filterContentForSearchText(searchString)
-    return true
-  }
-  
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    var selectedContact: Contact
-    if tableView == self.searchDisplayController!.searchResultsTableView {
-      selectedContact = filteredContacts[indexPath.item]
-    } else {
-      selectedContact = sections[indexPath.section].items[indexPath.row].contact
-    }
-    
-    if selectedContact.token != nil {
-      let ctrl = ConversationViewController.controller(contact: selectedContact)
-      ctrl.hidesBottomBarWhenPushed = true
-      var nav = UINavigationController(rootViewController: ctrl)
-      
-      let title = DWTLocalizedStringWithDefaultValue(
-        "screen.chat.navigation-bar.left-button",
-        tableName: "Localizable",
-        bundle: NSBundle.mainBundle(),
-        value: "Chats",
-        comment: "Text for the left button in the navigation bar of the chat screen (when coming from the contact list)")
-      
-      ctrl.navigationItem.leftBarButtonItem = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("didClickOnNavigationBarLeftButton"))
-      self.presentViewController(nav, animated: true, completion: { () -> Void in
-        // TODO: go to chats tab
-      })
-    }
-  }
-  
-  func didClickOnNavigationBarLeftButton() {
-    self.dismissViewControllerAnimated(true, completion: nil)
-  }
+}
+
+extension ContactsViewController: UISearchControllerDelegate {
 }

@@ -12,7 +12,6 @@ import CoreData
 @objc(CDMessage)
 class CDMessage: NSManagedObject {
 
-    @NSManaged var channel: String
     @NSManaged var date: NSDate
     @NSManaged var drawing: String
     @NSManaged var identifier: String

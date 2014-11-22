@@ -19,9 +19,6 @@ extension Constants {
   class var port: UInt16 {
     return 16056
   }
-  class var topicPrefix: String {
-    return ""
-  }
 }
 
 extension Constants {

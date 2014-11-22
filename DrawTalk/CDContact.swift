@@ -12,7 +12,7 @@ import CoreData
 @objc(CDContact)
 class CDContact: NSManagedObject {
 
-    @NSManaged var token: String
+    @NSManaged var channel: String
     @NSManaged var recordId: String
 
 }

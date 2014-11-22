@@ -55,7 +55,7 @@ class ContactDataProvider: DataProvider {
     if entity == nil {
       entity = context.createEntity(CDContact.self) as? CDContact
       entity?.recordId = contact.identifier
-      entity?.token = contact.token!
+      entity?.channel = contact.channel!
       entity?.recordId = contact.identifier
     }
   }

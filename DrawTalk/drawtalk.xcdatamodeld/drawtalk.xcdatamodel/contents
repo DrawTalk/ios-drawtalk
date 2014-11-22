@@ -5,12 +5,11 @@
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDMessage" inverseName="chats" inverseEntity="CDMessage" syncable="YES"/>
     </entity>
     <entity name="CDContact" representedClassName="CDContact" syncable="YES">
+        <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recordId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDChat" inverseName="contacts" inverseEntity="CDChat" syncable="YES"/>
     </entity>
     <entity name="CDMessage" representedClassName="CDMessage" syncable="YES">
-        <attribute name="channel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="drawing" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,7 +19,7 @@
     </entity>
     <elements>
         <element name="CDChat" positionX="9" positionY="54" width="128" height="73"/>
-        <element name="CDContact" positionX="-27" positionY="18" width="128" height="88"/>
-        <element name="CDMessage" positionX="18" positionY="63" width="128" height="148"/>
+        <element name="CDContact" positionX="-27" positionY="18" width="128" height="90"/>
+        <element name="CDMessage" positionX="18" positionY="63" width="128" height="135"/>
     </elements>
 </model>

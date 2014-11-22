@@ -28,9 +28,9 @@ class ContactsTokenDecorator {
     var allPhoneNumbers = [String]()
     for contact: Contact in contacts {
       if let cdContact = mapping[contact.identifier] {
-        contact.token = cdContact.token
+        contact.channel = cdContact.channel
       } else {
-        if contact.token == nil {
+        if contact.channel == nil {
           if let numbers = contact.phoneNumbers {
             for phoneNumber: PhoneNumber in numbers {
               allPhoneNumbers.append(phoneNumber.number)
@@ -57,7 +57,7 @@ class ContactsTokenDecorator {
             if let numbers = contact.phoneNumbers {
               for phoneNumber: PhoneNumber in numbers {
                 if let token = tokens?[phoneNumber.number] {
-                  contact.token = token
+                  contact.channel = token
                   contactsToSave.append(contact)
                   break
                 }
