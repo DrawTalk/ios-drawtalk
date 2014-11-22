@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ConversationViewController : UIViewController, MessageCollectionDataSourceDelegate {
+class ConversationViewController : UIViewController, MessageCollectionDelegate {
   
   @IBOutlet weak var messageContainerView: UIView!
   @IBOutlet weak var canvasView: CanvasView!
@@ -40,7 +40,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
     addChildViewController(messageController)
     messageContainerView.addSubview(messageController.view)
     messageController.didMoveToParentViewController(self)
-    messageController.messageCollectionDataSource.messageCollectionDelegate = self
+    messageController.messageCollectionDelegate = self
     
     //canvasView.viewOnly = true
     
@@ -65,7 +65,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
     let drawingJson = DrawingJson(drawing: drawing)
     var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.channel!)
     MessageEventBus.defaultBus.post(.Outgoing, event: message)
-    messageController.messageCollectionDataSource.addDrawing(drawing)
+    messageController.addDrawing(drawing)
   }
   
   private func observerMessagingEvent() {
@@ -76,7 +76,7 @@ class ConversationViewController : UIViewController, MessageCollectionDataSource
         var drawingJson =  DrawingJson(json: d)
         dispatch_async(dispatch_get_main_queue(), {
           var drawing = drawingJson.toDrawing()
-          self.messageController.messageCollectionDataSource.addDrawing(drawing)
+          self.messageController.addDrawing(drawing)
         })
       }
     })

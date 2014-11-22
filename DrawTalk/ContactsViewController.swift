@@ -38,11 +38,18 @@ class ContactItem: NSObject, Item {
   }
 }
 
+protocol ContactsViewControllerDelegate {
+  func contactsViewControllerDidDismissChat()
+}
+
 class ContactsViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
+  var contactsViewControllerDelegate: ContactsViewControllerDelegate?
+  
   private var sections = [Section<ContactItem>]()
+  
   private var contacts: [Contact] {
     didSet {
       let selector: Selector = "localizedTitle"
@@ -141,6 +148,7 @@ class ContactsViewController: UIViewController {
   
   func didClickOnNavigationBarLeftButton() {
     self.dismissViewControllerAnimated(true, completion: nil)
+    contactsViewControllerDelegate?.contactsViewControllerDidDismissChat()
   }
 }
 
@@ -255,4 +263,5 @@ extension ContactsViewController: UITableViewDataSource {
 }
 
 extension ContactsViewController: UISearchControllerDelegate {
+  
 }

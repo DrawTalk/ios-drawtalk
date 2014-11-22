@@ -23,6 +23,7 @@
 		484F67851A1403B000867982 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484F67841A1403B000867982 /* ContactsViewController.xib */; };
 		4862DF791A17442B00750E1D /* CDChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4862DF781A17442B00750E1D /* CDChat.swift */; };
 		486A0FC61A169AB800D83363 /* ContactsTokenDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */; };
+		487BB1051A1B156200FC48BD /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487BB1041A1B156200FC48BD /* StyleGuide.swift */; };
 		48A13DAB1A17142D0090BAF1 /* CINAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA41A17142D0090BAF1 /* CINAssert.swift */; };
 		48A13DAC1A17142D0090BAF1 /* CINCoreDataPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA51A17142D0090BAF1 /* CINCoreDataPersistence.swift */; };
 		48A13DAD1A17142D0090BAF1 /* CINLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A13DA71A17142D0090BAF1 /* CINLogging.m */; };
@@ -54,7 +55,6 @@
 		A19CD5781A1EF66C0090E459 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19CD5771A1EF66C0090E459 /* DataProvider.swift */; };
 		A1CF82711A03283A00E93F65 /* MessageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */; };
 		A1CF82731A03285C00E93F65 /* MessageCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */; };
-		A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */; };
 		A1CF82771A0329D700E93F65 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */; };
 		A1CF82791A0329EF00E93F65 /* MessageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */; };
 		A1D269CA19F313A1004C82C6 /* MqqtClientWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */; };
@@ -104,6 +104,7 @@
 		484F67841A1403B000867982 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
 		4862DF781A17442B00750E1D /* CDChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDChat.swift; sourceTree = "<group>"; };
 		486A0FC51A169AB800D83363 /* ContactsTokenDecorator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTokenDecorator.swift; sourceTree = "<group>"; };
+		487BB1041A1B156200FC48BD /* StyleGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
 		48A13DA41A17142D0090BAF1 /* CINAssert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CINAssert.swift; sourceTree = "<group>"; };
 		48A13DA51A17142D0090BAF1 /* CINCoreDataPersistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CINCoreDataPersistence.swift; sourceTree = "<group>"; };
 		48A13DA61A17142D0090BAF1 /* CINLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CINLogging.h; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		A19CD5771A1EF66C0090E459 /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewController.swift; sourceTree = "<group>"; };
 		A1CF82721A03285C00E93F65 /* MessageCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCollectionViewController.xib; sourceTree = "<group>"; };
-		A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionDataSource.swift; sourceTree = "<group>"; };
 		A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCollectionViewCell.xib; sourceTree = "<group>"; };
 		A1D269C919F313A1004C82C6 /* MqqtClientWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MqqtClientWrapper.swift; sourceTree = "<group>"; };
@@ -206,7 +206,6 @@
 		481256821A16D5000012139E /* Carousel */ = {
 			isa = PBXGroup;
 			children = (
-				A1CF82741A03299F00E93F65 /* MessageCollectionDataSource.swift */,
 				A1CF82761A0329D700E93F65 /* MessageCollectionViewCell.swift */,
 				A1CF82781A0329EF00E93F65 /* MessageCollectionViewCell.xib */,
 				A1CF82701A03283A00E93F65 /* MessageCollectionViewController.swift */,
@@ -345,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				A1DACD3C19FC3D4700D02B5D /* AppDelegate.swift */,
+				487BB1041A1B156200FC48BD /* StyleGuide.swift */,
 				A100D2851A06BD3200664C66 /* Core */,
 				A11E8F3819E8895B0055772A /* DrawTalk-Bridging-Header.h */,
 				A11E8F3919E8895B0055772A /* DrawTalk-Prefix.pch */,
@@ -718,7 +718,6 @@
 				481256811A16B8890012139E /* Localization.swift in Sources */,
 				A10935F219F4BF2000D618EA /* CanvasView.swift in Sources */,
 				A100D28A1A06BE4C00664C66 /* UIView+Utils.swift in Sources */,
-				A1CF82751A03299F00E93F65 /* MessageCollectionDataSource.swift in Sources */,
 				A19CD5781A1EF66C0090E459 /* DataProvider.swift in Sources */,
 				48A13DAF1A17142D0090BAF1 /* CINPersistenceProtocol.swift in Sources */,
 				A1EF25AA19F2EC5000F52A85 /* ChatMessage.swift in Sources */,
@@ -752,6 +751,7 @@
 				A1E6539819FC268F00DBABE7 /* ContactABRecord.swift in Sources */,
 				A10E60CC19F9E62400A69F18 /* AddressBookImport.swift in Sources */,
 				A1EF25A319F2CF3400F52A85 /* DrawingJson.swift in Sources */,
+				487BB1051A1B156200FC48BD /* StyleGuide.swift in Sources */,
 				A11E8F3C19E8895B0055772A /* ConversationViewController.swift in Sources */,
 				A19CD5761A1EF6410090E459 /* MessageDataProvider.swift in Sources */,
 				48A13DAB1A17142D0090BAF1 /* CINAssert.swift in Sources */,

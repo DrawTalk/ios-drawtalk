@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 
 
-class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+private protocol MainTabBarControllerProtocol {
+  func openTab(type: TabType)
+}
+
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate, MainTabBarControllerProtocol {
   
   private var tabs: [TabContent]!
   
@@ -21,11 +25,11 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
   
   func setup() {
     
-    self.navigationItem
     tabs = [
       ContactsTabContent(),
       ChatTabContent()
     ]
+    tabs.sort { $0.tabType.rawValue < $1.tabType.rawValue }
     
     setupContent()
 
@@ -36,7 +40,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
   func setupContent() {
     var controllers: [AnyObject] = []
     for tab: TabContent in tabs {
-      var ctrl = tab.controller()
+      var ctrl = tab.controller(self)
       var root: UIViewController? = ctrl.viewControllers.first as? UIViewController
       root?.edgesForExtendedLayout = .None
       ctrl.tabBarItem = tab.tabBarItem()
@@ -44,30 +48,58 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     viewControllers = controllers;
   }
+  
+  private func openTab(type: TabType) {
+    selectedIndex = type.rawValue
+  }
 }
 
 // Tab contents
 
-protocol TabContent {
-  func controller() -> UINavigationController
+private enum TabType: Int {
+  case Contacts = 0
+  case Chats = 1
+}
+
+private protocol TabContent {
+  var tabType: TabType { get }
+  func controller(parent: MainTabBarController) -> UINavigationController
   func tabBarItem() -> UITabBarItem
 }
 
-private class ContactsTabContent: TabContent {
-  func controller() -> UINavigationController {
+private class ContactsTabContent: TabContent, ContactsViewControllerDelegate {
+  var tabType: TabType {
+    return .Contacts
+  }
+  
+  private(set) var parent: MainTabBarControllerProtocol?
+  
+  func controller(parent: MainTabBarController) -> UINavigationController {
+    self.parent = parent
     let cv = ContactsViewController.controller()
+    cv.contactsViewControllerDelegate = self
+    
     let nav = UINavigationController(rootViewController: cv)
     nav.navigationBar.translucent = false
     nav.navigationBar.barTintColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     return nav
   }
+  
   func tabBarItem() -> UITabBarItem {
     return UITabBarItem(tabBarSystemItem: UITabBarSystemItem.Contacts, tag: 1)
+  }
+  
+  func contactsViewControllerDidDismissChat() {
+    parent?.openTab(.Chats)
   }
 }
 
 private class ChatTabContent: TabContent {
-  func controller() -> UINavigationController {
+  var tabType: TabType {
+    return .Chats
+  }
+  
+  func controller(parent: MainTabBarController) -> UINavigationController {
     let conversation = ChatCollectionViewController.controller()
     let nav = UINavigationController(rootViewController: conversation)
     nav.navigationBar.translucent = false
