@@ -11,11 +11,11 @@ import Foundation
 @objc
 public protocol MessageEvent {
   func payload() -> AnyObject
-  var channel: String? { get }
+  var channel: String { get }
 }
 
-public typealias EventBusHandler = (MessageEvent) -> Void
-public typealias Observer = NSObjectProtocol
+typealias EventBusHandler = (Message) -> Void
+typealias Observer = NSObjectProtocol
 
 enum MessageEventType: String {
   case Outgoing = "kMessageEventOutgoing"
@@ -25,9 +25,9 @@ enum MessageEventType: String {
 private let kEvent = "event"
 
 class MessageEventBus {
-  
+
   private var observers: [Observer] = []
-  
+
   class var defaultBus: MessageEventBus {
   struct Static {
     static let instance = MessageEventBus()
@@ -35,10 +35,10 @@ class MessageEventBus {
     return Static.instance
   }
 
-  func post(type: MessageEventType, event: MessageEvent!) {
-    NSNotificationCenter.defaultCenter().postNotificationName(type.rawValue, object: nil, userInfo: [kEvent : event])
+  func post(type: MessageEventType, message: Message) {
+    NSNotificationCenter.defaultCenter().postNotificationName(type.rawValue, object: nil, userInfo: [kEvent : message])
   }
-  
+
   func subscribe(type: MessageEventType, handler: EventBusHandler!) -> Observer {
     let observer = NSNotificationCenter.defaultCenter().addObserverForName(
       type.rawValue,
@@ -47,22 +47,22 @@ class MessageEventBus {
       usingBlock: { (note: NSNotification!) -> Void in
         if let userInfo = note.userInfo {
           if let event: AnyObject = userInfo[kEvent] {
-            if event is MessageEvent {
-              handler(event as MessageEvent)
+            if event is Message {
+              handler(event as Message)
             }
           }
         }
       })
-    
+
     observers.append(observer)
-    
+
     return observer
   }
-  
+
   func unsubscribe(observer: Observer) {
     NSNotificationCenter.defaultCenter().removeObserver(observer)
   }
-  
+
   func unsubscribeAll() {
     for observer in observers {
       unsubscribe(observer)

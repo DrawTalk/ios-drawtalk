@@ -34,3 +34,6 @@ extension Constants {
 }
 
 func noop(){}
+
+struct CoreData {
+}

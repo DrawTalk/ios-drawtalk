@@ -17,6 +17,7 @@ class MessageListener {
     return Static.instance
   }
   
+  /*
   func observe() {
     MessageEventBus.defaultBus.subscribe(.Incoming, handler: { (event: MessageEvent) -> Void in
       let chatMessage = event as ChatMessage
@@ -30,6 +31,7 @@ class MessageListener {
   }
   
   private func saveMessage(message: ChatMessage) {
-    MessageDataProvider.saveMessage(message, completion: nil)
+    MessageDataProvider.save(message, completion: nil)
   }
+  */
 }

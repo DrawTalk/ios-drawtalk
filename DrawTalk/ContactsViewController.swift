@@ -34,6 +34,7 @@ class ContactItem: NSObject, Item {
   
   init(contact: Contact) {
     self.contact = contact
+    println(contact.firstName)
     self.localizedTitle = contact.firstName![0]
   }
 }
@@ -122,7 +123,9 @@ class ContactsViewController: UIViewController {
   private func retrieveContactsFromAddressBook() {
     AddressBookImport.defaultAddressBookImport.contacts { (contacts: [Contact]?, error: NSError?) in
       dispatch_async(dispatch_get_main_queue(), {
-        self.contacts = contacts!
+        self.contacts = contacts!.map({ (contact: Contact) -> Contact in
+          return CINPersistence.defaultPersistence?.objectInContext(contact) as Contact
+        })
         let contactsTokenDecorator = ContactsTokenDecorator(self.contacts)
         contactsTokenDecorator.decorate({ (success, error) -> Void in
           if success {
@@ -163,7 +166,7 @@ extension ContactsViewController: UITableViewDelegate {
     }
     
     if selectedContact.channel != nil {
-      let ctrl = ConversationViewController.controller(contact: selectedContact)
+      let ctrl = ChatViewController.controller(contact: selectedContact)
       ctrl.hidesBottomBarWhenPushed = true
       var nav = UINavigationController(rootViewController: ctrl)
       

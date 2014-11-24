@@ -9,10 +9,10 @@
 import Foundation
 import CoreData
 
-@objc(CDChat)
-class CDChat: NSManagedObject {
-
-    @NSManaged var contacts: NSSet
-    @NSManaged var messages: NSSet
-
+@objc(Chat)
+class Chat: NSManagedObject {
+  
+  @NSManaged var contacts: NSSet
+  @NSManaged var messages: NSSet
+  
 }

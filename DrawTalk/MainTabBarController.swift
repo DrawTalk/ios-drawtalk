@@ -81,7 +81,7 @@ private class ContactsTabContent: TabContent, ContactsViewControllerDelegate {
     
     let nav = UINavigationController(rootViewController: cv)
     nav.navigationBar.translucent = false
-    nav.navigationBar.barTintColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+    nav.navigationBar.barTintColor = StyleGuide.defaultStyle.color500// UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     return nav
   }
   
@@ -100,10 +100,10 @@ private class ChatTabContent: TabContent {
   }
   
   func controller(parent: MainTabBarController) -> UINavigationController {
-    let conversation = ChatCollectionViewController.controller()
+    let conversation = ChatsViewController.controller()
     let nav = UINavigationController(rootViewController: conversation)
     nav.navigationBar.translucent = false
-    nav.navigationBar.barTintColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+    nav.navigationBar.barTintColor = StyleGuide.defaultStyle.color500 //UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     return nav
   }
   func tabBarItem() -> UITabBarItem {

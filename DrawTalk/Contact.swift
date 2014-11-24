@@ -1,30 +1,23 @@
 //
-//  DWTContact.swift
+//  CDContact.swift
 //  DrawTalk
 //
-//  Created by Kirollos Risk on 10/25/14.
+//  Created by Kirollos Risk on 11/22/14.
 //  Copyright (c) 2014 DrawTalk. All rights reserved.
 //
 
 import Foundation
+import CoreData
 
-struct PhoneNumber {
-  var label: String
-  var number: String
-}
-
-class Contact {
+@objc(Contact)
+class Contact: NSManagedObject {
   
-  var identifier: String!
-  var firstName: String?
-  var lastName: String?
-  var imageData: NSData?
-  var emails: [String]?
-  var phoneNumbers: [PhoneNumber]?
+  @NSManaged var channel: String?
+  @NSManaged var recordId: String
+  @NSManaged var image: NSData?
+  @NSManaged var lastName: String?
+  @NSManaged var firstName: String?
+  @NSManaged var chats: NSSet
+  @NSManaged var phoneNumbers: NSSet
   
-  var channel: String?
-  
-  init() {
-    
-  }
 }

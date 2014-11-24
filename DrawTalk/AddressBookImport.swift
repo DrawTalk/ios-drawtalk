@@ -16,8 +16,8 @@ class AddressBookImport {
   private var importQueue: dispatch_queue_t
   
   class var defaultAddressBookImport: AddressBookImport {
-  struct Static {
-    static let instance = AddressBookImport()
+    struct Static {
+      static let instance = AddressBookImport()
     }
     return Static.instance
   }
@@ -54,14 +54,39 @@ class AddressBookImport {
         ABAddressBookRequestAccessWithCompletion(ref) {
           (granted:Bool, err:CFError!) in
           if granted {
-            var contacts: [Contact] = []
             // retrieve contacts
             let people = ABAddressBookCopyArrayOfAllPeople(ref).takeRetainedValue() as NSArray as [ABRecord]
-            for person in people {
-              let contact = ContactABRecord(abRecord: person)
-              contacts.append(contact.toContact())
-            }
-            completion(contacts, nil)
+            
+            var contacts = [Contact]()
+            CINPersistence.defaultPersistence?.save({ (context: CINPersistenceContext!) -> () in
+              
+              for person in people {
+                
+                let contact = ContactABRecord(abRecord: person)
+                var record = contact.record
+                
+                var contactEntity = context.createEntity(Contact.self) as Contact
+                contactEntity.recordId = (record[kDWTContactABRecordIndentifier] as AnyObject? as? String)!
+                contactEntity.firstName = record[kDWTContactABRecordFirstNameProperty] as AnyObject? as? String
+                contactEntity.lastName = record[kDWTContactABRecordLastNameProperty] as AnyObject? as? String
+                contactEntity.image = record[kDWTContactABRecordImageData] as AnyObject? as? NSData
+                
+                let phones = record[kDWTContactABRecordPhoneNumbers] as AnyObject? as? [[String : AnyObject]]
+                
+                var arr = phones?.map({ (phone: [String : AnyObject]) -> PhoneNumber in
+                  var phoneEntity = context.createEntity(PhoneNumber.self) as PhoneNumber
+                  phoneEntity.label = phone[kDWTContactABRecordPhoneLabel] as AnyObject? as String
+                  phoneEntity.number = phone[kDWTContactABRecordPhoneNumber] as AnyObject? as String
+                  return phoneEntity
+                })
+                
+                contactEntity.phoneNumbers = NSSet(array: arr!)
+                contacts.append(contactEntity)
+              }
+              
+              }, completion: { (success, error) -> Void in
+                completion(contacts, nil)
+            })
           } else {
             println(err)
           }

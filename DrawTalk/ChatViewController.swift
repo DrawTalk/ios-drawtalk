@@ -9,70 +9,69 @@
 import Foundation
 import UIKit
 
-class ConversationViewController : UIViewController, MessageCollectionDelegate {
-  
+class ChatViewController : UIViewController, MessageCollectionDelegate {
+
   @IBOutlet weak var messageContainerView: UIView!
   @IBOutlet weak var canvasView: CanvasView!
   @IBOutlet weak var sendButton: UIButton!
-  
+
   private var messageController: MessageCollectionViewController!
-  
+
   private var contact: Contact!
-  
+
   override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
-  
+
   required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  class func controller(#contact: Contact) -> ConversationViewController {
-    let vc = ConversationViewController(nibName:"ConversationViewController", bundle: nil)
+
+  class func controller(#contact: Contact) -> ChatViewController {
+    let vc = ChatViewController(nibName:"ChatViewController", bundle: nil)
     vc.contact = contact
     return vc
   }
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     messageController = MessageCollectionViewController.controller()
     addChildViewController(messageController)
     messageContainerView.addSubview(messageController.view)
     messageController.didMoveToParentViewController(self)
     messageController.messageCollectionDelegate = self
-    
+
     //canvasView.viewOnly = true
-    
+
     observerMessagingEvent()
   }
-  
+
   func didSelectMessage(drawing: Drawing) {
     canvasView.replay(drawing, animated: true)
   }
-  
-  
+
+
   @IBAction func resetButtonTapped(sender : AnyObject) {
     canvasView.reset()
   }
-  
+
   @IBAction func replayButtonTapped(sender : AnyObject) {
     canvasView.replay()
   }
-  
+
   @IBAction func sendButtonTapped(sender : AnyObject) {
     let drawing = canvasView.drawing()
     let drawingJson = DrawingJson(drawing: drawing)
-    var message = ChatMessage.outgoing(drawingJson.jsonString(), channel: contact.channel!)
-    MessageEventBus.defaultBus.post(.Outgoing, event: message)
+    var message = Message.outgoing(drawingJson.jsonString(), channel: contact.channel!)
+    MessageEventBus.defaultBus.post(.Outgoing, message: message)
     messageController.addDrawing(drawing)
   }
-  
+
   private func observerMessagingEvent() {
-    MessageEventBus.defaultBus.subscribe(.Incoming, handler: { (event: MessageEvent) -> Void in
-      let chatMessage = event as ChatMessage
-      if chatMessage.clientId == self.contact.channel {
-        var d = JSON(data: chatMessage.text.dataUsingEncoding(NSUTF8StringEncoding)!)
+    MessageEventBus.defaultBus.subscribe(.Incoming, handler: { (message: Message) -> Void in
+      if message.clientId == self.contact.channel {
+        var d = JSON(data: message.text.dataUsingEncoding(NSUTF8StringEncoding)!)
         var drawingJson =  DrawingJson(json: d)
         dispatch_async(dispatch_get_main_queue(), {
           var drawing = drawingJson.toDrawing()
@@ -81,5 +80,5 @@ class ConversationViewController : UIViewController, MessageCollectionDelegate {
       }
     })
   }
-  
+
 }

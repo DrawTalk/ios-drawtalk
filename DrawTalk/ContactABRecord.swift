@@ -22,7 +22,7 @@ let kDWTContactABRecordPhoneNumber = "ContactABRecordPhoneNumber"
 class ContactABRecord {
   
   private var abRecord: ABRecord!
-  private var result: [String : AnyObject] = [String : AnyObject]()
+  var record: [String : AnyObject] = [String : AnyObject]()
   
   init(abRecord: ABRecord) {
     self.abRecord = abRecord
@@ -36,14 +36,14 @@ class ContactABRecord {
 
   private func parseIdentifier() {
     let recordId: ABRecordID = ABRecordGetRecordID(abRecord);
-    result[kDWTContactABRecordIndentifier] = String(recordId)
+    record[kDWTContactABRecordIndentifier] = String(recordId)
   }
   
   private func parseImage() {
     let imgData = ABPersonCopyImageDataWithFormat(abRecord, kABPersonImageFormatOriginalSize).takeRetainedValue()
     let data = imgData as NSData
     if data.length > 0 {
-      result[kDWTContactABRecordImageData] = data
+      record[kDWTContactABRecordImageData] = data
     }
   }
   
@@ -54,8 +54,8 @@ class ContactABRecord {
     var unmanagedLastName = ABRecordCopyValue(abRecord, kABPersonLastNameProperty)
     let lastName: String = Unmanaged.fromOpaque(unmanagedLastName.toOpaque()).takeUnretainedValue() as NSObject as String
     
-    result[kDWTContactABRecordFirstNameProperty] = firstName
-    result[kDWTContactABRecordLastNameProperty] = lastName
+    record[kDWTContactABRecordFirstNameProperty] = firstName
+    record[kDWTContactABRecordLastNameProperty] = lastName
   }
   
   private func parseEmails() {
@@ -73,7 +73,7 @@ class ContactABRecord {
     }
     
     if count > 0 {
-      result[kDWTContactABRecordEmails] = list
+      record[kDWTContactABRecordEmails] = list
     }
   }
   
@@ -99,31 +99,8 @@ class ContactABRecord {
     }
     
     if count > 0 {
-      result[kDWTContactABRecordPhoneNumbers] = list
+      record[kDWTContactABRecordPhoneNumbers] = list
     }
   }
   
-}
-
-extension ContactABRecord {
-  
-  func toContact() -> Contact {
-    var contact = Contact()
-    
-    contact.identifier = result[kDWTContactABRecordIndentifier] as AnyObject? as? String
-    contact.firstName = result[kDWTContactABRecordFirstNameProperty] as AnyObject? as? String
-    contact.lastName = result[kDWTContactABRecordLastNameProperty] as AnyObject? as? String
-    contact.imageData = result[kDWTContactABRecordImageData] as AnyObject? as? NSData
-    contact.emails = result[kDWTContactABRecordEmails] as AnyObject? as? [String]
-    
-    let phones = result[kDWTContactABRecordPhoneNumbers] as AnyObject? as? [[String : AnyObject]]
-    contact.phoneNumbers = phones?.map({ (phone: [String : AnyObject]) -> PhoneNumber in
-      return PhoneNumber(
-        label: phone[kDWTContactABRecordPhoneLabel] as AnyObject? as String,
-        number: phone[kDWTContactABRecordPhoneNumber] as AnyObject? as String
-      )
-    })
-    
-    return contact
-  }
 }
